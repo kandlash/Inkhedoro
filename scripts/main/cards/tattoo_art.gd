@@ -1,0 +1,94 @@
+extends Sprite2D
+
+@export var cells_to_feel: int
+var self_areas: Array[Area2D] = []
+var feeled_areas: Array[Area2D] = []
+
+var dragging: bool = false
+var drag_offset: Vector2 = Vector2.ZERO
+
+var start_position
+var on_arm: bool = false
+@onready var center: Node2D = $Center
+
+func _ready() -> void:
+	start_position = global_position
+	for child in get_children():
+		if child is Area2D:
+			var area: Area2D = child
+			self_areas.append(area)
+			area.connect("area_entered", _on_area_feel)
+			area.connect("area_exited", _on_area_exit)
+
+func _on_area_feel(area: Area2D):
+	if !area.is_in_group("grid_cells"):
+		return
+	if G.used_grids.has(area):
+		return
+	if not feeled_areas.has(area):
+		feeled_areas.append(area)
+		var sprite: Sprite2D = area.get_parent()
+		sprite.visible = false
+
+func _on_area_exit(area: Area2D):
+	if !area.is_in_group("grid_cells"):
+		return
+	if G.used_grids.has(area):
+		return
+	for a: Area2D in self_areas:
+		if a.get_overlapping_areas().has(area):
+			return
+	feeled_areas.erase(area)
+	var sprite: Sprite2D = area.get_parent()
+	sprite.visible = true
+	
+# Проверяем нажатие мыши
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				if get_rect().has_point(to_local(event.position)):
+					dragging = true
+					drag_offset = position - event.position
+					if on_arm:
+						on_arm = false
+						for area in feeled_areas:
+							G.used_grids.erase(area)
+			elif !event.pressed and dragging:
+				dragging = false
+				if (feeled_areas.size() >= cells_to_feel) and check_cells_for_other():
+					var closest_distance = INF
+					var closest_pos = Vector2.ZERO
+					for area in feeled_areas:
+						var cell_pos = area.get_child(0).global_position
+						var dist = cell_pos.distance_to(center.global_position)  # расстояние до центра
+						if dist < closest_distance:
+							closest_distance = dist
+							closest_pos = cell_pos
+					global_position = closest_pos - (center.global_position - global_position)
+					print(feeled_areas)
+					await get_tree().create_timer(0.1).timeout
+					print('check: ', feeled_areas)
+					if feeled_areas.size() < cells_to_feel:
+						global_position = start_position
+						return
+					for area: Area2D in feeled_areas:
+						area.get_parent().visible = false
+					G.used_grids.append_array(feeled_areas)
+					on_arm = true
+				else:
+					global_position = start_position
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.pressed and dragging:
+				rotate(deg_to_rad(90))
+
+func check_cells_for_other():
+	for area in self_areas:
+		for ao in area.get_overlapping_areas():
+			if ao.is_in_group("tattoo_area"):
+				return false
+	return true
+
+func _process(delta: float) -> void:
+	if dragging:
+		position = get_global_mouse_position() + drag_offset
