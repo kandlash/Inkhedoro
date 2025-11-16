@@ -16,10 +16,9 @@ sky_material = SubResource("ProceduralSkyMaterial_ksju7")
 sky = SubResource("Sky_6iamk")
 tonemap_mode = 2
 fog_enabled = true
-fog_light_energy = 0.52
-fog_density = 0.03
+fog_light_color = Color(0.0005812841, 0.00070481526, 0.0009252253, 1)
+fog_density = 0.0853
 fog_height = 3.0
-volumetric_fog_enabled = true
 adjustment_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
@@ -43,6 +42,7 @@ proximity_fade_distance = 0.01
 [node name="level_1" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+visible = false
 light_energy = 0.15
 light_specular = 5.948
 shadow_enabled = true
@@ -55,8 +55,8 @@ environment = SubResource("Environment_nsrm0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 19.710766)
 
 [node name="Sprite3D" type="Sprite3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 85.43718, -78.82971)
-pixel_size = 0.11
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.52829, -27.855637)
+pixel_size = 0.03
 billboard = 1
 texture = ExtResource("4_x42e6")
 
@@ -440,3 +440,15 @@ transform = Transform3D(0.8452245, -0.5344112, 7.376337e-09, -5.765226e-09, -4.3
 material_override = SubResource("StandardMaterial3D_nsrm0")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2232594, 4.294791, 16.05968)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 11.979278)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 20.2269)
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7747602, 4.294791, 10.833363)
