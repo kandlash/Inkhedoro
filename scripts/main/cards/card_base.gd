@@ -8,6 +8,11 @@ var feeled_areas: Array[Area2D] = []
 var dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
 
+const TATTOO_FRAME = preload("uid://0koxmjyxn077")
+const TATTOO_FRAME_USED = preload("uid://clgs11mmp0mav")
+const TATTOO_SELECETED = preload("uid://sg7qtxtecnsu")
+
+
 var start_position
 var on_arm: bool = false
 @onready var center: Node2D = $Center
@@ -32,7 +37,7 @@ func _on_area_feel(area: Area2D):
 	if not feeled_areas.has(area):
 		feeled_areas.append(area)
 		var sprite: Sprite2D = area.get_parent()
-		sprite.visible = false
+		sprite.texture = TATTOO_SELECETED
 
 func _on_area_exit(area: Area2D):
 	if !area.is_in_group("grid_cells"):
@@ -44,7 +49,7 @@ func _on_area_exit(area: Area2D):
 			return
 	feeled_areas.erase(area)
 	var sprite: Sprite2D = area.get_parent()
-	sprite.visible = true
+	sprite.texture = TATTOO_FRAME
 	
 # Проверяем нажатие мыши
 func _input(event: InputEvent) -> void:
@@ -79,7 +84,7 @@ func _input(event: InputEvent) -> void:
 						global_position = start_position
 						return
 					for area: Area2D in feeled_areas:
-						area.get_parent().visible = false
+						area.get_parent().texture = TATTOO_FRAME_USED
 					G.used_grids.append_array(feeled_areas)
 					on_arm = true
 				else:
