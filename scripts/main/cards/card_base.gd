@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name CardBase
 
 @export var cells_to_feel: int
 var self_areas: Array[Area2D] = []
@@ -11,7 +12,10 @@ var start_position
 var on_arm: bool = false
 @onready var center: Node2D = $Center
 
+@onready var cells: Node2D = $Cells
+
 func _ready() -> void:
+	cells.visible = false
 	start_position = global_position
 	for child in get_children():
 		if child is Area2D:
@@ -47,7 +51,9 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if get_rect().has_point(to_local(event.position)):
+				if get_rect().has_point(to_local(event.position)) and G.selected_card == null:
+					G.selected_card = self
+					cells.visible = true
 					dragging = true
 					drag_offset = position - event.position
 					if on_arm:
@@ -56,6 +62,8 @@ func _input(event: InputEvent) -> void:
 							G.used_grids.erase(area)
 			elif !event.pressed and dragging:
 				dragging = false
+				cells.visible = false
+				G.selected_card = null
 				if (feeled_areas.size() >= cells_to_feel) and check_cells_for_other():
 					var closest_distance = INF
 					var closest_pos = Vector2.ZERO
@@ -66,9 +74,7 @@ func _input(event: InputEvent) -> void:
 							closest_distance = dist
 							closest_pos = cell_pos
 					global_position = closest_pos - (center.global_position - global_position)
-					print(feeled_areas)
 					await get_tree().create_timer(0.1).timeout
-					print('check: ', feeled_areas)
 					if feeled_areas.size() < cells_to_feel:
 						global_position = start_position
 						return

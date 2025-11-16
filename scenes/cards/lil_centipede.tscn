@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceokwkhruu0yj"]
+
+[ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_h5gr5"]
+[ext_resource type="Texture2D" uid="uid://dps528cdx1i1u" path="res://assets/sprites/Centipede.png" id="2_e832t"]
+[ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_e832t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
+size = Vector2(181.16125, 181.16162)
+
+[node name="Lil_Centipede" instance=ExtResource("1_h5gr5")]
+texture = ExtResource("2_e832t")
+cells_to_feel = 2
+
+[node name="Center" parent="." index="0"]
+position = Vector2(149.45807, -135.87099)
+
+[node name="Area2D" parent="." index="1"]
+position = Vector2(-131.34193, 99.638725)
+
+[node name="Area2D2" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
+position = Vector2(95.10967, -49.81936)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
+position = Vector2(0, -40.761295)
+rotation = 0.18502945
+shape = SubResource("RectangleShape2D_75vfm")
+
+[node name="Cells" parent="." index="3"]
+visible = true
+
+[node name="Sprite2D" parent="Cells" index="0"]
+position = Vector2(-131.34192, 58.877434)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Cells" index="1"]
+position = Vector2(95.10968, -95.10969)
+rotation = 0.18768506
+scale = Vector2(1.8137224, 1.782836)
+texture = ExtResource("3_e832t")

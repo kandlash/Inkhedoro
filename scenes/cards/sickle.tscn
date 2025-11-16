@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkjxu46hk1w8s"]
+
+[ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_ruloy"]
+[ext_resource type="Texture2D" uid="uid://bd4rqyvvbb8f3" path="res://assets/sprites/serp.png" id="2_wtxfb"]
+[ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_tsmgh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
+size = Vector2(181.16125, 181.16162)
+
+[node name="Sickle" instance=ExtResource("1_ruloy")]
+texture = ExtResource("2_wtxfb")
+cells_to_feel = 3
+
+[node name="Center" parent="." index="0"]
+position = Vector2(203.80646, -113.225815)
+
+[node name="Area2D" parent="." index="1"]
+position = Vector2(203.80646, -72.46452)
+
+[node name="Area2D3" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
+position = Vector2(-40.761276, -113.225815)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" index="0"]
+position = Vector2(0, -40.761295)
+rotation = 0.18502945
+shape = SubResource("RectangleShape2D_75vfm")
+
+[node name="Area2D2" type="Area2D" parent="." index="3" groups=["tattoo_area"]]
+position = Vector2(158.51613, 172.10324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
+position = Vector2(0, -40.761295)
+rotation = 0.18502945
+shape = SubResource("RectangleShape2D_75vfm")
+
+[node name="Cells" parent="." index="4"]
+visible = true
+
+[node name="Sprite2D" parent="Cells" index="0"]
+position = Vector2(-40.76129, -153.9871)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Cells" index="1"]
+position = Vector2(203.80644, -113.225815)
+rotation = 0.18768506
+scale = Vector2(1.8137224, 1.782836)
+texture = ExtResource("3_tsmgh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Cells" index="2"]
+position = Vector2(158.51613, 126.81291)
+rotation = 0.18768506
+scale = Vector2(1.8137224, 1.782836)
+texture = ExtResource("3_tsmgh")

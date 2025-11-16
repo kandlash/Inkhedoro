@@ -124,37 +124,37 @@ mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(4.854736, -0.5136582, 5.7808435e-08, -9.2314494e-08, -3.4082277e-08, -4.2165675, 3.8277135, 0.65147895, -1.7501175e-07, 9.888802, 2.8243074, 18.130383)
+transform = Transform3D(7.813253, -0.8266859, 9.3037386e-08, -1.4857173e-07, -5.4852304e-08, -6.7861795, 6.1603546, 1.0484958, -2.816654e-07, 15.291275, 5.9701405, 23.580702)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D61" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(4.854736, -0.5136582, 5.7808435e-08, -9.2314494e-08, -3.4082277e-08, -4.2165675, 3.8277135, 0.65147895, -1.7501175e-07, 8.589825, 2.8243074, 11.781554)
+transform = Transform3D(7.813253, -0.8266859, 9.3037386e-08, -1.4857173e-07, -5.4852304e-08, -6.7861795, 6.1603546, 1.0484958, -2.816654e-07, 13.20069, 5.9701405, 13.362844)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D62" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(4.854736, -0.5136582, 5.7808435e-08, -9.2314494e-08, -3.4082277e-08, -4.2165675, 3.8277135, 0.65147895, -1.7501175e-07, 6.951705, 2.8243074, 3.474063)
+transform = Transform3D(7.813253, -0.8266859, 9.3037386e-08, -1.4857173e-07, -5.4852304e-08, -6.7861795, 6.1603546, 1.0484958, -2.816654e-07, 10.564286, 2.3589125, -0.007303238)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D63" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(6.2157145, -0.51365846, 7.7298246e-08, -1.1819398e-07, -3.4082294e-08, -5.638161, 4.9007764, 0.65147924, -2.3401604e-07, 7.056135, 5.692189, -5.7410045)
+transform = Transform3D(10.003624, -0.8266863, 1.2440445e-07, -1.902224e-07, -5.4852332e-08, -9.074104, 7.887351, 1.0484962, -3.766274e-07, 10.732357, 6.974506, -14.838112)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D13" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(4.634782, 0.54902864, 5.780842e-08, 2.3335406e-07, -1.828791e-08, -4.2165675, -4.091289, 0.62196237, -1.7501175e-07, -10.23004, 3.6502736, 21.776752)
+transform = Transform3D(7.459257, 0.8836113, 9.3037364e-08, 3.75562e-07, -2.9432718e-08, -6.7861795, -6.584555, 1.0009915, -2.816654e-07, -17.08816, 6.466653, 29.449202)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D58" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(4.634782, 0.54902864, 5.780842e-08, 2.3335406e-07, -1.828791e-08, -4.2165675, -4.091289, 0.62196237, -1.7501175e-07, -8.281122, 3.6502738, 14.247625)
+transform = Transform3D(7.459257, 0.8836113, 9.3037364e-08, 3.75562e-07, -2.9432718e-08, -6.7861795, -6.584555, 1.0009915, -2.816654e-07, -13.951555, 6.6237745, 17.33176)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
@@ -166,7 +166,7 @@ mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D60" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(4.634782, 0.54902864, 5.780842e-08, 2.3335406e-07, -1.828791e-08, -4.2165675, -4.091289, 0.62196237, -1.7501175e-07, -6.8094616, 3.6502738, 0.63795596)
+transform = Transform3D(7.459257, 0.8836113, 9.3037364e-08, 3.75562e-07, -2.9432718e-08, -6.7861795, -6.584555, 1.0009915, -2.816654e-07, -11.583052, 3.6882298, -4.5717583)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
@@ -442,13 +442,19 @@ mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2232594, 4.294791, 16.05968)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7308903, 19.485085, 21.144222)
+light_energy = 11.722
+shadow_enabled = true
+omni_range = 19.248947
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7308903, 11.960683, -4.8557777)
+light_energy = 11.722
+shadow_enabled = true
+omni_range = 19.248947
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 11.979278)
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 20.2269)
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7747602, 4.294791, 10.833363)
