@@ -496,7 +496,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7747602, 4.294791, 10.83336
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.53670394, 0, 0, 0, 0.53670394, 0, 0, 0, 0.21047372, 0, 1.7767051, 11.168811)
-visible = false
 billboard = 2
 texture = ExtResource("5_6761a")
 
