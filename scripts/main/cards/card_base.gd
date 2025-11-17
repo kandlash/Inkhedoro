@@ -16,6 +16,8 @@ var start_position
 var on_arm: bool = false
 @onready var center: Node2D = $Center
 
+signal card_dropped
+
 @onready var cells: Node2D = $Cells
 
 func _ready() -> void:
@@ -88,6 +90,7 @@ func _input(event: InputEvent) -> void:
 					on_arm = true
 				else:
 					global_position = start_position
+				emit_signal("card_dropped", self)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed and dragging:
 				rotate(deg_to_rad(90))

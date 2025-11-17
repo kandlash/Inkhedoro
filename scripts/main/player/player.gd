@@ -20,7 +20,6 @@ var breathing_time := 0.0
 @export var breathing_strength := 6.0
 @export var breathing_speed := 1.5
 
-# Ходьба
 var walk_time := 0.0
 @export var walk_strength := 12.0
 @export var walk_speed := 8.0
@@ -44,7 +43,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		arm_base.visible = !arm_base.visible
 		tattoo_pose.visible = !tattoo_pose.visible
-	# --- мышь ---
+
 	var viewport := get_viewport()
 	var mouse_pos := viewport.get_mouse_position()
 	var size := viewport.get_visible_rect().size
@@ -56,7 +55,6 @@ func _process(delta):
 	last_mouse_pos = mouse_pos
 	var is_mouse_moving := mouse_delta > 0.5
 
-	# камера
 	var target_x := -ny * max_look_angle
 	var target_y := -nx * max_look_angle
 
@@ -65,8 +63,6 @@ func _process(delta):
 	current.y = lerp(current.y, target_y, delta * 8.0)
 	head.rotation_degrees = current
 
-
-	# --- дыхание ---
 	if not is_mouse_moving and velocity.length() < 0.1:
 		breathing_time += delta * breathing_speed
 	else:
@@ -78,7 +74,6 @@ func _process(delta):
 	)
 
 	var walk_offset := Vector2.ZERO
-
 	if velocity.length() > 0.1:
 		walk_time += delta * walk_speed
 		walk_offset = Vector2(
@@ -88,14 +83,8 @@ func _process(delta):
 	else:
 		walk_time = lerp(walk_time, 0.0, delta * 3.0)
 
-
-	# --- sway от мыши ---
 	var mouse_sway := Vector2(nx, ny) * sway_amount
-
-
-	# --- итоговый оффсет ---
 	var final_offset := breathing_offset + mouse_sway + walk_offset
-
 	arm_base.position = arm_base.position.lerp(arm_base_start_pos + final_offset, delta * 6.0)
 	tattoo_pose.position = tattoo_pose.position.lerp(tattoo_pose_start_pos + final_offset/2, delta * 6.0)
 
