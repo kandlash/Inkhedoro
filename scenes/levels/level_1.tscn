@@ -584,7 +584,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 11.9792
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7747602, 4.294791, 10.833363)
 
 [node name="Enemy" type="Sprite3D" parent="."]
-transform = Transform3D(0.53670394, 0, 0, 0, 0.53670394, 0, 0, 0, 0.21047372, 0, 1.7767051, 11.168811)
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0, 1.3984185, 11.168811)
+pixel_size = 0.008
 texture = ExtResource("5_6761a")
 script = ExtResource("9_qxy0u")
 
@@ -654,7 +655,7 @@ offset_top = -41.5
 offset_bottom = 41.5
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 55
+theme_override_font_sizes/font_size = 115
 text = "-current_hp/-max_hp"
 horizontal_alignment = 1
 vertical_alignment = 1

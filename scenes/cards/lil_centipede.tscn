@@ -9,6 +9,8 @@ size = Vector2(181.16125, 181.16162)
 
 [node name="Lil_Centipede" instance=ExtResource("1_h5gr5")]
 texture = ExtResource("2_e832t")
+card_name = "Lil Centipede"
+description = "Makes enemy vulnarable"
 cells_to_feel = 2
 
 [node name="Center" parent="." index="0"]
@@ -36,3 +38,6 @@ position = Vector2(95.10968, -95.10969)
 rotation = 0.18768506
 scale = Vector2(1.8137224, 1.782836)
 texture = ExtResource("3_e832t")
+
+[node name="Image" parent="Card_UI" index="1"]
+texture = ExtResource("2_e832t")

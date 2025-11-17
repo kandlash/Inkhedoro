@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://drk3wxeg2kh3r"]
+[gd_scene load_steps=6 format=3 uid="uid://drk3wxeg2kh3r"]
 
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="1_6o33k"]
 [ext_resource type="Script" uid="uid://c1cv6jvbgmt55" path="res://scripts/main/cards/card_base.gd" id="2_auqya"]
 [ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_uh4ib"]
+[ext_resource type="Texture2D" uid="uid://c7dcifn0waxd6" path="res://assets/sprites/ui/card_back.png" id="4_vvmxj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(181.16125, 181.16162)
@@ -31,3 +32,90 @@ position = Vector2(1.857357e-07, -40.76129)
 rotation = 0.18768506
 scale = Vector2(1.8137224, 1.782836)
 texture = ExtResource("3_uh4ib")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Card_UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.5
+offset_top = -277.0
+offset_right = -155.5
+offset_bottom = -237.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="TextureRect" parent="Card_UI"]
+modulate = Color(0.74138474, 0.7413847, 0.74138457, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -387.6129
+offset_top = -491.78064
+offset_right = 387.6129
+offset_bottom = 491.78064
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_vvmxj")
+
+[node name="Image" type="TextureRect" parent="Card_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.2774
+offset_top = -291.81934
+offset_right = 199.2774
+offset_bottom = 291.81934
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6o33k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Card_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -398.55487
+offset_right = 205.0
+offset_bottom = -302.55487
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "CARD NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Label" parent="Card_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -293.0
+offset_top = 217.39357
+offset_right = 293.0
+offset_bottom = 430.39355
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "bla bla bla bla bla
+bla bla bla bla bla
+bla bla bla bla"
+horizontal_alignment = 1
+vertical_alignment = 1

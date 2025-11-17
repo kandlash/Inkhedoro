@@ -1,6 +1,10 @@
 extends Sprite2D
 class_name CardBase
 
+
+@export var card_name: String
+@export_multiline var description: String
+
 @export var cells_to_feel: int
 var self_areas: Array[Area2D] = []
 var feeled_areas: Array[Area2D] = []
@@ -11,6 +15,10 @@ var drag_offset: Vector2 = Vector2.ZERO
 const TATTOO_FRAME = preload("uid://0koxmjyxn077")
 const TATTOO_FRAME_USED = preload("uid://clgs11mmp0mav")
 const TATTOO_SELECETED = preload("uid://sg7qtxtecnsu")
+@onready var card_ui: Control = $Card_UI
+@onready var back: TextureRect = $Card_UI/Back
+@onready var name_label: Label = $Card_UI/Name
+@onready var desc_label: Label = $Card_UI/Desc
 
 var start_position
 var on_arm: bool = false
@@ -26,6 +34,9 @@ var selected := false
 @onready var cells: Node2D = $Cells
 
 func _ready() -> void:
+	name_label.text = card_name
+	desc_label.text = description
+	
 	cells.visible = false
 	start_position = global_position
 	for child in get_children():
@@ -59,18 +70,19 @@ func _on_area_exit(area: Area2D):
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		if get_rect().has_point(to_local(event.position)) and !selected:
+		if back.get_rect().has_point(to_local(event.position)) and !selected:
 			emit_signal("card_selected", self)
 			selected = true
-		elif !get_rect().has_point(to_local(event.position)) and selected:
+		elif !back.get_rect().has_point(to_local(event.position)) and selected:
 			emit_signal("card_deselected", self)
 			selected = false
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if get_rect().has_point(to_local(event.position)) and G.selected_card == null:
+				if back.get_rect().has_point(to_local(event.position)) and G.selected_card == null:
 					G.selected_card = self
+					card_ui.visible = false
 					emit_signal("card_taked", self)
 					cells.visible = true
 					dragging = true
@@ -81,6 +93,7 @@ func _input(event: InputEvent) -> void:
 							G.used_grids.erase(area)
 			elif !event.pressed and dragging:
 				dragging = false
+				card_ui.visible = true
 				cells.visible = false
 				G.selected_card = null
 				if (feeled_areas.size() >= cells_to_feel) and check_cells_for_other():
@@ -101,6 +114,7 @@ func _input(event: InputEvent) -> void:
 						area.get_parent().texture = TATTOO_FRAME_USED
 					G.used_grids.append_array(feeled_areas)
 					on_arm = true
+					card_ui.visible = false
 				else:
 					global_position = start_position
 				emit_signal("card_dropped", self)
