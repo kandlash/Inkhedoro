@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=13 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Texture2D" uid="uid://ba7bhpvw034ce" path="res://assets/textures/garbade_texture.png" id="2_6iamk"]
 [ext_resource type="Texture2D" uid="uid://b6k2hktp0uedu" path="res://assets/textures/panel_texture.png" id="3_nsrm0"]
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="4_x42e6"]
+[ext_resource type="Texture2D" uid="uid://cuxy30l1flsch" path="res://assets/sprites/enemy_dummy.png" id="5_6761a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -14,11 +15,15 @@ sky_material = SubResource("ProceduralSkyMaterial_ksju7")
 
 [sub_resource type="Environment" id="Environment_nsrm0"]
 sky = SubResource("Sky_6iamk")
-tonemap_mode = 2
+tonemap_mode = 4
+ssr_fade_in = 0.058843866
+ssao_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.0005812841, 0.00070481526, 0.0009252253, 1)
-fog_density = 0.0853
+fog_light_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+fog_light_energy = 0.14
+fog_density = 0.1068
 fog_height = 3.0
+fog_height_density = 1.0323
 adjustment_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
@@ -42,8 +47,8 @@ proximity_fade_distance = 0.01
 [node name="level_1" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-visible = false
-light_energy = 0.15
+transform = Transform3D(1, 0, 0, 0, 0.51720566, 0.8558612, 0, -0.8558612, 0.51720566, 0, 14.46684, 0)
+light_energy = 0.4
 light_specular = 5.948
 shadow_enabled = true
 sky_mode = 1
@@ -53,12 +58,6 @@ environment = SubResource("Environment_nsrm0")
 
 [node name="player" parent="." instance=ExtResource("1_ksju7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 19.710766)
-
-[node name="Sprite3D" type="Sprite3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.52829, -27.855637)
-pixel_size = 0.03
-billboard = 1
-texture = ExtResource("4_x42e6")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 material_override = SubResource("StandardMaterial3D_x42e6")
@@ -167,6 +166,12 @@ skeleton = NodePath("../..")
 
 [node name="MeshInstance3D13" type="MeshInstance3D" parent="Env"]
 transform = Transform3D(7.459257, 0.8836113, 9.3037364e-08, 3.75562e-07, -2.9432718e-08, -6.7861795, -6.584555, 1.0009915, -2.816654e-07, -17.08816, 6.466653, 29.449202)
+material_override = SubResource("StandardMaterial3D_6iamk")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D68" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(7.459257, 0.8836113, 9.3037364e-08, 3.75562e-07, -2.9432718e-08, -6.7861795, -6.584555, 1.0009915, -2.816654e-07, -8.114947, 6.4666524, 39.61443)
 material_override = SubResource("StandardMaterial3D_6iamk")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
@@ -476,3 +481,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 11.9792
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7747602, 4.294791, 10.833363)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.53670394, 0, 0, 0, 0.53670394, 0, 0, 0, 0.21047372, 0, 1.7767051, 11.168811)
+visible = false
+billboard = 2
+texture = ExtResource("5_6761a")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8533845, 12.453573, -45.651344)
+pixel_size = 0.1
+billboard = 1
+texture = ExtResource("4_x42e6")

@@ -12,7 +12,6 @@ const TATTOO_FRAME = preload("uid://0koxmjyxn077")
 const TATTOO_FRAME_USED = preload("uid://clgs11mmp0mav")
 const TATTOO_SELECETED = preload("uid://sg7qtxtecnsu")
 
-
 var start_position
 var on_arm: bool = false
 @onready var center: Node2D = $Center

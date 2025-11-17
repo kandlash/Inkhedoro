@@ -65,7 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6710013, 0)
 
 [node name="ArmBase" type="Control" parent="CanvasLayer"]
 visible = false
-modulate = Color(0.7750634, 0.7750634, 0.7750634, 1)
+modulate = Color(0.8217887, 0.82178867, 0.82178867, 1)
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -90,7 +90,7 @@ scale = Vector2(-0.42, 0.42)
 sprite_frames = SubResource("SpriteFrames_8afob")
 
 [node name="TattooPose" type="Control" parent="CanvasLayer"]
-modulate = Color(0.7750634, 0.7750634, 0.7750634, 1)
+modulate = Color(0.8217887, 0.82178867, 0.82178867, 1)
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
