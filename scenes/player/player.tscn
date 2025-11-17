@@ -188,6 +188,7 @@ position = Vector2(-15.9999695, -218)
 scale = Vector2(-0.46607694, 0.46607688)
 sprite_frames = SubResource("SpriteFrames_lgqa7")
 animation = &"cut"
+frame = 3
 
 [node name="RightAttack" type="AnimatedSprite2D" parent="CanvasLayer/TattooPose"]
 visible = false
