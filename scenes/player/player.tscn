@@ -89,6 +89,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8ydkj")
 }],
 "loop": false,
 "name": &"cut",

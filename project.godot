@@ -27,6 +27,7 @@ window/stretch/mode="canvas_items"
 
 grid_cells=""
 tattoo_area=""
+player=""
 
 [input]
 

@@ -26,7 +26,6 @@ func _ready() -> void:
 			grid_areas.append(area)
 
 func _on_deck_updated(card: CardBase):
-	print("deck was updated!! ", card)
 	card.connect("card_dropped", _on_card_dropped)
 	card.connect("card_taked", _on_card_taked)
 	card.connect("card_selected", _on_card_selected)
@@ -82,7 +81,7 @@ func animate_attack() -> void:
 	await t.finished
 
 	# Сам удар (impact snap)
-	G.camera.shake(0.15, 0.1)
+	
 	var t2 = create_tween()
 	t2.set_parallel(true)
 
@@ -90,6 +89,8 @@ func animate_attack() -> void:
 	t2.tween_property(spr, "rotation", start_rot + deg_to_rad(randf_range(-3, 3)), 0.04)
 	
 	await t2.finished
+	G.camera.shake(0.15, 0.1)
+	G.current_enemy.take_damage(1)
 
 	# Откат + исчезновение
 	var t3 = create_tween()
@@ -120,7 +121,6 @@ func spell_cards_on_grid():
 				cards_in_grid.append(card)
 
 	for card in cards_in_grid:
-		print(card.name)
 		var tween = create_tween()
 		var card_start_scale = card.scale
 		tween.tween_property(card, "scale", card_start_scale * 1.5, 0.07).set_trans(Tween.TRANS_SPRING)
@@ -151,4 +151,3 @@ func spell_cards_on_grid():
 
 func _on_cut_frame_changed():
 	cut_frame += 1
-	print(cut_frame)

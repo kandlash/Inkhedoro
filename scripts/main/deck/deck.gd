@@ -19,7 +19,6 @@ func generate_deck() -> void:
 		for i in range(count):
 			var card_instance = card_scene.instantiate()
 			unused_cards.append(card_instance)
-			print('emitting signal with ', card_instance)
 			emit_signal("deck_updated", card_instance)
 	_shuffle_unused()
 

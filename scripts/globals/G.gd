@@ -7,3 +7,5 @@ var selected_card: CardBase
 var deck: Deck
 var hand: Hand
 var camera: Camera
+
+var current_enemy: EnemyBase
