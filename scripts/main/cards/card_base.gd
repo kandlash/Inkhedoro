@@ -16,7 +16,12 @@ var start_position
 var on_arm: bool = false
 @onready var center: Node2D = $Center
 
+signal card_taked
+signal card_selected
 signal card_dropped
+signal card_deselected
+
+var selected := false
 
 @onready var cells: Node2D = $Cells
 
@@ -52,13 +57,21 @@ func _on_area_exit(area: Area2D):
 	var sprite: Sprite2D = area.get_parent()
 	sprite.texture = TATTOO_FRAME
 	
-# Проверяем нажатие мыши
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouse:
+		if get_rect().has_point(to_local(event.position)) and !selected:
+			emit_signal("card_selected", self)
+			selected = true
+		elif !get_rect().has_point(to_local(event.position)) and selected:
+			emit_signal("card_deselected", self)
+			selected = false
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				if get_rect().has_point(to_local(event.position)) and G.selected_card == null:
 					G.selected_card = self
+					emit_signal("card_taked", self)
 					cells.visible = true
 					dragging = true
 					drag_offset = position - event.position
@@ -102,6 +115,6 @@ func check_cells_for_other():
 				return false
 	return true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if dragging:
 		position = get_global_mouse_position() + drag_offset

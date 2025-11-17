@@ -5,6 +5,8 @@ class_name Deck
 var unused_cards: Array = []
 var used_cards: Array = []
 
+signal deck_updated
+
 func _ready() -> void:
 	G.deck = self
 	generate_deck()
@@ -17,6 +19,8 @@ func generate_deck() -> void:
 		for i in range(count):
 			var card_instance = card_scene.instantiate()
 			unused_cards.append(card_instance)
+			print('emitting signal with ', card_instance)
+			emit_signal("deck_updated", card_instance)
 	_shuffle_unused()
 
 func add_to_deck(new_cards: Dictionary[PackedScene, int]) -> void:
@@ -25,6 +29,7 @@ func add_to_deck(new_cards: Dictionary[PackedScene, int]) -> void:
 		for i in range(count):
 			var card_instance = card_scene.instantiate()
 			unused_cards.append(card_instance)
+			emit_signal("deck_updated", card_instance)
 	_shuffle_unused()
 
 func _shuffle_unused() -> void:

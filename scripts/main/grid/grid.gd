@@ -11,20 +11,50 @@ var cut_frame = 0
 var grid_areas: Array[Area2D]
 var cards_in_grid: Array[CardBase]
 func _ready() -> void:
+	G.deck.connect("deck_updated", _on_deck_updated)
+	for card in G.deck.unused_cards:
+		card.connect("card_dropped", _on_card_dropped)
+		card.connect("card_taked", _on_card_taked)
+		card.connect("card_selected", _on_card_selected)
+		card.connect("card_deselected", _on_card_deselected)
+	visible = false
 	cut_self.connect("frame_changed", _on_cut_frame_changed)
+	
 	for i in get_children():
 		if i is Sprite2D and i.get_child(0).is_in_group("grid_cells"):
 			var area = i.get_child(0)
 			grid_areas.append(area)
 
+func _on_deck_updated(card: CardBase):
+	print("deck was updated!! ", card)
+	card.connect("card_dropped", _on_card_dropped)
+	card.connect("card_taked", _on_card_taked)
+	card.connect("card_selected", _on_card_selected)
+	card.connect("card_deselected", _on_card_deselected)
+
+func _on_card_dropped(card: CardBase):
+	visible = false
+
+func _on_card_taked(card: CardBase):
+	visible = true
+	
+func _on_card_selected(card: CardBase):
+	if card.on_arm:
+		return
+	visible = true
+
+func _on_card_deselected(card: CardBase):
+	if card.on_arm:
+		return
+	visible = false
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_left"):
 		spell_cards_on_grid()
-		
+	
 	if cut_frame >= cut_frame_to_effect and cut_frame > 0:
 		cut_frame = -1
-		G.camera.shake(0.025, 0.5)
-		
+		G.camera.shake(0.025, 0.4)
 
 func animate_attack() -> void:
 	var spr := right_attack
@@ -77,7 +107,6 @@ func animate_attack() -> void:
 	spr.rotation = start_rot
 	spr.visible = false
 
-
 func spell_cards_on_grid():
 	cut_frame = 0
 	visible = false
@@ -120,7 +149,6 @@ func spell_cards_on_grid():
 	cards_in_grid.clear()
 	visible = true
 	right_arm.visible = true
-
 
 func _on_cut_frame_changed():
 	cut_frame += 1

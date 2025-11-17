@@ -194,6 +194,7 @@ modulate = Color(1, 1, 1, 0.3137255)
 position = Vector2(-36, -51.999996)
 rotation = 0.21369182
 script = ExtResource("4_75vfm")
+cut_frame_to_effect = 6
 
 [node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
 position = Vector2(156, -243.79999)
