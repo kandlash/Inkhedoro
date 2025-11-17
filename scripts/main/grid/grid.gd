@@ -147,7 +147,6 @@ func spell_cards_on_grid():
 	await cut_self.animation_finished
 	cut_self.visible = false
 	cards_in_grid.clear()
-	visible = true
 	right_arm.visible = true
 
 func _on_cut_frame_changed():
