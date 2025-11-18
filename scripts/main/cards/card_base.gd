@@ -28,6 +28,8 @@ signal card_taked
 signal card_selected
 signal card_dropped
 signal card_deselected
+signal card_grid_exited
+signal card_grid_entered
 
 var selected := false
 
@@ -69,20 +71,21 @@ func _on_area_exit(area: Area2D):
 	sprite.texture = TATTOO_FRAME
 	
 func _input(event: InputEvent) -> void:
+	var check_rect = back if !on_arm else self
 	if event is InputEventMouse:
-		if back.get_rect().has_point(to_local(event.position)) and !selected:
+		if check_rect.get_rect().has_point(to_local(event.position)) and !selected:
 			emit_signal("card_selected", self)
 			selected = true
-		elif !back.get_rect().has_point(to_local(event.position)) and selected:
+		elif !check_rect.get_rect().has_point(to_local(event.position)) and selected:
 			emit_signal("card_deselected", self)
 			selected = false
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if back.get_rect().has_point(to_local(event.position)) and G.selected_card == null:
+				if check_rect.get_rect().has_point(to_local(event.position)) and G.selected_card == null:
 					G.selected_card = self
-					card_ui.visible = false
+					global_position = event.global_position
 					emit_signal("card_taked", self)
 					cells.visible = true
 					dragging = true
@@ -93,7 +96,6 @@ func _input(event: InputEvent) -> void:
 							G.used_grids.erase(area)
 			elif !event.pressed and dragging:
 				dragging = false
-				card_ui.visible = true
 				cells.visible = false
 				G.selected_card = null
 				if (feeled_areas.size() >= cells_to_feel) and check_cells_for_other():
@@ -118,6 +120,7 @@ func _input(event: InputEvent) -> void:
 				else:
 					global_position = start_position
 				emit_signal("card_dropped", self)
+				card_ui.visible = !on_arm
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed and dragging:
 				rotate(deg_to_rad(90))
@@ -132,3 +135,15 @@ func check_cells_for_other():
 func _process(_delta: float) -> void:
 	if dragging:
 		position = get_global_mouse_position() + drag_offset
+
+
+func _on_collide_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("grid_collide"):
+		emit_signal("card_grid_entered", self)
+		card_ui.visible = false
+
+
+func _on_collide_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("grid_collide"):
+		emit_signal("card_grid_exited", self)
+		card_ui.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://drk3wxeg2kh3r"]
+[gd_scene load_steps=7 format=3 uid="uid://drk3wxeg2kh3r"]
 
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="1_6o33k"]
 [ext_resource type="Script" uid="uid://c1cv6jvbgmt55" path="res://scripts/main/cards/card_base.gd" id="2_auqya"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(181.16125, 181.16162)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvmxj"]
+size = Vector2(552.54193, 833.34204)
 
 [node name="card_base" type="Sprite2D"]
 scale = Vector2(0.22079772, 0.2207977)
@@ -94,6 +97,8 @@ offset_right = 205.0
 offset_bottom = -302.55487
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
 theme_override_font_sizes/font_size = 100
 text = "CARD NAME"
 horizontal_alignment = 1
@@ -112,9 +117,20 @@ offset_right = 293.0
 offset_bottom = 430.39355
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
 theme_override_font_sizes/font_size = 50
 text = "bla bla bla bla bla
 bla bla bla bla bla
 bla bla bla bla"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CollideArea" type="Area2D" parent="." groups=["card_collide"]]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollideArea"]
+shape = SubResource("RectangleShape2D_vvmxj")
+
+[connection signal="area_entered" from="CollideArea" to="." method="_on_collide_area_area_entered"]
+[connection signal="area_exited" from="CollideArea" to="." method="_on_collide_area_area_exited"]

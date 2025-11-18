@@ -15,8 +15,10 @@ func _ready() -> void:
 	for card in G.deck.unused_cards:
 		card.connect("card_dropped", _on_card_dropped)
 		card.connect("card_taked", _on_card_taked)
-		card.connect("card_selected", _on_card_selected)
-		card.connect("card_deselected", _on_card_deselected)
+		#card.connect("card_selected", _on_card_selected)
+		#card.connect("card_deselected", _on_card_deselected)
+		card.connect("card_grid_exited", _on_card_grid_exited)
+		card.connect("card_grid_entered", _on_card_grid_entered)
 	visible = false
 	cut_self.connect("frame_changed", _on_cut_frame_changed)
 	
@@ -30,11 +32,15 @@ func _on_deck_updated(card: CardBase):
 	card.connect("card_taked", _on_card_taked)
 	card.connect("card_selected", _on_card_selected)
 	card.connect("card_deselected", _on_card_deselected)
+	card.connect("card_grid_exited", _on_card_grid_exited)
+	card.connect("card_grid_entered", _on_card_grid_entered)
 
 func _on_card_dropped(card: CardBase):
 	visible = false
 
 func _on_card_taked(card: CardBase):
+	if !card.on_arm:
+		return
 	visible = true
 	
 func _on_card_selected(card: CardBase):
@@ -46,6 +52,13 @@ func _on_card_deselected(card: CardBase):
 	if card.on_arm:
 		return
 	visible = false
+
+func _on_card_grid_exited(card: CardBase):
+	visible = false
+
+func _on_card_grid_entered(card: CardBase):
+	visible = true
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_left"):

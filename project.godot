@@ -28,6 +28,8 @@ window/stretch/mode="canvas_items"
 grid_cells=""
 tattoo_area=""
 player=""
+card_collide=""
+grid_collide=""
 
 [input]
 

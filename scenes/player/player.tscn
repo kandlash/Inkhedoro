@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dmwwst3hdut4y"]
+[gd_scene load_steps=31 format=3 uid="uid://dmwwst3hdut4y"]
 
 [ext_resource type="Texture2D" uid="uid://cywxycueh0kl5" path="res://assets/sprites/arm_test3.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://d4mvcidbtb15w" path="res://scripts/main/player/player.gd" id="1_dovo2"]
@@ -59,6 +59,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ydkj"]
+size = Vector2(1880.3367, 1276.3745)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lgqa7"]
 animations = [{
@@ -186,9 +189,18 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="RightArm" type="AnimatedSprite2D" parent="CanvasLayer/TattooPose"]
-position = Vector2(277.00003, -228.18102)
+position = Vector2(423.90042, -228.18102)
 scale = Vector2(-0.24835971, 0.24835971)
 sprite_frames = SubResource("SpriteFrames_p47bc")
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/RightArm" groups=["grid_collide"]]
+collision_layer = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/RightArm/Area2D"]
+position = Vector2(251.25024, 22.874146)
+shape = SubResource("RectangleShape2D_8ydkj")
+debug_color = Color(0.84313726, 0.38039216, 0, 0.10980392)
 
 [node name="CutSelf" type="AnimatedSprite2D" parent="CanvasLayer/TattooPose"]
 visible = false
@@ -206,7 +218,7 @@ sprite_frames = SubResource("SpriteFrames_8ydkj")
 
 [node name="Grid" type="Node2D" parent="CanvasLayer/TattooPose"]
 modulate = Color(1, 1, 1, 0.3137255)
-position = Vector2(-36, -138.18102)
+position = Vector2(110.900406, -138.18102)
 rotation = 0.21369182
 script = ExtResource("4_75vfm")
 cut_frame_to_effect = 6

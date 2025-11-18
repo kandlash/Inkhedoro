@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="4_x42e6"]
 [ext_resource type="Texture2D" uid="uid://cuxy30l1flsch" path="res://assets/sprites/enemy_dummy.png" id="5_6761a"]
 [ext_resource type="Script" uid="uid://tbbjclm2bas7" path="res://scripts/main/enemy/enemy.gd" id="9_qxy0u"]
-[ext_resource type="Texture2D" uid="uid://bchb6vy6a021a" path="res://assets/sprites/ui/heart.png" id="10_excbq"]
+[ext_resource type="Texture2D" uid="uid://dyefffuxqsp4k" path="res://assets/sprites/ui/heart2.png" id="10_excbq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -596,7 +596,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3916626, 8.03046)
 shape = SubResource("BoxShape3D_dga24")
 
 [node name="UI_HP" type="Sprite3D" parent="Enemy"]
-transform = Transform3D(0.24649559, 0, 0, 0, 0.24649559, 0, 0, 0, 0.4, -2.5217507, 0.9536352, 2.2237976)
+transform = Transform3D(0.24401581, 0, 0.056595482, 0, 0.24649559, 0, -0.03487634, 0, 0.39597595, -2.5217507, 0.9536352, 2.2237976)
 layers = 2
 material_override = SubResource("StandardMaterial3D_iav0o")
 billboard = 1
