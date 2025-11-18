@@ -50,7 +50,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Back" type="TextureRect" parent="Card_UI"]
-modulate = Color(0.74138474, 0.7413847, 0.74138457, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
