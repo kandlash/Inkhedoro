@@ -61,10 +61,8 @@ func end_player_turn():
 	start_enemy_turn()
 
 func start_enemy_turn():
-	print('enemy!!!!')
 	enemy = G.current_enemy
 	if enemy_defeated:
-		print('defeated!')
 		await get_tree().create_timer(0.5).timeout
 		G.emit_signal("battle_finished")
 		clear_turn_manager()

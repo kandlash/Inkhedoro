@@ -32,6 +32,7 @@ func take_damage(amount: int):
 		hp = 0
 		visible = false
 		emit_signal("enemy_died")
+		emit_signal("turn_finished")
 	hp_label.text = hp_text_template.replace("-current_hp", str(hp)).replace("-max_hp", str(max_hp))
 
 func make_turn():
