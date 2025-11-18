@@ -16,11 +16,11 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_6iamk"]
+[sub_resource type="Sky" id="Sky_excbq"]
 sky_material = SubResource("ProceduralSkyMaterial_ksju7")
 
 [sub_resource type="Environment" id="Environment_nsrm0"]
-sky = SubResource("Sky_6iamk")
+sky = SubResource("Sky_excbq")
 tonemap_mode = 4
 ssr_fade_in = 0.058843866
 ssao_enabled = true
@@ -596,7 +596,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3916626, 8.03046)
 shape = SubResource("BoxShape3D_dga24")
 
 [node name="UI_HP" type="Sprite3D" parent="Enemy"]
-transform = Transform3D(0.24401581, 0, 0.056595482, 0, 0.24649559, 0, -0.03487634, 0, 0.39597595, -2.5217507, 0.9536352, 2.2237976)
+transform = Transform3D(0.24649559, 0, 0, 0, 0.24649559, 0, 0, 0, 0.4, 0, 2.4948921, 1.7687445)
 layers = 2
 material_override = SubResource("StandardMaterial3D_iav0o")
 billboard = 1

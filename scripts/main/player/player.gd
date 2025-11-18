@@ -1,10 +1,27 @@
 extends CharacterBody3D
+class_name Player
 @onready var arm_base: Control = $CanvasLayer/ArmBase
 @onready var tattoo_pose: Control = $CanvasLayer/TattooPose
-@export var speed: float = 1.5
 @onready var head: Node3D = $head
 @onready var camera_3d: Camera3D = $head/Camera3D
 
+
+@export_category("Stats")
+@export var hp : int = 10
+var max_hp: int
+@export var base_damage: int = 1
+@export var block: int = 0
+
+@export var bleed_turns: int = 0
+var bleed_damage: int = 0
+
+var vulnarable_turns: int = 0
+@export var vulnarable_damage: float = 0.0
+
+signal hp_updated
+
+@export_category("Movement")
+@export var speed: float = 1.5
 @export var max_look_angle := 15.0
 @export var mouse_sensitivity := 0.2
 
@@ -24,11 +41,12 @@ var walk_time := 0.0
 @export var walk_strength := 12.0
 @export var walk_speed := 8.0
 
-
 func _ready():
+	G.player = self
+	max_hp = hp
 	await get_tree().process_frame
 	center_mouse()
-
+	G.emit_signal("player_spawned")
 
 func center_mouse():
 	var viewport := get_viewport()
@@ -38,6 +56,11 @@ func center_mouse():
 	arm_base_start_pos = arm_base.position
 	tattoo_pose_start_pos = tattoo_pose.position
 
+func take_damage(amount: int):
+	hp -= amount
+	if hp < 0:
+		hp = 0
+	emit_signal("hp_updated")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):

@@ -2,7 +2,7 @@ extends Panel
 class_name Hand
 
 @export var card_spacing := 80
-@export var max_card_angle := 3
+@export var max_card_angle := 0
 @export var base_y_offset := 150
 @export var smooth_appearance := true
 @export var tween_time := 0.25
@@ -55,7 +55,7 @@ func _update_card_layout() -> void:
 		
 	var center_x = size.x / 2
 	var base_y = size.y - base_y_offset
-	var card_size = cards_to_update[0].scale
+	var card_size = cards_to_update[0].back.scale
 
 	if count == 1:
 		var card = cards_to_update[0]

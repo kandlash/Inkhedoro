@@ -8,4 +8,7 @@ var deck: Deck
 var hand: Hand
 var camera: Camera
 
+var player: Player
+signal player_spawned
+
 var current_enemy: EnemyBase
