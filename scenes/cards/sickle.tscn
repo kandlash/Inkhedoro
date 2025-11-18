@@ -1,27 +1,27 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkjxu46hk1w8s"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_ruloy"]
-[ext_resource type="Texture2D" uid="uid://bd4rqyvvbb8f3" path="res://assets/sprites/serp.png" id="2_wtxfb"]
+[ext_resource type="Texture2D" uid="uid://fyqqcd5byc3g" path="res://assets/sprites/cards/serp2.png" id="2_ot5mr"]
 [ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_tsmgh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(181.16125, 181.16162)
 
 [node name="Sickle" instance=ExtResource("1_ruloy")]
-texture = ExtResource("2_wtxfb")
+texture = ExtResource("2_ot5mr")
 card_name = "Sickle"
 description = "Takes 3 cells to feel.
 Deals damage and bleed."
 cells_to_feel = 3
 
 [node name="Center" parent="." index="0"]
-position = Vector2(203.80646, -113.225815)
+position = Vector2(-40.761288, -153.98712)
 
 [node name="Area2D" parent="." index="1"]
-position = Vector2(203.80646, -72.46452)
+position = Vector2(-40.761288, -113.22583)
 
 [node name="Area2D3" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
-position = Vector2(-40.761276, -113.225815)
+position = Vector2(-95.10968, 117.754845)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" index="0"]
 position = Vector2(0, -40.761295)
@@ -29,7 +29,7 @@ rotation = 0.18502945
 shape = SubResource("RectangleShape2D_75vfm")
 
 [node name="Area2D2" type="Area2D" parent="." index="3" groups=["tattoo_area"]]
-position = Vector2(158.51613, 172.10324)
+position = Vector2(203.80646, -67.935486)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
 position = Vector2(0, -40.761295)
@@ -49,10 +49,13 @@ scale = Vector2(1.8137224, 1.782836)
 texture = ExtResource("3_tsmgh")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Cells" index="2"]
-position = Vector2(158.51613, 126.81291)
+position = Vector2(-95.10968, 76.99355)
 rotation = 0.18768506
 scale = Vector2(1.8137224, 1.782836)
 texture = ExtResource("3_tsmgh")
 
 [node name="Image" parent="Card_UI" index="1"]
-texture = ExtResource("2_wtxfb")
+texture = ExtResource("2_ot5mr")
+
+[node name="CollisionShape2D" parent="CollideArea" index="0"]
+debug_color = Color(0, 0.6, 0.69803923, 0.050980393)

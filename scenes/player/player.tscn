@@ -430,9 +430,9 @@ tween_time = 0.15
 [node name="Get_Ink_Button" type="Button" parent="CanvasLayer/TattooPose"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 442.99994
+offset_left = 443.00006
 offset_top = -23.000002
-offset_right = 665.99994
+offset_right = 666.00006
 offset_bottom = 62.0
 scale = Vector2(0.49733248, 0.49733248)
 theme_override_colors/font_color = Color(1, 1, 1, 1)

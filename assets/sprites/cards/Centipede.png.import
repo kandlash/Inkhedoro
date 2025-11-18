@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dps528cdx1i1u"
-path="res://.godot/imported/Centipede.png-380203fb7194fd3163e658e900f64a44.ctex"
+path="res://.godot/imported/Centipede.png-8f72b14bb61bac2ec372bcfd6f59195a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Centipede.png"
-dest_files=["res://.godot/imported/Centipede.png-380203fb7194fd3163e658e900f64a44.ctex"]
+source_file="res://assets/sprites/cards/Centipede.png"
+dest_files=["res://.godot/imported/Centipede.png-8f72b14bb61bac2ec372bcfd6f59195a.ctex"]
 
 [params]
 

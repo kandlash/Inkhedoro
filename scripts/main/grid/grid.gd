@@ -126,6 +126,8 @@ func animate_attack() -> void:
 	spr.visible = false
 
 func spell_cards_on_grid():
+	var start_pos = right_arm.position
+
 	cut_frame = 0
 	visible = false
 	for area in grid_areas:
@@ -143,9 +145,9 @@ func spell_cards_on_grid():
 		tween.tween_property(card, "scale", card_start_scale * 1.5, 0.07).set_trans(Tween.TRANS_SPRING)
 		await tween.finished
 
-		var tween2 = create_tween()
-		tween2.tween_property(card, "scale", card_start_scale, 0.15).set_trans(Tween.TRANS_SPRING)
-		await tween2.finished
+		var tween22 = create_tween()
+		tween22.tween_property(card, "scale", card_start_scale, 0.15).set_trans(Tween.TRANS_SPRING)
+		await tween22.finished
 		
 		await get_tree().create_timer(0.15).timeout
 		
@@ -157,6 +159,7 @@ func spell_cards_on_grid():
 
 		cards_hand.visible = true
 		right_arm.visible = true
+		
 	right_arm.visible = false
 	G.hand.drop_cards()
 	cut_self.visible = true
@@ -165,6 +168,15 @@ func spell_cards_on_grid():
 	cut_self.visible = false
 	cards_in_grid.clear()
 	right_arm.visible = true
+	var tween1 = create_tween()
+	
+	tween1.tween_property(right_arm, "position", start_pos + Vector2(500, 0), 0.15).set_trans(Tween.TRANS_SPRING)
+	await tween1.finished
+
+	var tween2 = create_tween()
+	tween2.tween_property(right_arm, "position", start_pos, 0.5).set_trans(Tween.TRANS_SPRING)
+	
+
 	emit_signal("turn_finished")
 
 func _on_cut_frame_changed():

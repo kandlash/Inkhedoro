@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ceokwkhruu0yj"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_h5gr5"]
-[ext_resource type="Texture2D" uid="uid://dps528cdx1i1u" path="res://assets/sprites/Centipede.png" id="2_e832t"]
+[ext_resource type="Texture2D" uid="uid://dps528cdx1i1u" path="res://assets/sprites/cards/Centipede.png" id="2_e832t"]
 [ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_e832t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
