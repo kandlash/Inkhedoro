@@ -32,15 +32,17 @@ signal card_grid_exited
 signal card_grid_entered
 
 var selected := false
+var start_z: int
+var start_scale: Vector2
 
 @onready var cells: Node2D = $Cells
 
 func _ready() -> void:
 	name_label.text = card_name
 	desc_label.text = description
-	
 	cells.visible = false
 	start_position = global_position
+	start_scale = scale
 	for child in get_children():
 		if child is Area2D:
 			var area: Area2D = child
@@ -73,18 +75,24 @@ func _on_area_exit(area: Area2D):
 func _input(event: InputEvent) -> void:
 	var check_rect = back if !on_arm else self
 	if event is InputEventMouse:
-		if check_rect.get_rect().has_point(to_local(event.position)) and !selected:
+		if check_rect.get_rect().has_point(to_local(event.position)) and !selected and G.selected_card == null:
+			G.selected_card = self
 			emit_signal("card_selected", self)
 			selected = true
-		elif !check_rect.get_rect().has_point(to_local(event.position)) and selected:
+			start_z = z_index
+			z_index = 100
+			scale = start_scale * 1.1
+		elif !check_rect.get_rect().has_point(to_local(event.position)) and selected and G.selected_card == self:
+			G.selected_card = null
 			emit_signal("card_deselected", self)
 			selected = false
+			z_index = start_z
+			scale = start_scale
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if check_rect.get_rect().has_point(to_local(event.position)) and G.selected_card == null:
-					G.selected_card = self
+				if check_rect.get_rect().has_point(to_local(event.position)) and G.selected_card == self:
 					global_position = event.global_position
 					emit_signal("card_taked", self)
 					cells.visible = true
@@ -98,6 +106,7 @@ func _input(event: InputEvent) -> void:
 				dragging = false
 				cells.visible = false
 				G.selected_card = null
+				selected = false
 				if (feeled_areas.size() >= cells_to_feel) and check_cells_for_other():
 					var closest_distance = INF
 					var closest_pos = Vector2.ZERO

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://drk3wxeg2kh3r"]
+[gd_scene load_steps=10 format=3 uid="uid://drk3wxeg2kh3r"]
 
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="1_6o33k"]
 [ext_resource type="Script" uid="uid://c1cv6jvbgmt55" path="res://scripts/main/cards/card_base.gd" id="2_auqya"]
@@ -10,6 +10,26 @@ size = Vector2(181.16125, 181.16162)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvmxj"]
 size = Vector2(552.54193, 833.34204)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vvmxj"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6iamk"]
+sky_material = SubResource("ProceduralSkyMaterial_vvmxj")
+
+[sub_resource type="Environment" id="Environment_sf5il"]
+sky = SubResource("Sky_6iamk")
+tonemap_mode = 4
+ssr_fade_in = 0.058843866
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+fog_light_energy = 0.14
+fog_density = 0.1068
+fog_height = 3.0
+fog_height_density = 1.0323
+adjustment_enabled = true
 
 [node name="card_base" type="Sprite2D"]
 scale = Vector2(0.22079772, 0.2207977)
@@ -131,6 +151,9 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollideArea"]
 shape = SubResource("RectangleShape2D_vvmxj")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sf5il")
 
 [connection signal="area_entered" from="CollideArea" to="." method="_on_collide_area_area_entered"]
 [connection signal="area_exited" from="CollideArea" to="." method="_on_collide_area_area_exited"]

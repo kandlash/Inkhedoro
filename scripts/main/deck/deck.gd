@@ -4,7 +4,6 @@ class_name Deck
 @export var deck: Dictionary[PackedScene, int]
 var unused_cards: Array = []
 var used_cards: Array = []
-
 signal deck_updated
 
 func _ready() -> void:
@@ -36,7 +35,7 @@ func _shuffle_unused() -> void:
 
 func generate_hand(size: int) -> Array:
 	var hand: Array = []
-
+	var card_index = 0
 	while hand.size() < size:
 		if unused_cards.is_empty():
 			if used_cards.is_empty():
@@ -46,6 +45,8 @@ func generate_hand(size: int) -> Array:
 			_shuffle_unused()
 
 		var card = unused_cards.pop_back()
+		card.z_index = card_index
+		card_index += 1
 		hand.append(card)
 		used_cards.append(card)
 
