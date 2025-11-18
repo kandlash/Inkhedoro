@@ -107,7 +107,8 @@ func animate_attack() -> void:
 	
 	await t2.finished
 	G.camera.shake(0.15, 0.1)
-	G.current_enemy.take_damage(1)
+	if G.current_enemy:
+		G.current_enemy.take_damage(1)
 
 	# Откат + исчезновение
 	var t3 = create_tween()
@@ -159,6 +160,8 @@ func spell_cards_on_grid():
 
 		cards_hand.visible = true
 		right_arm.visible = true
+		if G.current_enemy.hp <= 0:
+			break
 		
 	right_arm.visible = false
 	G.hand.drop_cards()

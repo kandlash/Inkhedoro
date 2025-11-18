@@ -36,7 +36,7 @@ func take_damage(amount: int):
 
 func make_turn():
 	G.player.take_damage(base_damage)
-	await get_tree().create_timer(0.1).timeout
+	await G.player.damage_taked
 	emit_signal("turn_finished")
 
 func attack():

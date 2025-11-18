@@ -45,6 +45,7 @@ func generate_hand(size: int) -> Array:
 			_shuffle_unused()
 
 		var card = unused_cards.pop_back()
+		card.selected = false
 		card.z_index = card_index
 		card_index += 1
 		hand.append(card)

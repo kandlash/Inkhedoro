@@ -14,11 +14,11 @@ description = "Takes 3 cells to feel.
 Deals damage and bleed."
 cells_to_feel = 3
 
-[node name="Center" parent="." index="0"]
-position = Vector2(-40.761288, -153.98712)
+[node name="Image" parent="Card_UI" index="1"]
+texture = ExtResource("2_ot5mr")
 
-[node name="Area2D" parent="." index="1"]
-position = Vector2(-40.761288, -113.22583)
+[node name="Center" parent="." index="1"]
+position = Vector2(-40.761288, -153.98712)
 
 [node name="Area2D3" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
 position = Vector2(-95.10968, 117.754845)
@@ -36,7 +36,10 @@ position = Vector2(0, -40.761295)
 rotation = 0.18502945
 shape = SubResource("RectangleShape2D_75vfm")
 
-[node name="Cells" parent="." index="4"]
+[node name="Area2D" parent="." index="4"]
+position = Vector2(-40.761288, -113.22583)
+
+[node name="Cells" parent="." index="5"]
 visible = true
 
 [node name="Sprite2D" parent="Cells" index="0"]
@@ -53,9 +56,6 @@ position = Vector2(-95.10968, 76.99355)
 rotation = 0.18768506
 scale = Vector2(1.8137224, 1.782836)
 texture = ExtResource("3_tsmgh")
-
-[node name="Image" parent="Card_UI" index="1"]
-texture = ExtResource("2_ot5mr")
 
 [node name="CollisionShape2D" parent="CollideArea" index="0"]
 debug_color = Color(0, 0.6, 0.69803923, 0.050980393)

@@ -41,6 +41,9 @@ var walk_time := 0.0
 @export var walk_strength := 12.0
 @export var walk_speed := 8.0
 
+@onready var damage_animator: AnimatedSprite2D = $CanvasLayer/DamageControl/DamageAnimator
+signal damage_taked
+
 func _ready():
 	arm_base.visible = true
 	tattoo_pose.visible = false
@@ -72,9 +75,15 @@ func _on_battle_finished():
 	tattoo_pose.visible = false
 
 func take_damage(amount: int):
+	damage_animator.visible = true
+	damage_animator.play("take_damage")
+	await damage_animator.animation_finished
+	G.camera.shake(0.1, 0.15)
+	damage_animator.visible = false
 	hp -= amount
 	if hp < 0:
 		hp = 0
+	emit_signal("damage_taked")
 	emit_signal("hp_updated")
 
 func _process(delta):

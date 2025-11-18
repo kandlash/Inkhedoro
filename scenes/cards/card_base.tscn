@@ -37,27 +37,6 @@ texture = ExtResource("1_6o33k")
 script = ExtResource("2_auqya")
 cells_to_feel = 1
 
-[node name="Center" type="Node2D" parent="."]
-position = Vector2(4.529032, -36.23226)
-
-[node name="Area2D" type="Area2D" parent="." groups=["tattoo_area"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -40.761295)
-rotation = 0.18502945
-shape = SubResource("RectangleShape2D_75vfm")
-
-[node name="Cells" type="Node2D" parent="."]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="Cells"]
-position = Vector2(1.857357e-07, -40.76129)
-rotation = 0.18768506
-scale = Vector2(1.8137224, 1.782836)
-texture = ExtResource("3_uh4ib")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
 [node name="Card_UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
@@ -145,6 +124,27 @@ bla bla bla bla bla
 bla bla bla bla"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Center" type="Node2D" parent="."]
+position = Vector2(4.529032, -36.23226)
+
+[node name="Area2D" type="Area2D" parent="." groups=["tattoo_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -40.761295)
+rotation = 0.18502945
+shape = SubResource("RectangleShape2D_75vfm")
+
+[node name="Cells" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Cells"]
+position = Vector2(1.857357e-07, -40.76129)
+rotation = 0.18768506
+scale = Vector2(1.8137224, 1.782836)
+texture = ExtResource("3_uh4ib")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="CollideArea" type="Area2D" parent="." groups=["card_collide"]]
 collision_mask = 2

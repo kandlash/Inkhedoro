@@ -34,6 +34,7 @@ func add_cards(cards):
 		add_card(card)
 
 func drop_cards():
+	G.selected_card = null
 	G.used_grids.clear()
 	var cards = get_children()
 	for card in cards:

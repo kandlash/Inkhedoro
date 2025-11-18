@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dmwwst3hdut4y"]
+[gd_scene load_steps=39 format=3 uid="uid://dmwwst3hdut4y"]
 
 [ext_resource type="Texture2D" uid="uid://cywxycueh0kl5" path="res://assets/sprites/arm_test3.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://d4mvcidbtb15w" path="res://scripts/main/player/player.gd" id="1_dovo2"]
@@ -22,6 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://dl7numpgr3dxr" path="res://assets/sprites/cut_self/cut_self_3_1.png" id="11_8ydkj"]
 [ext_resource type="PackedScene" uid="uid://cigkigjjj0r0k" path="res://scenes/player/hp_ui.tscn" id="21_3j4b4"]
 [ext_resource type="Script" uid="uid://butd31fbl22dq" path="res://scripts/main/grid/get_ink_button.gd" id="21_yj68g"]
+[ext_resource type="Texture2D" uid="uid://c351so5v5lrhb" path="res://assets/sprites/ui/take_damage/attack_1.png" id="23_6cv16"]
+[ext_resource type="Texture2D" uid="uid://ciimumd8j0tls" path="res://assets/sprites/ui/take_damage/attack_3.png" id="24_j4nxn"]
+[ext_resource type="Texture2D" uid="uid://c2gxtvg3gn8np" path="res://assets/sprites/ui/take_damage/attack_4.png" id="25_28m0y"]
+[ext_resource type="Texture2D" uid="uid://dtpx8de7ciu8j" path="res://assets/sprites/ui/take_damage/attack_5.png" id="26_uniwh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
 
@@ -144,6 +148,38 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqsei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_uniwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_6cv16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_6cv16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_6cv16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_j4nxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_28m0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_uniwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_uniwh")
+}],
+"loop": false,
+"name": &"take_damage",
+"speed": 10.0
+}]
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_dovo2")
@@ -447,6 +483,24 @@ offset_left = -265.0
 offset_top = -4.0
 offset_right = -265.0
 offset_bottom = -4.0
+
+[node name="DamageControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DamageAnimator" type="AnimatedSprite2D" parent="CanvasLayer/DamageControl"]
+visible = false
+position = Vector2(577, 325)
+sprite_frames = SubResource("SpriteFrames_iqsei")
+animation = &"take_damage"
+frame = 7
+frame_progress = 1.0
+speed_scale = 5.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7498689, 0)
