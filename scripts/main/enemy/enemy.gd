@@ -1,7 +1,6 @@
 extends Sprite3D
 class_name EnemyBase
 @onready var area_3d: Area3D = $Area3D
-signal battle_started
 
 @export var enemy_name: String
 @export_multiline var description: String
@@ -20,6 +19,8 @@ var vulnarable_turns: int = 0
 @onready var hp_label: Label = $HP_SUB/Control/Panel/hp_label
 var hp_text_template: String
 
+signal turn_finished
+signal enemy_died
 func _ready() -> void:
 	max_hp = hp
 	hp_text_template = hp_label.text
@@ -27,11 +28,24 @@ func _ready() -> void:
 	
 func take_damage(amount: int):
 	hp -= amount
-	if hp < 0:
+	if hp <= 0:
 		hp = 0
+		visible = false
+		emit_signal("enemy_died")
 	hp_label.text = hp_text_template.replace("-current_hp", str(hp)).replace("-max_hp", str(max_hp))
+
+func make_turn():
+	G.player.take_damage(base_damage)
+	await get_tree().create_timer(0.1).timeout
+	emit_signal("turn_finished")
+
+func attack():
+	pass
+
+func buff():
+	pass
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		G.current_enemy = self
-		emit_signal("battle_started")
+		G.emit_signal("battle_started")

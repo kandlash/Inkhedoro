@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=18 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
@@ -8,9 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bkjxu46hk1w8s" path="res://scenes/cards/sickle.tscn" id="3_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://ceokwkhruu0yj" path="res://scenes/cards/lil_centipede.tscn" id="4_excbq"]
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="4_x42e6"]
-[ext_resource type="Texture2D" uid="uid://cuxy30l1flsch" path="res://assets/sprites/enemy_dummy.png" id="5_6761a"]
-[ext_resource type="Script" uid="uid://tbbjclm2bas7" path="res://scripts/main/enemy/enemy.gd" id="9_qxy0u"]
-[ext_resource type="Texture2D" uid="uid://dyefffuxqsp4k" path="res://assets/sprites/ui/heart2.png" id="10_excbq"]
+[ext_resource type="Script" uid="uid://cv68aydhw6075" path="res://scripts/globals/turn_base_manager.gd" id="6_iav0o"]
+[ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -51,92 +50,6 @@ albedo_texture_force_srgb = true
 metallic_specular = 0.0
 proximity_fade_distance = 0.01
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dga24"]
-size = Vector3(4.536133, 5.5047607, 17.060913)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_excbq"]
-viewport_path = NodePath("Enemy/HP_SUB")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iav0o"]
-resource_local_to_scene = true
-transparency = 1
-shading_mode = 0
-disable_ambient_light = true
-disable_fog = true
-disable_specular_occlusion = true
-albedo_texture = SubResource("ViewportTexture_excbq")
-texture_filter = 0
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_qxy0u"]
-viewport_path = NodePath("Enemy/HP_SUB")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxy0u"]
-bg_color = Color(0, 0, 0, 1)
-border_color = Color(1, 1, 1, 1)
-corner_detail = 1
-
-[sub_resource type="Animation" id="Animation_excbq"]
-resource_name = "heart"
-length = 1.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 0.32987824, 0.32987824, 1, 1),
-"update": 0,
-"values": [Vector2(261, 261), Vector2(211, 211), Vector2(261, 261), Vector2(211, 211), Vector2(261, 261)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 0.32987824, 0.32987824, 1, 1),
-"update": 0,
-"values": [Vector2(46, 25.5), Vector2(71, 50.5), Vector2(46, 25.5), Vector2(71, 50.5), Vector2(46, 25.5)]
-}
-
-[sub_resource type="Animation" id="Animation_iav0o"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(309, 309)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(22, 1.5)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dnkej"]
-_data = {
-&"RESET": SubResource("Animation_iav0o"),
-&"heart": SubResource("Animation_excbq")
-}
-
 [node name="level_1" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -159,6 +72,9 @@ ExtResource("4_excbq"): 2
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 19.710766)
+
+[node name="TurnBaseManager" type="Node" parent="."]
+script = ExtResource("6_iav0o")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 material_override = SubResource("StandardMaterial3D_x42e6")
@@ -583,87 +499,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 11.9792
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7747602, 4.294791, 10.833363)
 
-[node name="Enemy" type="Sprite3D" parent="."]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0, 1.3984185, 11.168811)
-pixel_size = 0.008
-texture = ExtResource("5_6761a")
-script = ExtResource("9_qxy0u")
-
-[node name="Area3D" type="Area3D" parent="Enemy"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3916626, 8.03046)
-shape = SubResource("BoxShape3D_dga24")
-
-[node name="UI_HP" type="Sprite3D" parent="Enemy"]
-transform = Transform3D(0.24649559, 0, 0, 0, 0.24649559, 0, 0, 0, 0.4, 0, 2.4948921, 1.7687445)
-layers = 2
-material_override = SubResource("StandardMaterial3D_iav0o")
-billboard = 1
-texture_filter = 0
-texture = SubResource("ViewportTexture_qxy0u")
-
-[node name="HP_SUB" type="SubViewport" parent="Enemy"]
-transparent_bg = true
-size = Vector2i(823, 312)
-render_target_update_mode = 4
-
-[node name="Control" type="Control" parent="Enemy/HP_SUB"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="Enemy/HP_SUB/Control"]
-layout_mode = 0
-offset_right = 823.0
-offset_bottom = 312.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_qxy0u")
-
-[node name="TextureRect" type="TextureRect" parent="Enemy/HP_SUB/Control/Panel"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 22.0
-offset_top = -154.5
-offset_right = 331.0
-offset_bottom = 154.5
-grow_vertical = 2
-texture = ExtResource("10_excbq")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy/HP_SUB/Control/Panel"]
-libraries = {
-&"": SubResource("AnimationLibrary_dnkej")
-}
-autoplay = "heart"
-
-[node name="hp_label" type="Label" parent="Enemy/HP_SUB/Control/Panel"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -586.0
-offset_top = -41.5
-offset_bottom = 41.5
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 115
-text = "-current_hp/-max_hp"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8533845, 12.453573, -45.651344)
 pixel_size = 0.1
 billboard = 1
 texture = ExtResource("4_x42e6")
 
-[connection signal="body_entered" from="Enemy/Area3D" to="Enemy" method="_on_area_3d_body_entered"]
+[node name="Enemy" parent="." instance=ExtResource("9_qxy0u")]
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 11.496852)
+
+[node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 7.709243)

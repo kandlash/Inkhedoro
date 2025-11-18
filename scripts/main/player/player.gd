@@ -42,7 +42,11 @@ var walk_time := 0.0
 @export var walk_speed := 8.0
 
 func _ready():
+	arm_base.visible = true
+	tattoo_pose.visible = false
 	G.player = self
+	G.connect("battle_started", _on_battle_started)
+	G.connect("battle_finished", _on_battle_finished)
 	max_hp = hp
 	await get_tree().process_frame
 	center_mouse()
@@ -55,6 +59,17 @@ func center_mouse():
 	Input.warp_mouse(center)
 	arm_base_start_pos = arm_base.position
 	tattoo_pose_start_pos = tattoo_pose.position
+
+func _on_battle_started():
+	velocity = Vector3.ZERO
+	set_physics_process(false)
+	arm_base.visible = false
+	tattoo_pose.visible = true
+
+func _on_battle_finished():
+	set_physics_process(true)
+	arm_base.visible = true
+	tattoo_pose.visible = false
 
 func take_damage(amount: int):
 	hp -= amount

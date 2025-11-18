@@ -7,10 +7,13 @@ class_name Grid
 @onready var cut_self: AnimatedSprite2D = $"../CutSelf"
 var cut_frame = 0
 @export var cut_frame_to_effect = 4
+signal turn_finished
 
 var grid_areas: Array[Area2D]
 var cards_in_grid: Array[CardBase]
+
 func _ready() -> void:
+	G.grid = self
 	G.deck.connect("deck_updated", _on_deck_updated)
 	for card in G.deck.unused_cards:
 		card.connect("card_dropped", _on_card_dropped)
@@ -58,6 +61,7 @@ func _on_card_grid_exited(card: CardBase):
 
 func _on_card_grid_entered(card: CardBase):
 	visible = true
+
 
 
 func _process(_delta: float) -> void:
@@ -161,6 +165,7 @@ func spell_cards_on_grid():
 	cut_self.visible = false
 	cards_in_grid.clear()
 	right_arm.visible = true
+	emit_signal("turn_finished")
 
 func _on_cut_frame_changed():
 	cut_frame += 1
