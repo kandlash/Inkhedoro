@@ -84,7 +84,6 @@ func _input(event: InputEvent) -> void:
 			scale = start_scale * 1.1
 		elif !check_rect.get_rect().has_point(to_local(event.position)) and selected and G.selected_card == self:
 			G.selected_card = null
-			emit_signal("card_deselected", self)
 			selected = false
 			z_index = start_z
 			scale = start_scale
