@@ -92,10 +92,9 @@ func spell_cards_on_grid():
 		
 		await card.use(speed)
 		
-		speed_mul += 0.35 
+		speed_mul += 0.35
 		if G.current_enemy.hp <= 0:
 			break
-		
 		
 	right_arm.visible = false
 	G.hand.drop_cards()

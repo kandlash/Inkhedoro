@@ -19,12 +19,19 @@ var vulnarable_turns: int = 0
 @onready var hp_label: Label = $HP_SUB/Control/Panel/hp_label
 var hp_text_template: String
 
+@onready var ui_attack_animator: AnimationPlayer = $Attack_SUB/Control/Panel/UIAttackAnimator
+
+@onready var attack_value_label: Label = $Attack_SUB/Control/Panel/attack_value
+var attack_text_template: String
+
 signal turn_finished
 signal enemy_died
 func _ready() -> void:
 	max_hp = hp
 	hp_text_template = hp_label.text
+	attack_text_template = attack_value_label.text
 	hp_label.text = hp_text_template.replace("-current_hp", str(hp)).replace("-max_hp", str(max_hp))
+	attack_value_label.text = attack_text_template.replace("-value", str(base_damage))
 	
 func take_damage(amount: int):
 	hp -= amount
@@ -36,9 +43,19 @@ func take_damage(amount: int):
 	hp_label.text = hp_text_template.replace("-current_hp", str(hp)).replace("-max_hp", str(max_hp))
 
 func make_turn():
+	if bleed_turns > 0:
+		print('bleed!')
+		take_damage(bleed_damage)
+		bleed_turns -= 1
+	ui_attack_animator.play("attack_value_animation")
+	await ui_attack_animator.animation_finished
 	G.player.take_damage(base_damage)
 	await G.player.damage_taked
 	emit_signal("turn_finished")
+	
+func take_bleed(turns, damage):
+	bleed_turns += turns
+	bleed_damage = damage
 
 func attack():
 	pass

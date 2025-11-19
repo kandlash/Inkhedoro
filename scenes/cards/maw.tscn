@@ -15,12 +15,23 @@ Deal damage
 tuns enemy
 "
 cells_to_feel = 3
+basic_damage = 2
 
-[node name="Center" parent="." index="0"]
+[node name="Card_UI" parent="." index="0"]
+offset_left = -270.0
+offset_top = -195.0
+offset_right = -230.0
+offset_bottom = -155.0
+
+[node name="Image" parent="Card_UI" index="1"]
+offset_left = -289.85806
+offset_top = -424.46454
+offset_right = 289.85806
+offset_bottom = 424.46454
+texture = ExtResource("2_t35db")
+
+[node name="Center" parent="." index="1"]
 position = Vector2(117.75484, -67.935486)
-
-[node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-108.69678, -113.225815)
 
 [node name="Area2D2" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
 position = Vector2(226.45161, 45.29033)
@@ -38,6 +49,9 @@ position = Vector2(-108.69678, -113.225815)
 rotation = 0.18502945
 shape = SubResource("RectangleShape2D_75vfm")
 
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-108.69678, -113.225815)
+
 [node name="Sprite2D" parent="Cells" index="0"]
 position = Vector2(81.52258, 144.92902)
 
@@ -52,16 +66,3 @@ position = Vector2(-104.16774, -113.225815)
 rotation = 0.18768506
 scale = Vector2(1.8137224, 1.782836)
 texture = ExtResource("3_1wa0x")
-
-[node name="Card_UI" parent="." index="6"]
-offset_left = -270.0
-offset_top = -195.0
-offset_right = -230.0
-offset_bottom = -155.0
-
-[node name="Image" parent="Card_UI" index="1"]
-offset_left = -289.85806
-offset_top = -424.46454
-offset_right = 289.85806
-offset_bottom = 424.46454
-texture = ExtResource("2_t35db")

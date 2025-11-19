@@ -43,9 +43,29 @@ var start_scale: Vector2
 
 @onready var neighbor_finder: Node2D = $NeighborFinder
 
+var _regex := RegEx.new()
+
+func _init():
+	_regex.compile(r"\{([a-zA-Z0-9_]+)\}")
+
+func has_property_name(_name: String) -> bool:
+	return get_property_list().any(func(p): return p.name == _name)
+
+func get_final_description() -> String:
+	var result := description
+	var matches := _regex.search_all(description)
+	for m in matches:
+		var key := m.get_string(1)
+		if has_property_name(key):
+			var value = get(key)
+			result = result.replace("{" + key + "}", str(value))
+		else:
+			push_warning("CardBase: no property named '%s' for description replacement" % key)
+	return result
+
 func _ready() -> void:
 	name_label.text = card_name
-	desc_label.text = description
+	desc_label.text = get_final_description()
 	cells.visible = false
 	start_position = global_position
 	start_scale = scale
@@ -76,8 +96,10 @@ func make_damage(speed):
 	G.hand.visible = false
 	G.right_attack.animate_attack(speed)
 	await G.right_attack.right_attack_impacted
+	
 	G.camera.shake(0.15, 0.1)
 	G.current_enemy.take_damage(basic_damage)
+	
 	await G.right_attack.right_attack_finished
 	G.right_arm.visible = true
 	G.hand.visible = true
