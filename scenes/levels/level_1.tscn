@@ -66,10 +66,10 @@ environment = SubResource("Environment_nsrm0")
 [node name="Deck" type="Node" parent="."]
 script = ExtResource("1_sk5k4")
 deck = Dictionary[PackedScene, int]({
-ExtResource("2_dga24"): 10,
-ExtResource("3_qxy0u"): 1,
-ExtResource("4_excbq"): 1,
-ExtResource("5_excbq"): 1
+ExtResource("2_dga24"): 4,
+ExtResource("3_qxy0u"): 3,
+ExtResource("4_excbq"): 3,
+ExtResource("5_excbq"): 3
 })
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]

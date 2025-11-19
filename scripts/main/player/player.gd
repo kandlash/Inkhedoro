@@ -48,6 +48,7 @@ func _ready():
 	arm_base.visible = true
 	tattoo_pose.visible = false
 	G.player = self
+	G.right_arm = $CanvasLayer/TattooPose/RightArm
 	G.connect("battle_started", _on_battle_started)
 	G.connect("battle_finished", _on_battle_finished)
 	max_hp = hp

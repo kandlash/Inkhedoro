@@ -5,3 +5,4 @@
 [node name="Eye" instance=ExtResource("1_6wtue")]
 card_name = "Little Eye"
 description = "This Eye is WATCHING"
+basic_damage = 1

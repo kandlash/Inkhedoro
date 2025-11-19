@@ -1,11 +1,15 @@
 extends Sprite2D
 class_name CardBase
 
-
+@export_category("Data")
 @export var card_name: String
 @export_multiline var description: String
-
 @export var cells_to_feel: int
+
+@export_category("Stats")
+@export var basic_damage := 0
+
+
 var self_areas: Array[Area2D] = []
 var feeled_areas: Array[Area2D] = []
 
@@ -52,11 +56,31 @@ func _ready() -> void:
 			area.connect("area_entered", _on_area_feel)
 			area.connect("area_exited", _on_area_exit)
 
+func use(speed):
+	var tween = create_tween()
+	var card_start_scale = scale
+	tween.tween_property(self, "scale", card_start_scale * 1.5, 0.07 * speed).set_trans(Tween.TRANS_SPRING)
+	await tween.finished
+
+	var tween22 = create_tween()
+	tween22.tween_property(self, "scale", card_start_scale, 0.15 * speed).set_trans(Tween.TRANS_SPRING)
+	await tween22.finished
+	await get_tree().create_timer(0.15 * speed).timeout
+	await make_damage(speed)
+
 func make_effect():
 	pass
 
-func make_damage():
-	pass
+func make_damage(speed):
+	G.right_arm.visible = false
+	G.hand.visible = false
+	G.right_attack.animate_attack(speed)
+	await G.right_attack.right_attack_impacted
+	G.camera.shake(0.15, 0.1)
+	G.current_enemy.take_damage(basic_damage)
+	await G.right_attack.right_attack_finished
+	G.right_arm.visible = true
+	G.hand.visible = true
 
 func find_neighbor_cards() -> Array[CardBase]:
 	var neighbors: Array[CardBase] = []

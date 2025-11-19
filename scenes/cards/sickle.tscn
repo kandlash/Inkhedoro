@@ -13,6 +13,7 @@ card_name = "Sickle"
 description = "Takes 3 cells to feel.
 Deals damage and bleed."
 cells_to_feel = 3
+basic_damage = 2
 
 [node name="Image" parent="Card_UI" index="1"]
 texture = ExtResource("2_ot5mr")

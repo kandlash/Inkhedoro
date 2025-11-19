@@ -8,6 +8,8 @@ var deck: Deck
 var hand: Hand
 var camera: Camera
 var grid: Grid
+var right_attack: RightAttack
+var right_arm
 
 var tbm: TurnBaseManager
 
