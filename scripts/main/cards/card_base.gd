@@ -4,10 +4,13 @@ class_name CardBase
 @export_category("Data")
 @export var card_name: String
 @export_multiline var description: String
+var description_template: String
+
 @export var cells_to_feel: int
 
 @export_category("Stats")
 @export var basic_damage := 0
+var extra_damage := 0
 
 
 var self_areas: Array[Area2D] = []
@@ -52,7 +55,7 @@ func has_property_name(_name: String) -> bool:
 	return get_property_list().any(func(p): return p.name == _name)
 
 func get_final_description() -> String:
-	var result := description
+	var result := description_template
 	var matches := _regex.search_all(description)
 	for m in matches:
 		var key := m.get_string(1)
@@ -65,6 +68,7 @@ func get_final_description() -> String:
 
 func _ready() -> void:
 	name_label.text = card_name
+	description_template = description
 	desc_label.text = get_final_description()
 	cells.visible = false
 	start_position = global_position
@@ -86,9 +90,11 @@ func use(speed):
 	tween22.tween_property(self, "scale", card_start_scale, 0.15 * speed).set_trans(Tween.TRANS_SPRING)
 	await tween22.finished
 	await get_tree().create_timer(0.15 * speed).timeout
-	await make_damage(speed)
 
 func make_effect():
+	pass
+
+func upgrage(_value):
 	pass
 
 func make_damage(speed):
@@ -98,7 +104,8 @@ func make_damage(speed):
 	await G.right_attack.right_attack_impacted
 	
 	G.camera.shake(0.15, 0.1)
-	G.current_enemy.take_damage(basic_damage)
+	G.current_enemy.take_damage(basic_damage + extra_damage)
+	extra_damage = 0
 	
 	await G.right_attack.right_attack_finished
 	G.right_arm.visible = true
@@ -206,7 +213,6 @@ func check_cells_for_other():
 func _process(_delta: float) -> void:
 	if dragging:
 		position = get_global_mouse_position() + drag_offset
-
 
 func _on_collide_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("grid_collide"):

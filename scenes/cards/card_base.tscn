@@ -122,11 +122,10 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 25
 theme_override_font_sizes/font_size = 50
-text = "bla bla bla bla bla
-bla bla bla bla bla
-bla bla bla bla"
+text = "Deal some damage to enemy lol kek cheburek azaza kek lol mother fucker i just"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Center" type="Node2D" parent="."]
 position = Vector2(4.529032, -36.23226)

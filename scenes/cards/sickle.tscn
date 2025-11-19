@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkjxu46hk1w8s"]
+[gd_scene load_steps=6 format=3 uid="uid://bkjxu46hk1w8s"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_ruloy"]
 [ext_resource type="Texture2D" uid="uid://fyqqcd5byc3g" path="res://assets/sprites/cards/serp2.png" id="2_ot5mr"]
+[ext_resource type="Script" uid="uid://cfoog2qlc73v2" path="res://scripts/main/cards/sickle.gd" id="3_ot5mr"]
 [ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_tsmgh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
@@ -9,11 +10,13 @@ size = Vector2(181.16125, 181.16162)
 
 [node name="Sickle" instance=ExtResource("1_ruloy")]
 texture = ExtResource("2_ot5mr")
+script = ExtResource("3_ot5mr")
+bleed_damage = 1
+bleed_turns = 3
 card_name = "Sickle"
-description = "Takes 3 cells to feel.
-Deals damage and bleed."
+description = "Deals {basic_damage} damage to enemy and makes him bleed for {bleed_turns} turns"
 cells_to_feel = 3
-basic_damage = 2
+basic_damage = 1
 
 [node name="Image" parent="Card_UI" index="1"]
 texture = ExtResource("2_ot5mr")

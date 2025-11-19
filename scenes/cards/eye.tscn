@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://v3oiujvowil2"]
+[gd_scene load_steps=3 format=3 uid="uid://v3oiujvowil2"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_6wtue"]
+[ext_resource type="Script" uid="uid://bqevwirl1gr1q" path="res://scripts/main/cards/eye.gd" id="2_qvajq"]
 
 [node name="Eye" instance=ExtResource("1_6wtue")]
+script = ExtResource("2_qvajq")
 card_name = "Little Eye"
 description = "This Eye is WATCHING
-Deals {basic_damage}"
+Deals {basic_damage} damage"
 basic_damage = 1

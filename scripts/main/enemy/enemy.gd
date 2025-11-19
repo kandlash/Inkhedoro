@@ -14,7 +14,9 @@ var max_hp: int
 var bleed_damage: int = 0
 
 var vulnarable_turns: int = 0
-@export var vulnarable_damage: float = 0.0
+@export var vulnarable_damage: float = 0.5
+
+var stun_turns: int = 0
 
 @onready var hp_label: Label = $HP_SUB/Control/Panel/hp_label
 var hp_text_template: String
@@ -23,6 +25,10 @@ var hp_text_template: String
 
 @onready var attack_value_label: Label = $Attack_SUB/Control/Panel/attack_value
 var attack_text_template: String
+
+@onready var stun_texture: TextureRect = $HP_SUB/Control/Panel/StunTexture
+@onready var vulnarable_texture: TextureRect = $HP_SUB/Control/Panel/VulnarableTexture
+@onready var bleed_textures: Control = $HP_SUB/Control/Panel/BleedTextures
 
 signal turn_finished
 signal enemy_died
@@ -34,12 +40,18 @@ func _ready() -> void:
 	attack_value_label.text = attack_text_template.replace("-value", str(base_damage))
 	
 func take_damage(amount: int):
-	hp -= amount
+	if vulnarable_turns > 0:
+		vulnarable_turns -= 1
+		hp -= amount + round(amount * vulnarable_damage)
+		if vulnarable_turns == 0:
+			vulnarable_texture.visible = false
+	else:
+		hp -= amount
+		
 	if hp <= 0:
+		print('I DIED')
 		hp = 0
 		visible = false
-		emit_signal("enemy_died")
-		emit_signal("turn_finished")
 	hp_label.text = hp_text_template.replace("-current_hp", str(hp)).replace("-max_hp", str(max_hp))
 
 func make_turn():
@@ -47,6 +59,26 @@ func make_turn():
 		print('bleed!')
 		take_damage(bleed_damage)
 		bleed_turns -= 1
+		print(bleed_turns)
+		if bleed_turns == 0:
+			bleed_textures.visible = false
+	if hp <= 0:
+		await get_tree().create_timer(0.15).timeout
+		print('emitting finish and exit')
+		emit_signal("enemy_died")
+		emit_signal("turn_finished")
+		return
+	
+	if stun_turns > 0:
+		print('stunned!')
+		stun_turns -= 1
+		await get_tree().create_timer(0.15).timeout
+		if stun_turns == 0:
+			stun_texture.visible = false
+		emit_signal("turn_finished")
+		return
+		
+	print('im attacking you! my health: ', hp)
 	ui_attack_animator.play("attack_value_animation")
 	await ui_attack_animator.animation_finished
 	G.player.take_damage(base_damage)
@@ -54,8 +86,17 @@ func make_turn():
 	emit_signal("turn_finished")
 	
 func take_bleed(turns, damage):
+	bleed_textures.visible = true
 	bleed_turns += turns
 	bleed_damage = damage
+
+func take_stun(turns):
+	stun_texture.visible = true
+	stun_turns = turns
+
+func take_vulnarable(turns):
+	vulnarable_texture.visible = true
+	vulnarable_turns = turns
 
 func attack():
 	pass

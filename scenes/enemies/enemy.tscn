@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2sgwmnk02oua"]
+[gd_scene load_steps=20 format=3 uid="uid://d2sgwmnk02oua"]
 
 [ext_resource type="Texture2D" uid="uid://cuxy30l1flsch" path="res://assets/sprites/enemy_dummy.png" id="1_38ino"]
 [ext_resource type="Script" uid="uid://tbbjclm2bas7" path="res://scripts/main/enemy/enemy.gd" id="2_fcftc"]
 [ext_resource type="Texture2D" uid="uid://dyefffuxqsp4k" path="res://assets/sprites/ui/heart2.png" id="3_lu5c6"]
 [ext_resource type="Texture2D" uid="uid://bd4rqyvvbb8f3" path="res://assets/sprites/cards/serp.png" id="4_fcftc"]
-[ext_resource type="Texture2D" uid="uid://cbqcud274clmq" path="res://assets/sprites/ui/heal.png" id="5_lu5c6"]
+[ext_resource type="Texture2D" uid="uid://cjkrrghlkkk7y" path="res://assets/sprites/ui/chains.png" id="4_nb6gf"]
+[ext_resource type="Texture2D" uid="uid://dafhvv5hekpyx" path="res://assets/sprites/ui/vulnarable.png" id="5_jt03m"]
+[ext_resource type="Texture2D" uid="uid://cfrmp51ec1dxq" path="res://assets/sprites/ui/drop_of_blood.png" id="5_lu5c6"]
+[ext_resource type="Texture2D" uid="uid://cbqcud274clmq" path="res://assets/sprites/ui/heal.png" id="8_n7575"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dga24"]
 size = Vector3(4.536133, 5.5047607, 13.552429)
@@ -187,6 +190,156 @@ texture = ExtResource("3_lu5c6")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="StunTexture" type="TextureRect" parent="HP_SUB/Control/Panel"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = -154.5
+offset_right = 331.0
+offset_bottom = 154.5
+grow_vertical = 2
+texture = ExtResource("4_nb6gf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VulnarableTexture" type="TextureRect" parent="HP_SUB/Control/Panel"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = -154.5
+offset_right = 331.0
+offset_bottom = 154.5
+grow_vertical = 2
+texture = ExtResource("5_jt03m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BleedTextures" type="Control" parent="HP_SUB/Control/Panel"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BleedTexture" type="TextureRect" parent="HP_SUB/Control/Panel/BleedTextures"]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = 49.999992
+offset_right = 420.0
+offset_bottom = 359.0
+grow_vertical = 2
+rotation = 0.3498413
+scale = Vector2(0.2700893, 0.2700893)
+texture = ExtResource("5_lu5c6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BleedTexture5" type="TextureRect" parent="HP_SUB/Control/Panel/BleedTextures"]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.000008
+offset_top = -22.0
+offset_right = 349.0
+offset_bottom = 287.0
+grow_vertical = 2
+rotation = 0.3498413
+scale = Vector2(0.3289593, 0.3289593)
+texture = ExtResource("5_lu5c6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BleedTexture2" type="TextureRect" parent="HP_SUB/Control/Panel/BleedTextures"]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 254.0
+offset_top = 123.000046
+offset_right = 563.0
+offset_bottom = 432.00006
+grow_vertical = 2
+rotation = 0.32433304
+scale = Vector2(0.1778306, 0.1778306)
+texture = ExtResource("5_lu5c6")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="BleedTexture4" type="TextureRect" parent="HP_SUB/Control/Panel/BleedTextures"]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 265.00003
+offset_top = 168.00002
+offset_right = 574.0
+offset_bottom = 477.0
+grow_vertical = 2
+rotation = 0.32433304
+scale = Vector2(0.090056695, 0.090056695)
+texture = ExtResource("5_lu5c6")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="BleedTexture6" type="TextureRect" parent="HP_SUB/Control/Panel/BleedTextures"]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 43.999996
+offset_top = 91.0
+offset_right = 353.0
+offset_bottom = 400.0
+grow_vertical = 2
+rotation = 0.32433304
+scale = Vector2(0.090056695, 0.090056695)
+texture = ExtResource("5_lu5c6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BleedTexture3" type="TextureRect" parent="HP_SUB/Control/Panel/BleedTextures"]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 72.0
+offset_top = 189.00002
+offset_right = 381.0
+offset_bottom = 498.0
+grow_vertical = 2
+rotation = -0.051490843
+scale = Vector2(0.29931268, 0.29931268)
+texture = ExtResource("5_lu5c6")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HP_SUB/Control/Panel"]
 libraries = {
 &"": SubResource("AnimationLibrary_dnkej")
@@ -308,7 +461,7 @@ offset_bottom = 169.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(125.87, 125.61)
-texture = ExtResource("5_lu5c6")
+texture = ExtResource("8_n7575")
 expand_mode = 1
 stretch_mode = 5
 

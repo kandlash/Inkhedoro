@@ -52,7 +52,13 @@ func reset_turn_manager():
 	start_player_turn()
 
 func start_player_turn():
+	print('player turn')
 	if G.player.hp <= 0:
+		return
+	if enemy_defeated:
+		await get_tree().create_timer(0.5).timeout
+		G.emit_signal("battle_finished")
+		clear_turn_manager()
 		return
 	emit_signal("player_turn_started")
 	hand_area.drop_cards()
@@ -64,14 +70,19 @@ func end_player_turn():
 	start_enemy_turn()
 
 func start_enemy_turn():
+	print('enemy turn')
 	enemy = G.current_enemy
 	if enemy_defeated:
+		print('defeated enemy!')
 		await get_tree().create_timer(0.5).timeout
 		G.emit_signal("battle_finished")
 		clear_turn_manager()
 		return
+	print('enemy making turn')	
 	enemy.make_turn()
+	print('turn was finished awaiting for signal')
 	await enemy.turn_finished
+	print('enemy finished turn')	
 	end_enemy_turn()
 
 func end_enemy_turn():

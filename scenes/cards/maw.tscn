@@ -1,21 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://5w7jkc8q8wbh"]
+[gd_scene load_steps=6 format=3 uid="uid://5w7jkc8q8wbh"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_djpm3"]
 [ext_resource type="Texture2D" uid="uid://ddgusdmeolfui" path="res://assets/sprites/cards/maw.png" id="2_t35db"]
 [ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_1wa0x"]
+[ext_resource type="Script" uid="uid://bxophv2up77x7" path="res://scripts/main/cards/maw.gd" id="3_t35db"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(181.16125, 181.16162)
 
 [node name="Maw" instance=ExtResource("1_djpm3")]
 texture = ExtResource("2_t35db")
+script = ExtResource("3_t35db")
+stun_turns = 1
 card_name = "Demon's Maw"
-description = "Mamu maw? A papu maw?
-Deal damage
-tuns enemy
-"
+description = "Deals {basic_damage} damage and bites into the enemy's limb causing a Stun."
 cells_to_feel = 3
-basic_damage = 2
+basic_damage = 1
 
 [node name="Card_UI" parent="." index="0"]
 offset_left = -270.0
