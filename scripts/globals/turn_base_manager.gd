@@ -20,6 +20,8 @@ var end_game = false
 
 var enemy_defeated = false
 
+signal player_turn_started
+
 func _ready() -> void:
 	G.connect("battle_started", _on_battle_started)
 	#G.connect("battle_finished", _on_battle_finished)
@@ -52,6 +54,7 @@ func reset_turn_manager():
 func start_player_turn():
 	if G.player.hp <= 0:
 		return
+	emit_signal("player_turn_started")
 	hand_area.drop_cards()
 	hand_area.add_cards(deck.generate_hand(3))
 	
