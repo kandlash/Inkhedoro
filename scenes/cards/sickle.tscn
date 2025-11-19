@@ -9,7 +9,6 @@
 size = Vector2(181.16125, 181.16162)
 
 [node name="Sickle" instance=ExtResource("1_ruloy")]
-texture = ExtResource("2_ot5mr")
 script = ExtResource("3_ot5mr")
 bleed_damage = 1
 bleed_turns = 3
@@ -18,11 +17,11 @@ description = "Deals {basic_damage} damage to enemy and makes him bleed for {ble
 cells_to_feel = 3
 basic_damage = 1
 
-[node name="Image" parent="Card_UI" index="1"]
+[node name="Texture" parent="." index="0"]
 texture = ExtResource("2_ot5mr")
 
-[node name="Center" parent="." index="1"]
-position = Vector2(-40.761288, -153.98712)
+[node name="Image" parent="Card_UI" index="1"]
+texture = ExtResource("2_ot5mr")
 
 [node name="Area2D3" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
 position = Vector2(-95.10968, 117.754845)
@@ -40,11 +39,11 @@ position = Vector2(0, -40.761295)
 rotation = 0.18502945
 shape = SubResource("RectangleShape2D_75vfm")
 
-[node name="Area2D" parent="." index="4"]
-position = Vector2(-40.761288, -113.22583)
+[node name="Center" parent="." index="4"]
+position = Vector2(-40.761288, -153.98712)
 
-[node name="Cells" parent="." index="5"]
-visible = true
+[node name="Area2D" parent="." index="5"]
+position = Vector2(-40.761288, -113.22583)
 
 [node name="Sprite2D" parent="Cells" index="0"]
 position = Vector2(-40.76129, -153.9871)

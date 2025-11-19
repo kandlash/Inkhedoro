@@ -9,7 +9,6 @@
 size = Vector2(181.16125, 181.16162)
 
 [node name="Lil_Centipede" instance=ExtResource("1_h5gr5")]
-texture = ExtResource("2_e832t")
 script = ExtResource("3_miw7w")
 vulnarable_turns = 2
 card_name = "Lil Centipede"
@@ -17,11 +16,11 @@ description = "Deals {basic_damage} damage and gets to enemy ear making him Vuln
 cells_to_feel = 2
 basic_damage = 1
 
-[node name="Image" parent="Card_UI" index="1"]
+[node name="Texture" parent="." index="0"]
 texture = ExtResource("2_e832t")
 
-[node name="Center" parent="." index="1"]
-position = Vector2(149.45807, -135.87099)
+[node name="Image" parent="Card_UI" index="1"]
+texture = ExtResource("2_e832t")
 
 [node name="Area2D2" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
 position = Vector2(95.10967, -49.81936)
@@ -31,10 +30,13 @@ position = Vector2(0, -40.761295)
 rotation = 0.18502945
 shape = SubResource("RectangleShape2D_75vfm")
 
-[node name="Area2D" parent="." index="3"]
+[node name="Center" parent="." index="3"]
+position = Vector2(149.45807, -135.87099)
+
+[node name="Area2D" parent="." index="4"]
 position = Vector2(-131.34193, 99.638725)
 
-[node name="Cells" parent="." index="4"]
+[node name="Cells" parent="." index="5"]
 visible = true
 
 [node name="Sprite2D" parent="Cells" index="0"]

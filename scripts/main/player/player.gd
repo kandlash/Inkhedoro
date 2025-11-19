@@ -86,6 +86,11 @@ func take_damage(amount: int):
 		hp = 0
 	emit_signal("damage_taked")
 	emit_signal("hp_updated")
+	
+func heal(amount: int):
+	hp += amount
+	hp = min(hp, max_hp)
+	emit_signal("hp_updated")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):

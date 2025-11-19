@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://vvhbsx24nrxj"]
+
+[ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_t3bnq"]
+[ext_resource type="Script" uid="uid://cj6x7wdgyqovf" path="res://scripts/main/cards/sun.gd" id="2_2ir4q"]
+[ext_resource type="Texture2D" uid="uid://dnrdf50xlvxu0" path="res://assets/sprites/cards/star_by_name_sun.png" id="3_2ir4q"]
+
+[node name="Sun" instance=ExtResource("1_t3bnq")]
+script = ExtResource("2_2ir4q")
+heal_value = 1
+card_name = "Sun"
+description = "Heals {heal_value}"
+
+[node name="Texture" parent="." index="0"]
+position = Vector2(0, -36.232258)
+scale = Vector2(0.34387097, 0.34387094)
+texture = ExtResource("3_2ir4q")
+
+[node name="Image" parent="Card_UI" index="1"]
+texture = ExtResource("3_2ir4q")

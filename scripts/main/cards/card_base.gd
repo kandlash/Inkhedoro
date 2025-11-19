@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 class_name CardBase
 
 @export_category("Data")
@@ -25,7 +25,7 @@ const TATTOO_SELECETED = preload("uid://sg7qtxtecnsu")
 @onready var card_ui: Control = $Card_UI
 @onready var back: TextureRect = $Card_UI/Back
 @onready var name_label: Label = $Card_UI/Name
-@onready var desc_label: Label = $Card_UI/Desc
+@onready var desc_label: RichTextLabel = $Card_UI/Desc
 
 var start_position
 var on_arm: bool = false
@@ -42,9 +42,13 @@ var selected := false
 var start_z: int
 var start_scale: Vector2
 
+
+signal on_arm_drawed
+
 @onready var cells: Node2D = $Cells
 
 @onready var neighbor_finder: Node2D = $NeighborFinder
+@onready var texture: Sprite2D = $Texture
 
 var _regex := RegEx.new()
 
@@ -53,6 +57,7 @@ func _init():
 
 func has_property_name(_name: String) -> bool:
 	return get_property_list().any(func(p): return p.name == _name)
+
 
 func get_final_description() -> String:
 	var result := description_template
@@ -69,7 +74,8 @@ func get_final_description() -> String:
 func _ready() -> void:
 	name_label.text = card_name
 	description_template = description
-	desc_label.text = get_final_description()
+	desc_label.clear()
+	desc_label.append_text(get_final_description())
 	cells.visible = false
 	start_position = global_position
 	start_scale = scale
@@ -111,6 +117,9 @@ func make_damage(speed):
 	G.right_arm.visible = true
 	G.hand.visible = true
 
+func on_arm_effect():
+	pass
+
 func find_neighbor_cards() -> Array[CardBase]:
 	var neighbors: Array[CardBase] = []
 	for area: Area2D in neighbor_finder.get_children():
@@ -142,7 +151,7 @@ func _on_area_exit(area: Area2D):
 	sprite.texture = TATTOO_FRAME
 	
 func _input(event: InputEvent) -> void:
-	var check_rect = back if !on_arm else self
+	var check_rect = back if !on_arm else texture
 	if event is InputEventMouse:
 		if check_rect.get_rect().has_point(to_local(event.position)) and !selected and G.selected_card == null:
 			G.selected_card = self
@@ -194,6 +203,8 @@ func _input(event: InputEvent) -> void:
 						area.get_parent().texture = TATTOO_FRAME_USED
 					G.used_grids.append_array(feeled_areas)
 					on_arm = true
+					on_arm_effect()
+					emit_signal("on_arm_drawed")
 					card_ui.visible = false
 				else:
 					global_position = start_position

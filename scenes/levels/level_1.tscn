@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=23 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
@@ -12,7 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://d03q04s1vvp51" path="res://scenes/cards/hummer.tscn" id="6_dnkej"]
 [ext_resource type="Script" uid="uid://cv68aydhw6075" path="res://scripts/globals/turn_base_manager.gd" id="6_iav0o"]
 [ext_resource type="PackedScene" uid="uid://bxehxgmgjdf0c" path="res://scenes/cards/nail.tscn" id="7_dnkej"]
+[ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="8_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
+[ext_resource type="PackedScene" uid="uid://byt6cnyrj65rc" path="res://scenes/cards/sacrifice_mark.tscn" id="9_wtwp4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -68,12 +70,14 @@ environment = SubResource("Environment_nsrm0")
 [node name="Deck" type="Node" parent="."]
 script = ExtResource("1_sk5k4")
 deck = Dictionary[PackedScene, int]({
-ExtResource("2_dga24"): 1,
-ExtResource("3_qxy0u"): 1,
-ExtResource("4_excbq"): 1,
-ExtResource("5_excbq"): 1,
-ExtResource("6_dnkej"): 5,
-ExtResource("7_dnkej"): 3
+ExtResource("2_dga24"): 3,
+ExtResource("3_qxy0u"): 0,
+ExtResource("4_excbq"): 0,
+ExtResource("5_excbq"): 0,
+ExtResource("6_dnkej"): 0,
+ExtResource("7_dnkej"): 3,
+ExtResource("8_mm8aj"): 0,
+ExtResource("9_wtwp4"): 4
 })
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]

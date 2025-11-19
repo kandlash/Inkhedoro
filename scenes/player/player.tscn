@@ -456,9 +456,9 @@ shape = SubResource("RectangleShape2D_lvxji")
 [node name="CardsHand" type="Panel" parent="CanvasLayer/TattooPose"]
 layout_mode = 0
 offset_left = -443.0
-offset_top = -169.0
+offset_top = -68.0
 offset_right = -77.0
-offset_bottom = -65.0
+offset_bottom = 36.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8ydkj")
 script = ExtResource("5_p47bc")
 base_y_offset = 100
@@ -481,10 +481,10 @@ script = ExtResource("21_yj68g")
 
 [node name="HP_UI" parent="CanvasLayer/TattooPose" instance=ExtResource("21_3j4b4")]
 layout_mode = 1
-offset_left = -265.0
-offset_top = -4.0
-offset_right = -265.0
-offset_bottom = -4.0
+offset_left = -254.0
+offset_top = -539.0
+offset_right = -254.0
+offset_bottom = -539.0
 
 [node name="DamageControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3

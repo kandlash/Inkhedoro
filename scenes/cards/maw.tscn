@@ -9,7 +9,6 @@
 size = Vector2(181.16125, 181.16162)
 
 [node name="Maw" instance=ExtResource("1_djpm3")]
-texture = ExtResource("2_t35db")
 script = ExtResource("3_t35db")
 stun_turns = 1
 card_name = "Demon's Maw"
@@ -17,11 +16,8 @@ description = "Deals {basic_damage} damage and bites into the enemy's limb causi
 cells_to_feel = 3
 basic_damage = 1
 
-[node name="Card_UI" parent="." index="0"]
-offset_left = -270.0
-offset_top = -195.0
-offset_right = -230.0
-offset_bottom = -155.0
+[node name="Texture" parent="." index="0"]
+texture = ExtResource("2_t35db")
 
 [node name="Image" parent="Card_UI" index="1"]
 offset_left = -289.85806
@@ -29,9 +25,6 @@ offset_top = -424.46454
 offset_right = 289.85806
 offset_bottom = 424.46454
 texture = ExtResource("2_t35db")
-
-[node name="Center" parent="." index="1"]
-position = Vector2(117.75484, -67.935486)
 
 [node name="Area2D2" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
 position = Vector2(226.45161, 45.29033)
@@ -48,6 +41,9 @@ position = Vector2(190.21936, 262.6839)
 position = Vector2(-108.69678, -113.225815)
 rotation = 0.18502945
 shape = SubResource("RectangleShape2D_75vfm")
+
+[node name="Center" parent="." index="4"]
+position = Vector2(117.75484, -67.935486)
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2(-108.69678, -113.225815)

@@ -34,11 +34,13 @@ adjustment_enabled = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sf5il"]
 size = Vector2(161.19994, 169.2894)
 
-[node name="card_base" type="Sprite2D"]
+[node name="card_base" type="Node2D"]
 scale = Vector2(0.22079772, 0.2207977)
-texture = ExtResource("1_6o33k")
 script = ExtResource("2_auqya")
 cells_to_feel = 1
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_6o33k")
 
 [node name="Card_UI" type="Control" parent="."]
 layout_mode = 3
@@ -47,10 +49,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -195.5
-offset_top = -277.0
-offset_right = -155.5
-offset_bottom = -237.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -61,21 +63,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -387.6129
-offset_top = -491.78064
-offset_right = 387.6129
-offset_bottom = 491.78064
+offset_left = -452.9032
+offset_top = -574.61707
+offset_right = 452.9032
+offset_bottom = 574.61707
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_vvmxj")
 
 [node name="Image" type="TextureRect" parent="Card_UI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 1.2925804
+anchor_top = 1.6606445
+anchor_right = -0.29258043
+anchor_bottom = -0.66064453
 offset_left = -199.2774
 offset_top = -291.81934
 offset_right = 199.2774
@@ -85,14 +87,15 @@ grow_vertical = 2
 texture = ExtResource("1_6o33k")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Name" type="Label" parent="Card_UI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -1.7
+anchor_top = -1.7645165
+anchor_right = 2.7
+anchor_bottom = -0.73951644
 offset_left = -205.0
 offset_top = -398.55487
 offset_right = 205.0
@@ -105,27 +108,30 @@ theme_override_font_sizes/font_size = 100
 text = "CARD NAME"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Desc" type="Label" parent="Card_UI"]
+[node name="Desc" type="RichTextLabel" parent="Card_UI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = -0.78016055
+anchor_top = -3.0100005
+anchor_right = 1.7801605
+anchor_bottom = 4.0182266
 offset_left = -293.0
 offset_top = 217.39357
 offset_right = 293.0
-offset_bottom = 430.39355
+offset_bottom = 502.39355
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 25
-theme_override_font_sizes/font_size = 50
-text = "Deal some damage to enemy lol kek cheburek azaza kek lol mother fucker i just"
+theme_override_font_sizes/normal_font_size = 51
+bbcode_enabled = true
+text = "Deal some damage to enemy lol kek cheburek azaza kek lol mother fucker i just fw"
+autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Center" type="Node2D" parent="."]
 position = Vector2(4.529032, -36.23226)

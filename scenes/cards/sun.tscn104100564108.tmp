@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vvhbsx24nrxj"]
+
+[ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_t3bnq"]
+[ext_resource type="Script" uid="uid://cj6x7wdgyqovf" path="res://scripts/main/cards/sun.gd" id="2_2ir4q"]
+
+[node name="Sun" instance=ExtResource("1_t3bnq")]
+script = ExtResource("2_2ir4q")
+card_name = "Sun"
+description = "Heals {heal_value}"
+basic_damage = null
