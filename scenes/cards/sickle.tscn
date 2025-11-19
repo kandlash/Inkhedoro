@@ -59,3 +59,6 @@ texture = ExtResource("3_tsmgh")
 
 [node name="CollisionShape2D" parent="CollideArea" index="0"]
 debug_color = Color(0, 0.6, 0.69803923, 0.050980393)
+
+[node name="Area2D" parent="NeighborFinder" index="0"]
+position = Vector2(149.45805, 131.34195)

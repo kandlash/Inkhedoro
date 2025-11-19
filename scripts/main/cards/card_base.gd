@@ -37,6 +37,8 @@ var start_scale: Vector2
 
 @onready var cells: Node2D = $Cells
 
+@onready var neighbor_finder: Node2D = $NeighborFinder
+
 func _ready() -> void:
 	name_label.text = card_name
 	desc_label.text = description
@@ -49,6 +51,20 @@ func _ready() -> void:
 			self_areas.append(area)
 			area.connect("area_entered", _on_area_feel)
 			area.connect("area_exited", _on_area_exit)
+
+func make_effect():
+	pass
+
+func make_damage():
+	pass
+
+func find_neighbor_cards() -> Array[CardBase]:
+	var neighbors: Array[CardBase] = []
+	for area: Area2D in neighbor_finder.get_children():
+		for overlap in area.get_overlapping_areas():
+			if overlap.is_in_group("tattoo_area") and overlap.get_parent() != self:
+				neighbors.append(overlap.get_parent())
+	return neighbors
 
 func _on_area_feel(area: Area2D):
 	if !area.is_in_group("grid_cells"):

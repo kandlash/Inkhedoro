@@ -11,6 +11,7 @@ signal turn_finished
 
 var grid_areas: Array[Area2D]
 var cards_in_grid: Array[CardBase]
+var speed_mul := 1.0
 
 func _ready() -> void:
 	G.grid = self
@@ -72,7 +73,7 @@ func _process(_delta: float) -> void:
 		cut_frame = -1
 		G.camera.shake(0.025, 0.4)
 
-func animate_attack() -> void:
+func animate_attack(speed) -> void:
 	var spr := right_attack
 	var start_pos := spr.position
 	var start_scale := spr.scale
@@ -90,10 +91,10 @@ func animate_attack() -> void:
 	var t = create_tween()
 	t.set_parallel(true)
 
-	t.tween_property(spr, "modulate:a", 1.0, 0.1)
-	t.tween_property(spr, "scale", start_scale * 0.75, 0.1).set_trans(Tween.TRANS_BACK)
-	t.tween_property(spr, "position", start_pos, 0.1).set_trans(Tween.TRANS_SINE)
-	t.tween_property(spr, "rotation", start_rot, 0.1)
+	t.tween_property(spr, "modulate:a", 1.0, 0.1  * speed )
+	t.tween_property(spr, "scale", start_scale * 0.75, 0.1 * speed).set_trans(Tween.TRANS_BACK)
+	t.tween_property(spr, "position", start_pos, 0.1 * speed).set_trans(Tween.TRANS_SINE)
+	t.tween_property(spr, "rotation", start_rot, 0.1 * speed)
 
 	await t.finished
 
@@ -102,8 +103,8 @@ func animate_attack() -> void:
 	var t2 = create_tween()
 	t2.set_parallel(true)
 
-	t2.tween_property(spr, "scale", start_scale * 0.15, 0.04).set_trans(Tween.TRANS_SPRING)
-	t2.tween_property(spr, "rotation", start_rot + deg_to_rad(randf_range(-3, 3)), 0.04)
+	t2.tween_property(spr, "scale", start_scale * 0.15, 0.04 * speed).set_trans(Tween.TRANS_SPRING)
+	t2.tween_property(spr, "rotation", start_rot + deg_to_rad(randf_range(-3, 3)), 0.04 * speed)
 	
 	await t2.finished
 	G.camera.shake(0.15, 0.1)
@@ -114,9 +115,9 @@ func animate_attack() -> void:
 	var t3 = create_tween()
 	t3.set_parallel(true)
 
-	t3.tween_property(spr, "scale", start_scale * 0.9, 0.15)
-	t3.tween_property(spr, "modulate:a", 0.0, 0.15)
-	t3.tween_property(spr, "position", start_pos + Vector2(10, -10), 0.15).set_trans(Tween.TRANS_SINE)
+	t3.tween_property(spr, "scale", start_scale * 0.9, 0.15 * speed)
+	t3.tween_property(spr, "modulate:a", 0.0, 0.15 * speed)
+	t3.tween_property(spr, "position", start_pos + Vector2(10, -10), 0.15 * speed).set_trans(Tween.TRANS_SINE)
 
 	await t3.finished
 
@@ -128,7 +129,7 @@ func animate_attack() -> void:
 
 func spell_cards_on_grid():
 	var start_pos = right_arm.position
-
+	speed_mul = 1.0
 	cut_frame = 0
 	visible = false
 	for area in grid_areas:
@@ -141,27 +142,30 @@ func spell_cards_on_grid():
 				cards_in_grid.append(card)
 
 	for card in cards_in_grid:
+		var speed := 1.0 / speed_mul
 		var tween = create_tween()
 		var card_start_scale = card.scale
-		tween.tween_property(card, "scale", card_start_scale * 1.5, 0.07).set_trans(Tween.TRANS_SPRING)
+		tween.tween_property(card, "scale", card_start_scale * 1.5, 0.07 * speed).set_trans(Tween.TRANS_SPRING)
 		await tween.finished
 
 		var tween22 = create_tween()
-		tween22.tween_property(card, "scale", card_start_scale, 0.15).set_trans(Tween.TRANS_SPRING)
+		tween22.tween_property(card, "scale", card_start_scale, 0.15 * speed).set_trans(Tween.TRANS_SPRING)
 		await tween22.finished
 		
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.15 * speed).timeout
 		
 		right_arm.visible = false
 		cards_hand.visible = false
 
 		right_attack.frame = randi_range(0, right_attack.sprite_frames.get_frame_count("default"))
-		await animate_attack()
-
+		await animate_attack(speed)
+		card.make_effect()
+		speed_mul += 0.35 
 		cards_hand.visible = true
 		right_arm.visible = true
 		if G.current_enemy.hp <= 0:
 			break
+		
 		
 	right_arm.visible = false
 	G.hand.drop_cards()

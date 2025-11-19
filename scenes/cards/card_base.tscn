@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://drk3wxeg2kh3r"]
+[gd_scene load_steps=11 format=3 uid="uid://drk3wxeg2kh3r"]
 
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="1_6o33k"]
 [ext_resource type="Script" uid="uid://c1cv6jvbgmt55" path="res://scripts/main/cards/card_base.gd" id="2_auqya"]
@@ -30,6 +30,9 @@ fog_density = 0.1068
 fog_height = 3.0
 fog_height_density = 1.0323
 adjustment_enabled = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sf5il"]
+size = Vector2(161.19994, 169.2894)
 
 [node name="card_base" type="Sprite2D"]
 scale = Vector2(0.22079772, 0.2207977)
@@ -154,6 +157,18 @@ shape = SubResource("RectangleShape2D_vvmxj")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sf5il")
+
+[node name="NeighborFinder" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="NeighborFinder"]
+position = Vector2(0, -40.761295)
+rotation = 0.18962112
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NeighborFinder/Area2D"]
+scale = Vector2(1, 0.9999999)
+shape = SubResource("RectangleShape2D_sf5il")
+debug_color = Color(2.9359758e-06, 0.64650387, 0.2428731, 0.41960785)
 
 [connection signal="area_entered" from="CollideArea" to="." method="_on_collide_area_area_entered"]
 [connection signal="area_exited" from="CollideArea" to="." method="_on_collide_area_area_exited"]
