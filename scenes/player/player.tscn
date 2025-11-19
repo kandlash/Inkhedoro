@@ -184,6 +184,7 @@ animations = [{
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_dovo2")
+hp = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_x7p2l")
@@ -342,6 +343,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D4" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(219.00006, -243.80002)
 scale = Vector2(0.60000026, 0.60000026)
 texture = ExtResource("4_lvxji")
@@ -356,6 +358,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D9" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(283, -243.79996)
 scale = Vector2(0.60000026, 0.60000026)
 texture = ExtResource("4_lvxji")
@@ -370,6 +373,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D8" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(283.00006, -179.8)
 scale = Vector2(0.60000014, 0.60000014)
 texture = ExtResource("4_lvxji")
@@ -384,6 +388,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D7" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(283.00012, -115.79999)
 scale = Vector2(0.60000026, 0.60000026)
 texture = ExtResource("4_lvxji")
@@ -398,6 +403,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D11" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(345.81677, -179.41801)
 scale = Vector2(0.60000014, 0.60000014)
 texture = ExtResource("4_lvxji")
@@ -412,6 +418,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D10" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(346.13794, -243.95401)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_lvxji")
@@ -426,6 +433,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D13" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(409.90875, -242.44347)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_lvxji")
@@ -440,6 +448,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="Sprite2D14" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+visible = false
 position = Vector2(410.35272, -179.09679)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_lvxji")

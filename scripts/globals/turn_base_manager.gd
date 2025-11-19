@@ -62,7 +62,7 @@ func start_player_turn():
 		return
 	emit_signal("player_turn_started")
 	hand_area.drop_cards()
-	hand_area.add_cards(deck.generate_hand(3))
+	hand_area.add_cards(deck.generate_hand(4))
 	
 func end_player_turn():
 	hand_area.drop_cards()
