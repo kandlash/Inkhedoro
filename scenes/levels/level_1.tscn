@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=21 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://ceokwkhruu0yj" path="res://scenes/cards/lil_centipede.tscn" id="4_excbq"]
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="4_x42e6"]
 [ext_resource type="PackedScene" uid="uid://5w7jkc8q8wbh" path="res://scenes/cards/maw.tscn" id="5_excbq"]
+[ext_resource type="PackedScene" uid="uid://d03q04s1vvp51" path="res://scenes/cards/hummer.tscn" id="6_dnkej"]
 [ext_resource type="Script" uid="uid://cv68aydhw6075" path="res://scripts/globals/turn_base_manager.gd" id="6_iav0o"]
+[ext_resource type="PackedScene" uid="uid://bxehxgmgjdf0c" path="res://scenes/cards/nail.tscn" id="7_dnkej"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
@@ -66,10 +68,12 @@ environment = SubResource("Environment_nsrm0")
 [node name="Deck" type="Node" parent="."]
 script = ExtResource("1_sk5k4")
 deck = Dictionary[PackedScene, int]({
-ExtResource("2_dga24"): 4,
-ExtResource("3_qxy0u"): 3,
-ExtResource("4_excbq"): 3,
-ExtResource("5_excbq"): 3
+ExtResource("2_dga24"): 1,
+ExtResource("3_qxy0u"): 1,
+ExtResource("4_excbq"): 1,
+ExtResource("5_excbq"): 1,
+ExtResource("6_dnkej"): 5,
+ExtResource("7_dnkej"): 3
 })
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]
@@ -507,9 +511,8 @@ pixel_size = 0.1
 billboard = 1
 texture = ExtResource("4_x42e6")
 
-[node name="Enemy" parent="." instance=ExtResource("9_qxy0u")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 14.208879)
-hp = 10
-
 [node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
 transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 7.709243)
+
+[node name="Enemy3" parent="." instance=ExtResource("9_qxy0u")]
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 14.139887)

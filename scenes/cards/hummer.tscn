@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://d03q04s1vvp51"]
+
+[ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_dr1r7"]
+[ext_resource type="Texture2D" uid="uid://legavx02brc4" path="res://assets/sprites/cards/hammer.png" id="2_c0nm0"]
+[ext_resource type="Script" uid="uid://b583op5jyqlf0" path="res://scripts/main/cards/hummer.gd" id="2_ee2xw"]
+[ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="4_a8ufc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
+size = Vector2(181.16125, 181.16162)
+
+[node name="Hammer" instance=ExtResource("1_dr1r7")]
+texture = ExtResource("2_c0nm0")
+script = ExtResource("2_ee2xw")
+card_name = "Hammer"
+description = "Deals {basic_damage} damage.
+If a Nail is nearby, hammer it in."
+cells_to_feel = 2
+basic_damage = 2
+
+[node name="Card_UI" parent="." index="0"]
+offset_left = -270.0
+offset_top = -270.0
+offset_right = -230.0
+offset_bottom = -230.0
+
+[node name="Image" parent="Card_UI" index="1"]
+texture = ExtResource("2_c0nm0")
+
+[node name="Center" parent="." index="1"]
+position = Vector2(0, -95.10969)
+
+[node name="Area2D" parent="." index="2"]
+position = Vector2(0, -54.348392)
+
+[node name="Area2D2" type="Area2D" parent="." index="3" groups=["tattoo_area"]]
+position = Vector2(-40.76129, 158.51614)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
+position = Vector2(0, -40.761295)
+rotation = 0.18502945
+shape = SubResource("RectangleShape2D_75vfm")
+
+[node name="Cells" parent="." index="4"]
+visible = true
+
+[node name="Sprite2D" parent="Cells" index="0"]
+position = Vector2(-9.0099155e-07, -95.10969)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Cells" index="1"]
+position = Vector2(-40.761288, 117.754845)
+rotation = 0.18768506
+scale = Vector2(1.8137224, 1.782836)
+texture = ExtResource("4_a8ufc")

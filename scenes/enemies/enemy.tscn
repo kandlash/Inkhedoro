@@ -134,7 +134,8 @@ transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0,
 pixel_size = 0.008
 texture = ExtResource("1_38ino")
 script = ExtResource("2_fcftc")
-hp = 3
+hp = 20
+base_damage = 2
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -384,6 +385,7 @@ offset_bottom = 350.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qxy0u")
 
 [node name="TextureRect" type="TextureRect" parent="Attack_SUB/Control/Panel"]
+modulate = Color(1, 0, 0, 1)
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
