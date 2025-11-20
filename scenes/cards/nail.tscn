@@ -6,21 +6,28 @@
 
 [node name="Nail" groups=["nailed"] instance=ExtResource("1_4a4b4")]
 script = ExtResource("2_yqkiv")
+synergy_target_groups = Array[String](["Pierceable"])
+extra_value = 1
 card_name = "Nail"
-description = "Deals {basic_damage}{extra_value} damage"
+description = "Deals {basic_damage}{_extra_value} damage.
+Pierce Pierceable."
 basic_damage = 1
 
 [node name="Texture" parent="." index="0"]
 position = Vector2(0, -40.761295)
-scale = Vector2(0.4267477, 0.42674777)
+scale = Vector2(0.7945671, 0.7945671)
 texture = ExtResource("2_nec7p")
 
 [node name="Image" parent="Card_UI" index="1"]
-offset_left = -167.57419
-offset_top = -433.1742
-offset_right = 167.57419
-offset_bottom = 57.612915
+offset_left = -31.70317
+offset_top = -412.14197
+offset_right = 303.4452
+offset_bottom = 78.64514
+rotation = 0.4069613
 texture = ExtResource("2_nec7p")
 
 [node name="Desc" parent="Card_UI" index="3"]
 anchor_bottom = 1.3008087
+
+[node name="Area2D" parent="NeighborFinder" index="0"]
+position = Vector2(-45.29032, 181.16129)

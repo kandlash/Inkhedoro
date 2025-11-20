@@ -31,6 +31,7 @@ player=""
 card_collide=""
 grid_collide=""
 nailed=""
+Pierceable=""
 
 [input]
 

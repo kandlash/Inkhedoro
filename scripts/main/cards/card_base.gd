@@ -166,10 +166,9 @@ func on_synergy_ui_update(synergy: bool, value):
 	if synergy:
 		var c = "+" if value > 0 else "-"
 		var t = "[color=red]" + c + str(abs(value)) + "[/color]"
-		print(t)
-		set_extra_value("extra_value", t)
+		set_extra_value("_extra_value", t)
 	else:
-		clear_extra_value("extra_value")
+		clear_extra_value("_extra_value")
 
 func synergy_popup(synergy: bool):
 	pass
@@ -213,11 +212,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		if check_rect.get_rect().has_point(to_local(event.position)) \
 			and !selected and G.selected_card == null:
-
+			
 			G.selected_card = self
 			emit_signal("card_selected", self)
 			selected = true
-			
+			if self is SynergyCardBase and in_grid_area:
+				neighbor_finder.visible = true
 			start_z = z_index
 			z_index = 100
 			scale = start_scale * 1.1
@@ -228,10 +228,11 @@ func _input(event: InputEvent) -> void:
 				G.card_info_ui.show_data(card_name, get_final_description(), standart_texture)
 		elif !check_rect.get_rect().has_point(to_local(event.position)) \
 			and selected and G.selected_card == self:
-
+	
 			G.selected_card = null
 			emit_signal("card_deselected", self)
 			selected = false
+			neighbor_finder.visible = false
 			z_index = start_z
 			scale = start_scale
 			if !in_grid_area:
@@ -256,6 +257,7 @@ func _input(event: InputEvent) -> void:
 							G.used_grids.erase(area)
 			elif !event.pressed and dragging:
 				dragging = false
+				neighbor_finder.visible = false
 				cells.visible = false
 				G.selected_card = null
 				selected = false
@@ -305,6 +307,7 @@ func _on_collide_area_area_entered(area: Area2D) -> void:
 		card_ui.visible = false
 		in_grid_area = true
 		cells.visible = true
+		if self is SynergyCardBase: neighbor_finder.visible = true
 
 
 func _on_collide_area_area_exited(area: Area2D) -> void:
@@ -313,3 +316,4 @@ func _on_collide_area_area_exited(area: Area2D) -> void:
 		card_ui.visible = true
 		in_grid_area = false
 		cells.visible = false
+		neighbor_finder.visible = false

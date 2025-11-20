@@ -14,9 +14,10 @@ size = Vector2(161.19994, 169.2894)
 [node name="Hammer" instance=ExtResource("1_dr1r7")]
 script = ExtResource("2_ee2xw")
 synergy_target_groups = Array[String](["nailed"])
+extra_value = 1
 card_name = "Hammer"
 description = "Deals {basic_damage} damage.
-If a Nail is nearby, hammer it in."
+Hammer Hammerable."
 cells_to_feel = 2
 basic_damage = 2
 
@@ -66,7 +67,7 @@ texture = ExtResource("4_a8ufc")
 position = Vector2(-244.56778, -144.92905)
 
 [node name="Area2D2" type="Area2D" parent="NeighborFinder" index="1"]
-position = Vector2(235.50967, -45.290337)
+position = Vector2(240.0387, -45.290337)
 rotation = 0.18962112
 monitorable = false
 

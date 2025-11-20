@@ -2,5 +2,6 @@ extends SynergyCardBase
 
 func use(speed):
 	await super.use(speed)
+	for card: CardBase in active_synergy_cards:
+		card.extra_damage = extra_value
 	await make_damage(speed)
-	print('fuck this sheeet - ', active_synergy_cards)

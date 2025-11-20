@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://drk3wxeg2kh3r"]
+[gd_scene load_steps=12 format=3 uid="uid://drk3wxeg2kh3r"]
 
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="1_6o33k"]
 [ext_resource type="Script" uid="uid://c1cv6jvbgmt55" path="res://scripts/main/cards/card_base.gd" id="2_auqya"]
 [ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="3_uh4ib"]
 [ext_resource type="Texture2D" uid="uid://c7dcifn0waxd6" path="res://assets/sprites/ui/card_back.png" id="4_vvmxj"]
+[ext_resource type="Texture2D" uid="uid://5q5rhl7mlq6d" path="res://assets/sprites/ui/synergy.png" id="5_sf5il"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(181.16125, 181.16162)
@@ -164,11 +165,18 @@ shape = SubResource("RectangleShape2D_vvmxj")
 environment = SubResource("Environment_sf5il")
 
 [node name="NeighborFinder" type="Node2D" parent="."]
+visible = false
 
 [node name="Area2D" type="Area2D" parent="NeighborFinder"]
 position = Vector2(0, -40.761295)
 rotation = 0.18962112
 monitorable = false
+
+[node name="SynergyMark" type="Sprite2D" parent="NeighborFinder/Area2D"]
+z_index = 999
+rotation = -0.19602053
+scale = Vector2(0.22204745, 0.22204743)
+texture = ExtResource("5_sf5il")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NeighborFinder/Area2D"]
 scale = Vector2(1, 0.9999999)
