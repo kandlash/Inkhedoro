@@ -21,7 +21,14 @@ basic_damage = 1
 texture = ExtResource("2_ot5mr")
 
 [node name="Image" parent="Card_UI" index="1"]
+anchors_preset = -1
+anchor_left = -0.29258043
+anchor_top = -0.66064453
 texture = ExtResource("2_ot5mr")
+
+[node name="Desc" parent="Card_UI" index="3"]
+anchor_bottom = -2.3306441
+offset_bottom = 615.9484
 
 [node name="Area2D3" type="Area2D" parent="." index="2" groups=["tattoo_area"]]
 position = Vector2(-95.10968, 117.754845)

@@ -51,25 +51,50 @@ signal on_arm_drawed
 @onready var neighbor_finder: Node2D = $NeighborFinder
 @onready var texture: Sprite2D = $Texture
 
+@export var synergy_texture: Texture2D
+var standart_texture: Texture2D
+var card_ui_get_back_position: Vector2
+
+var extra_replacements := {}
+
 var _regex := RegEx.new()
 
-func _init():
-	_regex.compile(r"\{([a-zA-Z0-9_]+)\}")
-
-func _ready() -> void:
+func _ready():
+	standart_texture = texture.texture
+	if synergy_texture == null: synergy_texture = standart_texture
 	name_label.text = card_name
+
 	description_template = description
-	desc_label.clear()
-	desc_label.append_text(get_final_description())
+	_regex.compile(r"\{([a-zA-Z_0-9]+)\}")
+
+	refresh_description()
 	cells.visible = false
 	start_position = global_position
 	start_scale = scale
 	for child in get_children():
 		if child is Area2D:
 			var area: Area2D = child
-			self_areas.append(area)
+			self_areas.append(area)	
 			area.connect("area_entered", _on_area_feel)
 			area.connect("area_exited", _on_area_exit)
+
+
+
+func refresh_description():
+	desc_label.clear()
+	desc_label.append_text(get_final_description())
+
+
+func set_extra_value(key: String, value):
+	extra_replacements[key] = value
+	refresh_description()
+
+
+func clear_extra_value(key: String):
+	if key in extra_replacements:
+		extra_replacements.erase(key)
+	refresh_description()
+
 
 func has_property_name(_name: String) -> bool:
 	return get_property_list().any(func(p): return p.name == _name)
@@ -77,16 +102,27 @@ func has_property_name(_name: String) -> bool:
 
 func get_final_description() -> String:
 	var result := description_template
-	var matches := _regex.search_all(description)
+
+	var matches := _regex.search_all(description_template)
 	for m in matches:
 		var key := m.get_string(1)
+
+		# 1. ПРИОРИТЕТ: extra_value
+		if key in extra_replacements:
+			var v = extra_replacements[key]
+			result = result.replace("{" + key + "}", str(v))
+			continue
+
+		# 2. Свойства карточки (damage, block, turns, etc)
 		if has_property_name(key):
 			var value = get(key)
 			result = result.replace("{" + key + "}", str(value))
-		else:
-			push_warning("CardBase: no property named '%s' for description replacement" % key)
-	return result
+			continue
 
+		# 3. Если ключ не найден
+		result = result.replace("{" + key + "}", "")
+
+	return result
 
 func use(speed):
 	var tween = create_tween()
@@ -122,7 +158,20 @@ func make_damage(speed):
 func on_arm_effect():
 	pass
 
-func on_synergy_ui_update():
+func on_synergy_ui_update(synergy: bool, value):
+	texture.texture = synergy_texture if synergy else standart_texture
+
+	synergy_popup(synergy)
+
+	if synergy:
+		var c = "+" if value > 0 else "-"
+		var t = "[color=red]" + c + str(abs(value)) + "[/color]"
+		print(t)
+		set_extra_value("extra_value", t)
+	else:
+		clear_extra_value("extra_value")
+
+func synergy_popup(synergy: bool):
 	pass
 
 func on_synergy_effect():
@@ -172,10 +221,11 @@ func _input(event: InputEvent) -> void:
 			start_z = z_index
 			z_index = 100
 			scale = start_scale * 1.1
-
+			
 			if !in_grid_area:
 				position.y -= 80
-				print('поднялась')
+			else:
+				G.card_info_ui.show_data(card_name, get_final_description(), standart_texture)
 		elif !check_rect.get_rect().has_point(to_local(event.position)) \
 			and selected and G.selected_card == self:
 
@@ -184,10 +234,10 @@ func _input(event: InputEvent) -> void:
 			selected = false
 			z_index = start_z
 			scale = start_scale
-
 			if !in_grid_area:
-				print('вернулась')
 				position.y += 80
+			else:
+				G.card_info_ui.hide_data()
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -195,10 +245,12 @@ func _input(event: InputEvent) -> void:
 				if check_rect.get_rect().has_point(to_local(event.position)) and G.selected_card == self:
 					global_position = event.global_position
 					emit_signal("card_taked", self)
-					cells.visible = true
+					if in_grid_area:
+						cells.visible = true
 					dragging = true
 					drag_offset = position - event.position
 					if on_arm:
+						G.card_info_ui.hide_data()
 						on_arm = false
 						for area in feeled_areas:
 							G.used_grids.erase(area)
@@ -252,7 +304,7 @@ func _on_collide_area_area_entered(area: Area2D) -> void:
 		emit_signal("card_grid_entered", self)
 		card_ui.visible = false
 		in_grid_area = true
-		print('in grid area')
+		cells.visible = true
 
 
 func _on_collide_area_area_exited(area: Area2D) -> void:
@@ -260,4 +312,4 @@ func _on_collide_area_area_exited(area: Area2D) -> void:
 		emit_signal("card_grid_exited", self)
 		card_ui.visible = true
 		in_grid_area = false
-		print('exit grid area')
+		cells.visible = false

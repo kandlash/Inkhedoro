@@ -15,7 +15,6 @@ self_damage = 2
 card_name = "Sicrifice Mark"
 description = "Sicrifice your blood [color=red]-{self_damage}[/color] hp
  to increase your next damage by {damage_buff}%"
-basic_damage = 0
 
 [node name="Texture" parent="." index="0"]
 rotation = 0.20352161
@@ -27,8 +26,15 @@ anchor_left = -3.57613
 anchor_top = -7.263551
 anchor_right = 6.614193
 anchor_bottom = 7.659032
+offset_left = -95.584885
+offset_top = -316.05048
+offset_right = 88.72946
+offset_bottom = -46.14276
 rotation = 0.07580701
 texture = ExtResource("3_tewfg")
+
+[node name="Desc" parent="Card_UI" index="3"]
+anchor_top = -5.161291
 
 [node name="Center" parent="." index="2"]
 position = Vector2(22.645164, -113.22582)

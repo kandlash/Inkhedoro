@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dmwwst3hdut4y"]
+[gd_scene load_steps=43 format=3 uid="uid://dmwwst3hdut4y"]
 
 [ext_resource type="Texture2D" uid="uid://cywxycueh0kl5" path="res://assets/sprites/arm_test3.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://d4mvcidbtb15w" path="res://scripts/main/player/player.gd" id="1_dovo2"]
@@ -27,6 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://ciimumd8j0tls" path="res://assets/sprites/ui/take_damage/attack_3.png" id="24_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://c2gxtvg3gn8np" path="res://assets/sprites/ui/take_damage/attack_4.png" id="25_28m0y"]
 [ext_resource type="Texture2D" uid="uid://dtpx8de7ciu8j" path="res://assets/sprites/ui/take_damage/attack_5.png" id="26_uniwh"]
+[ext_resource type="Script" uid="uid://bpljig4f1askf" path="res://scripts/main/cards/card_info_ui.gd" id="28_iqsei"]
+[ext_resource type="Texture2D" uid="uid://c7dcifn0waxd6" path="res://assets/sprites/ui/card_back.png" id="28_uniwh"]
+[ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="29_iqsei"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
 
@@ -196,6 +199,96 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6710013, 0)
 script = ExtResource("2_gx1jg")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Card_InfoUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 134.0
+offset_right = -78.0
+offset_bottom = 174.0
+grow_horizontal = 0
+scale = Vector2(0.21386465, 0.21386465)
+script = ExtResource("28_iqsei")
+
+[node name="Back" type="TextureRect" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -452.9032
+offset_top = -574.61707
+offset_right = 452.9032
+offset_bottom = 574.61707
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_uniwh")
+
+[node name="Image" type="TextureRect" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.283875
+offset_top = -362.3226
+offset_right = 122.283875
+offset_bottom = -4.1806335
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_iqsei")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.7
+anchor_top = -1.7645165
+anchor_right = 2.7
+anchor_bottom = -0.73951644
+offset_left = -205.0
+offset_top = -398.55487
+offset_right = 205.0
+offset_bottom = -302.55487
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 100
+text = "CARD NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Desc" type="RichTextLabel" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.1388702
+anchor_top = -4.821614
+anchor_right = 3.1388702
+anchor_bottom = 0.62145233
+offset_left = -293.0
+offset_top = 217.39357
+offset_right = 293.0
+offset_bottom = 502.39355
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "Deal some damage to enemy w
+asdfdsfsdfsdf"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ArmBase" type="Control" parent="CanvasLayer"]
 visible = false

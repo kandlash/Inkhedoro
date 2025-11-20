@@ -3,6 +3,8 @@ extends Node
 
 var used_grids: Array[Area2D]
 
+var card_info_ui: CardInfo
+
 var selected_card: CardBase
 var deck: Deck
 var hand: Hand

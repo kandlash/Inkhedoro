@@ -16,4 +16,12 @@ scale = Vector2(0.34387097, 0.34387094)
 texture = ExtResource("3_2ir4q")
 
 [node name="Image" parent="Card_UI" index="1"]
+offset_left = -217.39355
+offset_top = -510.6581
+offset_right = 217.39355
+offset_bottom = 126.03873
 texture = ExtResource("3_2ir4q")
+
+[node name="Desc" parent="Card_UI" index="3"]
+anchor_top = -4.708388
+anchor_bottom = 0.7346786

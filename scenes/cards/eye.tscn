@@ -9,3 +9,9 @@ card_name = "Little Eye"
 description = "This Eye is WATCHING
 Deals {basic_damage} damage"
 basic_damage = 1
+
+[node name="Image" parent="Card_UI" index="1"]
+offset_left = -181.16129
+offset_top = -434.95483
+offset_right = 181.16129
+offset_bottom = 95.62579

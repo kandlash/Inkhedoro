@@ -24,9 +24,17 @@ basic_damage = 2
 texture = ExtResource("2_c0nm0")
 
 [node name="Image" parent="Card_UI" index="1"]
-anchor_left = -0.29258043
-anchor_top = -0.66064453
+offset_left = -49.81929
+offset_top = -543.48395
+offset_right = 366.85168
+offset_bottom = 66.68384
+rotation = 0.41734543
+scale = Vector2(1.0183636, 1.0183636)
 texture = ExtResource("2_c0nm0")
+
+[node name="Desc" parent="Card_UI" index="3"]
+anchor_top = -4.708388
+anchor_bottom = 1.1875824
 
 [node name="Center" parent="." index="2"]
 position = Vector2(0, -95.10969)

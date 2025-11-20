@@ -27,7 +27,6 @@ sky_material = SubResource("ProceduralSkyMaterial_ksju7")
 sky = SubResource("Sky_excbq")
 tonemap_mode = 4
 ssr_fade_in = 0.058843866
-ssao_enabled = true
 fog_enabled = true
 fog_light_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 fog_light_energy = 0.14

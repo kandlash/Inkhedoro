@@ -7,7 +7,7 @@
 [node name="Nail" groups=["nailed"] instance=ExtResource("1_4a4b4")]
 script = ExtResource("2_yqkiv")
 card_name = "Nail"
-description = "Deals {basic_damage} damage"
+description = "Deals {basic_damage}{extra_value} damage"
 basic_damage = 1
 
 [node name="Texture" parent="." index="0"]
@@ -16,6 +16,11 @@ scale = Vector2(0.4267477, 0.42674777)
 texture = ExtResource("2_nec7p")
 
 [node name="Image" parent="Card_UI" index="1"]
-anchor_left = -0.29258043
-anchor_top = -0.66064453
+offset_left = -167.57419
+offset_top = -433.1742
+offset_right = 167.57419
+offset_bottom = 57.612915
 texture = ExtResource("2_nec7p")
+
+[node name="Desc" parent="Card_UI" index="3"]
+anchor_bottom = 1.3008087

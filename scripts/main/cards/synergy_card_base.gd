@@ -33,7 +33,8 @@ func update_synergy():
 	if !in_grid_area:
 		if synergy_active:
 			for card: CardBase in active_synergy_cards:
-				card.modulate = Color(1.0, 1.0, 1.0, 1.0)
+				#card.modulate = Color(1.0, 1.0, 1.0, 1.0)
+				card.on_synergy_ui_update(false, 0)
 			active_synergy_cards.clear()
 			remove_synergy()
 		return
@@ -41,7 +42,9 @@ func update_synergy():
 	var neighbors = find_neighbor_cards()
 	var new_active: Array[CardBase] = []
 	for card: CardBase in active_synergy_cards:
-		card.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		#card.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		card.on_synergy_ui_update(false, 0)
+		
 	for card in neighbors:
 		if card.in_grid_area and _matches_synergy_target(card):
 			new_active.append(card)
@@ -55,7 +58,8 @@ func update_synergy():
 		remove_synergy()
 	
 	for card: CardBase in active_synergy_cards:
-		card.modulate = Color(1.0, 0.0, 0.0, 1.0)
+		#card.modulate = Color(1.0, 0.635, 0.579, 1.0)
+		card.on_synergy_ui_update(true, 1)
 
 
 func _matches_synergy_target(card: CardBase) -> bool:

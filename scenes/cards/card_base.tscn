@@ -73,21 +73,20 @@ texture = ExtResource("4_vvmxj")
 
 [node name="Image" type="TextureRect" parent="Card_UI"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.2925804
-anchor_top = 1.6606445
-anchor_right = -0.29258043
-anchor_bottom = -0.66064453
-offset_left = -199.2774
-offset_top = -291.81934
-offset_right = 199.2774
-offset_bottom = 291.81934
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.283875
+offset_top = -362.3226
+offset_right = 122.283875
+offset_bottom = -4.1806335
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_6o33k")
 expand_mode = 1
 stretch_mode = 5
-metadata/_edit_use_anchors_ = true
 
 [node name="Name" type="Label" parent="Card_UI"]
 layout_mode = 1
@@ -113,10 +112,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Desc" type="RichTextLabel" parent="Card_UI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.78016055
-anchor_top = -3.0100005
-anchor_right = 1.7801605
-anchor_bottom = 4.0182266
+anchor_left = -2.1388702
+anchor_top = -3.1232262
+anchor_right = 3.1388702
+anchor_bottom = 2.3198395
 offset_left = -293.0
 offset_top = 217.39357
 offset_right = 293.0
@@ -125,12 +124,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 25
-theme_override_font_sizes/normal_font_size = 51
+theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "Deal some damage to enemy lol kek cheburek azaza kek lol mother fucker i just fw"
+text = "Deal some damage to enemy w
+asdfdsfsdfsdf"
+scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
-vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Center" type="Node2D" parent="."]
