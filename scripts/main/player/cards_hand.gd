@@ -37,8 +37,11 @@ func drop_cards():
 	G.selected_card = null
 	G.used_grids.clear()
 	var cards = get_children()
-	for card in cards:
+	G.card_info_ui.hide()
+	for card:CardBase in cards:
 		card.on_arm = false
+		card.in_grid_area = false
+		card.card_ui.visible = true
 		if card.is_connected("card_dropped", _on_card_dropped):
 			card.disconnect("card_dropped", _on_card_dropped)
 		remove_child(card)
