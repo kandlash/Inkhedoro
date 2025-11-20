@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxehxgmgjdf0c"]
+[gd_scene load_steps=4 format=3 uid="uid://bxehxgmgjdf0c"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_4a4b4"]
 [ext_resource type="Texture2D" uid="uid://dc3w3se716sns" path="res://assets/sprites/cards/nail.png" id="2_nec7p"]
 [ext_resource type="Script" uid="uid://4ww2uu2bo7d0" path="res://scripts/main/cards/nail.gd" id="2_yqkiv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
-size = Vector2(181.16125, 181.16162)
-
-[node name="Nail" instance=ExtResource("1_4a4b4")]
+[node name="Nail" groups=["nailed"] instance=ExtResource("1_4a4b4")]
 script = ExtResource("2_yqkiv")
 card_name = "Nail"
 description = "Deals {basic_damage} damage"
@@ -19,7 +16,6 @@ scale = Vector2(0.4267477, 0.42674777)
 texture = ExtResource("2_nec7p")
 
 [node name="Image" parent="Card_UI" index="1"]
+anchor_left = -0.29258043
+anchor_top = -0.66064453
 texture = ExtResource("2_nec7p")
-
-[node name="CollisionShape2D" parent="Area2D" index="0"]
-shape = SubResource("RectangleShape2D_75vfm")

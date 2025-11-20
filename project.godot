@@ -30,6 +30,7 @@ tattoo_area=""
 player=""
 card_collide=""
 grid_collide=""
+nailed=""
 
 [input]
 

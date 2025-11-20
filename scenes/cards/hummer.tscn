@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d03q04s1vvp51"]
+[gd_scene load_steps=7 format=3 uid="uid://d03q04s1vvp51"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_dr1r7"]
 [ext_resource type="Texture2D" uid="uid://legavx02brc4" path="res://assets/sprites/cards/hammer.png" id="2_c0nm0"]
@@ -8,8 +8,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(181.16125, 181.16162)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sf5il"]
+size = Vector2(161.19994, 169.2894)
+
 [node name="Hammer" instance=ExtResource("1_dr1r7")]
 script = ExtResource("2_ee2xw")
+synergy_target_groups = Array[String](["nailed"])
 card_name = "Hammer"
 description = "Deals {basic_damage} damage.
 If a Nail is nearby, hammer it in."
@@ -20,6 +24,8 @@ basic_damage = 2
 texture = ExtResource("2_c0nm0")
 
 [node name="Image" parent="Card_UI" index="1"]
+anchor_left = -0.29258043
+anchor_top = -0.66064453
 texture = ExtResource("2_c0nm0")
 
 [node name="Center" parent="." index="2"]
@@ -51,4 +57,12 @@ texture = ExtResource("4_a8ufc")
 [node name="Area2D" parent="NeighborFinder" index="0"]
 position = Vector2(-244.56778, -144.92905)
 
-[connection signal="area_entered" from="NeighborFinder/Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="Area2D2" type="Area2D" parent="NeighborFinder" index="1"]
+position = Vector2(235.50967, -45.290337)
+rotation = 0.18962112
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NeighborFinder/Area2D2" index="0"]
+scale = Vector2(1, 0.9999999)
+shape = SubResource("RectangleShape2D_sf5il")
+debug_color = Color(2.9359758e-06, 0.64650387, 0.2428731, 0.41960785)

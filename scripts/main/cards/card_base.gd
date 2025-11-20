@@ -56,6 +56,21 @@ var _regex := RegEx.new()
 func _init():
 	_regex.compile(r"\{([a-zA-Z0-9_]+)\}")
 
+func _ready() -> void:
+	name_label.text = card_name
+	description_template = description
+	desc_label.clear()
+	desc_label.append_text(get_final_description())
+	cells.visible = false
+	start_position = global_position
+	start_scale = scale
+	for child in get_children():
+		if child is Area2D:
+			var area: Area2D = child
+			self_areas.append(area)
+			area.connect("area_entered", _on_area_feel)
+			area.connect("area_exited", _on_area_exit)
+
 func has_property_name(_name: String) -> bool:
 	return get_property_list().any(func(p): return p.name == _name)
 
@@ -72,20 +87,6 @@ func get_final_description() -> String:
 			push_warning("CardBase: no property named '%s' for description replacement" % key)
 	return result
 
-func _ready() -> void:
-	name_label.text = card_name
-	description_template = description
-	desc_label.clear()
-	desc_label.append_text(get_final_description())
-	cells.visible = false
-	start_position = global_position
-	start_scale = scale
-	for child in get_children():
-		if child is Area2D:
-			var area: Area2D = child
-			self_areas.append(area)
-			area.connect("area_entered", _on_area_feel)
-			area.connect("area_exited", _on_area_exit)
 
 func use(speed):
 	var tween = create_tween()
@@ -121,6 +122,12 @@ func make_damage(speed):
 func on_arm_effect():
 	pass
 
+func on_synergy_ui_update():
+	pass
+
+func on_synergy_effect():
+	pass
+
 func find_neighbor_cards() -> Array[CardBase]:
 	var neighbors: Array[CardBase] = []
 	for area: Area2D in neighbor_finder.get_children():
@@ -152,6 +159,7 @@ func _on_area_exit(area: Area2D):
 	sprite.texture = TATTOO_FRAME
 	
 func _input(event: InputEvent) -> void:
+	@warning_ignore("incompatible_ternary")
 	var check_rect = back if !on_arm else texture
 	if event is InputEventMouse:
 		if check_rect.get_rect().has_point(to_local(event.position)) \
