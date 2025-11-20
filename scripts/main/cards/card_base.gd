@@ -42,6 +42,7 @@ var selected := false
 var start_z: int
 var start_scale: Vector2
 
+var in_grid_area = false
 
 signal on_arm_drawed
 
@@ -153,19 +154,32 @@ func _on_area_exit(area: Area2D):
 func _input(event: InputEvent) -> void:
 	var check_rect = back if !on_arm else texture
 	if event is InputEventMouse:
-		if check_rect.get_rect().has_point(to_local(event.position)) and !selected and G.selected_card == null:
+		if check_rect.get_rect().has_point(to_local(event.position)) \
+			and !selected and G.selected_card == null:
+
 			G.selected_card = self
 			emit_signal("card_selected", self)
 			selected = true
+			
 			start_z = z_index
 			z_index = 100
 			scale = start_scale * 1.1
-		elif !check_rect.get_rect().has_point(to_local(event.position)) and selected and G.selected_card == self:
+
+			if !in_grid_area:
+				position.y -= 80
+				print('поднялась')
+		elif !check_rect.get_rect().has_point(to_local(event.position)) \
+			and selected and G.selected_card == self:
+
 			G.selected_card = null
 			emit_signal("card_deselected", self)
 			selected = false
 			z_index = start_z
 			scale = start_scale
+
+			if !in_grid_area:
+				print('вернулась')
+				position.y += 80
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -226,12 +240,16 @@ func _process(_delta: float) -> void:
 		position = get_global_mouse_position() + drag_offset
 
 func _on_collide_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group("grid_collide"):
+	if area.is_in_group("grid_collide") and dragging:
 		emit_signal("card_grid_entered", self)
 		card_ui.visible = false
+		in_grid_area = true
+		print('in grid area')
 
 
 func _on_collide_area_area_exited(area: Area2D) -> void:
-	if area.is_in_group("grid_collide"):
+	if area.is_in_group("grid_collide") and dragging:
 		emit_signal("card_grid_exited", self)
 		card_ui.visible = true
+		in_grid_area = false
+		print('exit grid area')

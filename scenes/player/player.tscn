@@ -68,7 +68,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ydkj"]
-size = Vector2(1880.3367, 1276.3745)
+size = Vector2(1517.9591, 958.2875)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lgqa7"]
 animations = [{
@@ -246,7 +246,7 @@ collision_layer = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/RightArm/Area2D"]
-position = Vector2(251.25024, 22.874146)
+position = Vector2(70.06152, -136.16931)
 shape = SubResource("RectangleShape2D_8ydkj")
 debug_color = Color(0.84313726, 0.38039216, 0, 0.10980392)
 
@@ -464,10 +464,10 @@ shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="CardsHand" type="Panel" parent="CanvasLayer/TattooPose"]
 layout_mode = 0
-offset_left = -443.0
-offset_top = -68.0
-offset_right = -77.0
-offset_bottom = 36.0
+offset_left = -377.0
+offset_top = -15.0
+offset_right = -11.0
+offset_bottom = 89.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8ydkj")
 script = ExtResource("5_p47bc")
 base_y_offset = 100

@@ -1,7 +1,7 @@
 extends Panel
 class_name Hand
 
-@export var card_spacing := 80
+@export var card_spacing := 120
 @export var max_card_angle := 0
 @export var base_y_offset := 150
 @export var smooth_appearance := true
@@ -53,7 +53,11 @@ func _update_card_layout() -> void:
 	var count := cards_to_update.size()
 	if count == 0:
 		return
-		
+	
+	var spacing := card_spacing
+	if count > 5:
+		spacing = 90
+
 	var center_x = size.x / 2
 	var base_y = size.y - base_y_offset
 	var card_size = cards_to_update[0].back.scale
@@ -63,7 +67,7 @@ func _update_card_layout() -> void:
 		_set_card_transform(card, Vector2(center_x - card_size.x / 2, base_y), 0.0, 0)
 		return
 
-	var total_width = (count - 1) * card_spacing + card_size.x
+	var total_width = (count - 1) * spacing + card_size.x
 	var start_x = center_x - total_width / 2
 	var angle_step = (max_card_angle * 2.0) / (count - 1)
 	var start_angle = max_card_angle
@@ -71,7 +75,7 @@ func _update_card_layout() -> void:
 	for i in range(count):
 		var card = cards_to_update[i]
 		var rot_deg = start_angle - i * angle_step
-		var x = start_x + i * card_spacing
+		var x = start_x + i * spacing
 		var y = base_y - abs(rot_deg) * 1.2
 		_set_card_transform(card, Vector2(x, y), rot_deg, i)
 
