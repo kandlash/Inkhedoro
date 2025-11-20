@@ -20,11 +20,11 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_excbq"]
+[sub_resource type="Sky" id="Sky_wtwp4"]
 sky_material = SubResource("ProceduralSkyMaterial_ksju7")
 
 [sub_resource type="Environment" id="Environment_nsrm0"]
-sky = SubResource("Sky_excbq")
+sky = SubResource("Sky_wtwp4")
 tonemap_mode = 4
 ssr_fade_in = 0.058843866
 fog_enabled = true
@@ -70,12 +70,12 @@ environment = SubResource("Environment_nsrm0")
 script = ExtResource("1_sk5k4")
 deck = Dictionary[PackedScene, int]({
 ExtResource("2_dga24"): 3,
-ExtResource("3_qxy0u"): 1,
+ExtResource("3_qxy0u"): 2,
 ExtResource("4_excbq"): 2,
 ExtResource("5_excbq"): 2,
 ExtResource("6_dnkej"): 3,
 ExtResource("7_dnkej"): 6,
-ExtResource("8_mm8aj"): 3,
+ExtResource("8_mm8aj"): 2,
 ExtResource("9_wtwp4"): 1
 })
 

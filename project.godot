@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Inkhedoro"
-run/main_scene="uid://cjt8h4a83g2kx"
+run/main_scene="uid://bkd4d2mco0nvw"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ G="*res://scripts/globals/G.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]

@@ -65,9 +65,6 @@ func _on_card_grid_entered(card: CardBase):
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_left"):
-		spell_cards_on_grid()
-	
 	if cut_frame >= cut_frame_to_effect and cut_frame > 0:
 		cut_frame = -1
 		G.camera.shake(0.025, 0.4)
