@@ -58,7 +58,7 @@ proximity_fade_distance = 0.01
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.51720566, 0.8558612, 0, -0.8558612, 0.51720566, 0, 14.46684, 0)
-light_energy = 0.4
+light_energy = 0.1
 light_specular = 5.948
 shadow_enabled = true
 sky_mode = 1

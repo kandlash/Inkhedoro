@@ -7,6 +7,11 @@ class_name EnemyBase
 
 @export var hp : int = 10
 var max_hp: int
+@export var base_heal: int = 3
+@export var random_heal_min: int = 0
+@export var random_heal_max: int = 3
+var final_heal = 0
+
 @export var base_damage: int = 1
 @export var random_damage_min: int = 0
 @export var random_damage_max: int = 5
@@ -101,7 +106,6 @@ func make_turn():
 		emit_signal("enemy_died")
 		emit_signal("turn_finished")
 		return
-	# Выполняем действие
 	match next_action:
 		"attack":
 			await _attack_player()
@@ -122,27 +126,28 @@ func _choose_next_action():
 func _update_ui_turn():
 	match next_action:
 		"attack":
+			var random_bonus = randi_range(random_damage_min, random_damage_max)
+			final_damage = base_damage + random_bonus
+			attack_value_label.text = attack_text_template.replace("-value", str(final_damage))
 			ui_turn.texture = attack_sub.get_texture() if attack_sub.has_method("get_texture") else attack_sub.texture
 		"heal":
+			var random_bonus = randi_range(random_heal_min, random_heal_max)
+			final_heal = base_heal + random_bonus
+			heal_value_label.text = str(final_heal)
 			ui_turn.texture = heal_sub.get_texture() if heal_sub.has_method("get_texture") else heal_sub.texture
 
 func _attack_player():
-	var random_bonus = randi_range(random_damage_min, random_damage_max)
-	var damage = base_damage + random_bonus
 	ui_attack_animator.play("attack_value_animation")
 	await ui_attack_animator.animation_finished
-	G.player.take_damage(damage)
+	G.player.take_damage(final_damage)
 	await G.player.damage_taked
-	attack_value_label.text = attack_text_template.replace("-value", str(damage))
 
 func _heal_self():
-	var random_bonus = randi_range(random_damage_min, random_damage_max)
-	var heal_amount = base_damage + random_bonus
-	hp += heal_amount
+	hp += final_heal
 	if hp > max_hp:
 		hp = max_hp
-	await get_tree().create_timer(0.1).timeout
 	hp_label.text = hp_text_template.replace("-current_hp", str(hp)).replace("-max_hp", str(max_hp))
+	await get_tree().create_timer(0.1).timeout
 	
 func take_bleed(turns, damage):
 	bleed_textures.visible = true

@@ -9,13 +9,17 @@ extends Node3D
 var cut_frame = 0
 @export var cut_frame_to_effect = 4
 @onready var intro_music: AudioStreamPlayer = $IntroMusic
+@onready var world_environment: WorldEnvironment = $WorldEnvironment
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cut_self.connect("frame_changed", _on_cut_frame_changed)
 	continue_tip.visible = false
 	dialogue.connect("dialogue_ended", _on_dialogue_end)
-
+	var tween = create_tween()
+	tween.tween_property(world_environment.environment, "fog_density", 0.1, 15.0)
+	
+	
 func _process(_delta: float) -> void:
 	if cut_frame >= cut_frame_to_effect and cut_frame > 0:
 		cut_frame = -1
@@ -26,6 +30,7 @@ func _on_dialogue_end():
 	animation_player.play("fade_out")
 	right_arm.visible = false
 	cut_self.visible = true
+	world_environment.environment.fog_density = 0.2
 	G.camera.shake(0.07, 1.0)
 	await animation_player.animation_finished
 	
