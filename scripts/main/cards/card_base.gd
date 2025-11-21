@@ -162,7 +162,7 @@ func on_synergy_ui_update(synergy: bool, value):
 	texture.texture = synergy_texture if synergy else standart_texture
 
 	synergy_popup(synergy)
-
+	print('new synergy value!', value)
 	if synergy:
 		var c = "+" if value > 0 else "-"
 		var t = "[color=red]" + c + str(abs(value)) + "[/color]"

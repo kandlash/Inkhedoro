@@ -11,6 +11,6 @@ func apply_synergy():
 	for card: CardBase in active_synergy_cards:
 		card.extra_damage = extra_value
 
-func refresh_description():
+func remove_synergy():
 	for card: CardBase in prev_synergy_cards:
 		card.extra_damage = 0
