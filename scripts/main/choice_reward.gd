@@ -28,7 +28,8 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 	active = true
 	canvas_layer.visible = true
-
+	G.player.arm_base.visible = false
+	G.player.set_physics_process(false)
 	_spawn_cards()
 	_setup_selection_logic()
 
@@ -99,4 +100,6 @@ func _cleanup() -> void:
 	spawned_cards.clear()
 	selected_card = null
 	canvas_layer.visible = false
+	G.player.arm_base.visible = true
+	G.player.set_physics_process(true)
 	active = false

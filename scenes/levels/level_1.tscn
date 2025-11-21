@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=33 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
@@ -9,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://d03q04s1vvp51" path="res://scenes/cards/hummer.tscn" id="6_dnkej"]
 [ext_resource type="Script" uid="uid://cv68aydhw6075" path="res://scripts/globals/turn_base_manager.gd" id="6_iav0o"]
 [ext_resource type="PackedScene" uid="uid://bxehxgmgjdf0c" path="res://scenes/cards/nail.tscn" id="7_dnkej"]
+[ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="7_iwr0g"]
+[ext_resource type="PackedScene" uid="uid://5w7jkc8q8wbh" path="res://scenes/cards/maw.tscn" id="8_v6ha0"]
+[ext_resource type="PackedScene" uid="uid://bkjxu46hk1w8s" path="res://scenes/cards/sickle.tscn" id="9_gmpev"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
-[ext_resource type="PackedScene" uid="uid://byt6cnyrj65rc" path="res://scenes/cards/sacrifice_mark.tscn" id="9_wtwp4"]
+[ext_resource type="PackedScene" uid="uid://ceokwkhruu0yj" path="res://scenes/cards/lil_centipede.tscn" id="10_mkypq"]
 [ext_resource type="Texture2D" uid="uid://c6jvilvojjdyg" path="res://assets/textures/rock(41).png" id="12_np2pn"]
 [ext_resource type="Texture2D" uid="uid://clu1lfc4ejfon" path="res://assets/textures/sculls_texture.png" id="12_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://p6koixqyjp7e" path="res://scenes/enemies/one_leg_bahomet.tscn" id="16_iwr0g"]
@@ -114,9 +117,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 24.8
 new_cards = Dictionary[PackedScene, int]({
 ExtResource("7_dnkej"): 7,
 ExtResource("6_dnkej"): 2,
-ExtResource("9_wtwp4"): 3
+ExtResource("7_iwr0g"): 1
 })
-select_one = true
+
+[node name="Choice_Reward2" parent="." instance=ExtResource("20_gmpev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0074824095, 0.60530853, 10.870531)
+new_cards = Dictionary[PackedScene, int]({
+ExtResource("8_v6ha0"): 2,
+ExtResource("9_gmpev"): 2,
+ExtResource("10_mkypq"): 2
+})
 
 [node name="TurnBaseManager" type="Node" parent="."]
 script = ExtResource("6_iav0o")
@@ -629,11 +639,11 @@ texture = ExtResource("4_x42e6")
 [node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
 transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.3441875, 1.5386214, 14.25465)
 enemy_name = "Dummy"
-hp = 3
+hp = 18
 base_heal = 2
 random_damage_max = 2
-attack_chance = 1.0
-heal_chance = 0.0
+attack_chance = 0.8
+heal_chance = 0.2
 
 [node name="one_leg_bahomet" parent="." instance=ExtResource("16_iwr0g")]
 transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.14356256, 1.8832752, -0.50595284)

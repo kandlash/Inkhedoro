@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cffvsu8jf7y05"]
+[gd_scene load_steps=5 format=3 uid="uid://cffvsu8jf7y05"]
 
 [ext_resource type="Texture2D" uid="uid://uxty3uhoc7un" path="res://assets/textures/burrel.png" id="1_3vygg"]
 [ext_resource type="Script" uid="uid://btdagu8barh5a" path="res://scripts/main/chill_area.gd" id="1_b004p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3vygg"]
 size = Vector3(3.6074219, 3.6396484, 5.394287)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dyixl"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
 
 [node name="chill_area" type="Node3D"]
 script = ExtResource("1_b004p")
@@ -27,6 +35,54 @@ omni_range = 1.524
 shape = SubResource("BoxShape3D_3vygg")
 
 [node name="FlickerTimer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+z_index = 200
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="rest_button" type="Button" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -291.0
+offset_top = -143.99994
+offset_right = 145.02979
+offset_bottom = 45.557922
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.49733248, 0.49733248)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_dyixl")
+text = "REST"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -212.0
+offset_right = 20.0
+offset_bottom = -189.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 46
+text = "Fire always warms. Rest and heal your wounds."
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

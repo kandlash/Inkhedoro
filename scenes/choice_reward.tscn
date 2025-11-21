@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwg2moulwlxo5"]
+[gd_scene load_steps=6 format=3 uid="uid://cwg2moulwlxo5"]
 
 [ext_resource type="Script" uid="uid://coc7ua6xeuv7e" path="res://scripts/main/choice_reward.gd" id="1_hnqru"]
-[ext_resource type="Script" uid="uid://butd31fbl22dq" path="res://scripts/main/grid/get_ink_button.gd" id="2_d7u3h"]
 [ext_resource type="Script" uid="uid://cc2tbxhnjcxwb" path="res://scripts/main/player/cards_hand.gd" id="2_ilmdw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rg6yq"]
@@ -73,7 +72,22 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 56
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilmdw")
 text = "COLLECT"
-script = ExtResource("2_d7u3h")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -212.0
+offset_right = 20.0
+offset_bottom = -189.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 46
+text = "You have found the Cursed Scethches."
 
 [node name="Area3D" type="Area3D" parent="."]
 
