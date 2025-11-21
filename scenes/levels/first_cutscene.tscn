@@ -1,12 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://bjsagyyf22p2k"]
+[gd_scene load_steps=36 format=3 uid="uid://bjsagyyf22p2k"]
 
 [ext_resource type="Script" uid="uid://b6xklnx53h16m" path="res://scripts/main/cutscenes/first_cutscene.gd" id="1_kubor"]
 [ext_resource type="Script" uid="uid://bj17qco450ud3" path="res://scripts/main/cutscenes/dialogue_fcs.gd" id="2_arjpg"]
-[ext_resource type="Texture2D" uid="uid://ccdqea7ofgm2v" path="res://assets/sprites/cut_self/cut_self_1.png" id="2_hgehw"]
-[ext_resource type="Texture2D" uid="uid://6yhlywpptqvs" path="res://assets/sprites/cut_self/cut_self_2.png" id="3_f6ico"]
-[ext_resource type="Texture2D" uid="uid://cwmicp8vtgin3" path="res://assets/sprites/cut_self/cut_self_2_1.png" id="4_arg65"]
-[ext_resource type="Texture2D" uid="uid://bgvj6tg8pjsss" path="res://assets/sprites/cut_self/cut_self_2_2.png" id="5_k81vg"]
-[ext_resource type="Texture2D" uid="uid://clbm6ilwimihu" path="res://assets/sprites/cut_self/cut_self_2_3.png" id="6_131va"]
+[ext_resource type="Texture2D" uid="uid://cds00undpf6rs" path="res://assets/sprites/cut_self/cut_self_1_cutscene.png" id="3_arjpg"]
+[ext_resource type="Texture2D" uid="uid://dy8vaconoffx1" path="res://assets/sprites/cut_self/cut_self_2_cutscene.png" id="4_ru4gl"]
 [ext_resource type="Texture2D" uid="uid://ba7bhpvw034ce" path="res://assets/textures/garbade_texture.png" id="7_f6ico"]
 [ext_resource type="Texture2D" uid="uid://duk00ovikfhfl" path="res://assets/sprites/arm_tatoo_pose.png" id="7_k81vg"]
 [ext_resource type="Texture2D" uid="uid://dl7numpgr3dxr" path="res://assets/sprites/cut_self/cut_self_3_1.png" id="7_q4x8k"]
@@ -16,6 +13,7 @@
 [ext_resource type="Script" uid="uid://c3sa2cy74lpnn" path="res://scripts/main/cutscenes/cut_self_cs.gd" id="9_ru4gl"]
 [ext_resource type="Script" uid="uid://xfns0khwv2vi" path="res://scripts/main/cutscenes/camera_3d.gd" id="12_q4x8k"]
 [ext_resource type="Script" uid="uid://cogysw30v3imk" path="res://scripts/main/cutscenes/eye_cs.gd" id="12_v6vur"]
+[ext_resource type="Shader" uid="uid://b53hb4df7mt08" path="res://scripts/shaders/post_process.gdshader" id="17_jo8sd"]
 [ext_resource type="AudioStream" uid="uid://dmx5punsnngu2" path="res://assets/music/inkhedoro_intro.mp3" id="17_n14g3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s3lum"]
@@ -44,25 +42,25 @@ compositor_effects = Array[CompositorEffect]([null])
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_hgehw")
+"texture": ExtResource("3_arjpg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_hgehw")
+"texture": ExtResource("3_arjpg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_hgehw")
+"texture": ExtResource("3_arjpg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_f6ico")
+"texture": ExtResource("4_ru4gl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_arg65")
+"texture": ExtResource("4_ru4gl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_k81vg")
+"texture": ExtResource("4_ru4gl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_131va")
+"texture": ExtResource("4_ru4gl")
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_q4x8k")
@@ -165,11 +163,89 @@ _data = {
 &"fade_out": SubResource("Animation_arjpg")
 }
 
+[sub_resource type="Shader" id="Shader_n14g3"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+uniform float grayscale_strength : hint_range(0.0, 1.0) = 1.0;
+uniform float light_preserve_strength : hint_range(0.0, 1.0) = 0.3;
+uniform float vignette_strength : hint_range(0.0, 1.5) = 1.0;
+uniform float blur_intensity : hint_range(0.0, 1.0) = 0.15;
+uniform float blue_fade : hint_range(0.0, 1.0) = 0.7;
+uniform float noise_strength : hint_range(0.0, 0.5) = 0.1;
+uniform float distortion_strength : hint_range(0.0, 0.2) = 0.05;
+
+float rand(vec2 co) {
+    return fract(sin(dot(co.xy, vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = SCREEN_UV;
+
+    // Slight screen distortion
+    vec2 distortion = uv + (vec2(rand(uv), rand(uv.yx)) - 0.5) * distortion_strength;
+
+    // Sample screen texture
+    vec3 color = texture(SCREEN_TEXTURE, distortion).rgb;
+
+    // Convert to grayscale
+    float gray = dot(color, vec3(0.299, 0.587, 0.114));
+    vec3 grayscale = vec3(gray);
+
+    // Preserve bright regions
+    float brightness = dot(color, vec3(0.2126, 0.7152, 0.0722));
+    float glow = smoothstep(0.6, 1.0, brightness);
+    vec3 preserved = mix(grayscale, color, glow * light_preserve_strength);
+
+    // Fade out blue channel
+    preserved.b *= blue_fade;
+
+    // Mix grayscale and original
+    vec3 final_color = mix(color, preserved, grayscale_strength);
+
+    // Blur sampling
+    float bs = 0.002 * blur_intensity;
+    vec3 blur = vec3(0.0);
+    blur += texture(SCREEN_TEXTURE, uv + vec2( bs,  bs)).rgb;
+    blur += texture(SCREEN_TEXTURE, uv + vec2(-bs,  bs)).rgb;
+    blur += texture(SCREEN_TEXTURE, uv + vec2( bs, -bs)).rgb;
+    blur += texture(SCREEN_TEXTURE, uv + vec2(-bs, -bs)).rgb;
+    blur /= 4.0;
+
+    final_color = mix(final_color, blur, blur_intensity);
+
+    // Vignette
+    vec2 centered = uv * 2.0 - 1.0;
+    float dist = length(centered);
+    float vignette = smoothstep(0.5, 1.0, dist);
+    final_color *= mix(1.0, 1.0 - vignette, vignette_strength);
+
+    // Noise
+    float noise = rand(uv * TIME) * 2.0 - 1.0;
+    final_color += noise * noise_strength;
+
+    COLOR = vec4(final_color, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jo8sd"]
+shader = SubResource("Shader_n14g3")
+shader_parameter/grayscale_strength = 0.0400000019
+shader_parameter/light_preserve_strength = 0.0
+shader_parameter/vignette_strength = 0.7210000342475
+shader_parameter/blur_intensity = 0.01200000057
+shader_parameter/blue_fade = 0.0
+shader_parameter/noise_strength = 0.06000000285
+shader_parameter/distortion_strength = 0.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4c2k"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k81vg"]
-transparency = 1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("7_f6ico")
 albedo_texture_force_srgb = true
 metallic_specular = 0.0
@@ -183,6 +259,21 @@ albedo_texture = ExtResource("8_arg65")
 albedo_texture_force_srgb = true
 metallic_specular = 0.0
 proximity_fade_distance = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rngbm"]
+render_priority = 0
+shader = ExtResource("17_jo8sd")
+shader_parameter/grayscale_strength = 0.10000000475
+shader_parameter/light_preserve_strength = 0.0
+shader_parameter/vignette_strength = 0.710000033725
+shader_parameter/blur_intensity = 0.1170000055575
+shader_parameter/blue_fade = 0.0
+shader_parameter/noise_strength = 0.1410000066975
+shader_parameter/distortion_strength = 0.0010000000475
+
+[sub_resource type="QuadMesh" id="QuadMesh_stf7k"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [node name="first_cutscene" type="Node3D"]
 script = ExtResource("1_kubor")
@@ -259,7 +350,6 @@ rotation = 3.1415927
 scale = Vector2(0.46607694, -0.46607688)
 sprite_frames = SubResource("SpriteFrames_v6vur")
 animation = &"cut"
-frame = 4
 script = ExtResource("9_ru4gl")
 
 [node name="RightArm" type="AnimatedSprite2D" parent="CanvasLayer/arm_base"]
@@ -376,6 +466,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_v6vur")
 }
 autoplay = "blinking"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 655
+material = SubResource("ShaderMaterial_jo8sd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 material_override = SubResource("StandardMaterial3D_m4c2k")
@@ -785,6 +885,7 @@ skeleton = NodePath("../..")
 [node name="Eye" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5086809, -0.8609552, 0, 0.8609552, 0.5086809, -1.471, 75.94292, -38.103966)
 pixel_size = 0.1
+alpha_cut = 1
 texture = ExtResource("9_arg65")
 script = ExtResource("12_v6vur")
 
@@ -794,6 +895,11 @@ transform = Transform3D(1, 0, 0, 0, 0.5920132, -0.8059283, 0, 0.8059283, 0.59201
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04893242, 0)
 script = ExtResource("12_q4x8k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Camera3D"]
+material_override = SubResource("ShaderMaterial_rngbm")
+extra_cull_margin = 10.0
+mesh = SubResource("QuadMesh_stf7k")
 
 [node name="IntroMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_n14g3")
