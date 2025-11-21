@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://dmwwst3hdut4y"]
+[gd_scene load_steps=48 format=3 uid="uid://dmwwst3hdut4y"]
 
 [ext_resource type="Texture2D" uid="uid://cywxycueh0kl5" path="res://assets/sprites/arm_test3.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://d4mvcidbtb15w" path="res://scripts/main/player/player.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://buclmdx7yb84s" path="res://scripts/main/player/camera_3d.gd" id="2_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://duk00ovikfhfl" path="res://assets/sprites/arm_tatoo_pose.png" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://b3xs2qhsobcsu" path="res://assets/sprites/arm_test4.png" id="3_kvlxm"]
+[ext_resource type="Shader" uid="uid://b53hb4df7mt08" path="res://scripts/shaders/post_process.gdshader" id="3_tffgl"]
 [ext_resource type="Script" uid="uid://uqtwgenmhvml" path="res://scripts/main/grid/grid.gd" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://desgj0xtmp0fo" path="res://assets/sprites/punches/punch_1.png" id="4_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://0koxmjyxn077" path="res://assets/sprites/tattoo_frame.png" id="4_lvxji"]
@@ -30,8 +31,24 @@
 [ext_resource type="Script" uid="uid://bpljig4f1askf" path="res://scripts/main/cards/card_info_ui.gd" id="28_iqsei"]
 [ext_resource type="Texture2D" uid="uid://c7dcifn0waxd6" path="res://assets/sprites/ui/card_back.png" id="28_uniwh"]
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="29_iqsei"]
+[ext_resource type="Shader" uid="uid://kotvc8m4ao22" path="res://scripts/shaders/canvas_post.gdshader" id="32_pk8ii"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pk8ii"]
+render_priority = 0
+shader = ExtResource("3_tffgl")
+shader_parameter/grayscale_strength = 0.10000000475
+shader_parameter/light_preserve_strength = 0.0
+shader_parameter/vignette_strength = 0.710000033725
+shader_parameter/blur_intensity = 0.1170000055575
+shader_parameter/blue_fade = 0.0
+shader_parameter/noise_strength = 0.1410000066975
+shader_parameter/distortion_strength = 0.0010000000475
+
+[sub_resource type="QuadMesh" id="QuadMesh_5mf0n"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dovo2"]
 animations = [{
@@ -185,6 +202,16 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mf0n"]
+shader = ExtResource("32_pk8ii")
+shader_parameter/grayscale_strength = 0.0170000008075
+shader_parameter/light_preserve_strength = 0.0
+shader_parameter/vignette_strength = 0.50000002375
+shader_parameter/blur_intensity = 0.01200000057
+shader_parameter/blue_fade = 0.0
+shader_parameter/noise_strength = 0.06000000285
+shader_parameter/distortion_strength = 0.0010000000475
+
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_dovo2")
 hp = 20
@@ -197,6 +224,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6710013, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 script = ExtResource("2_gx1jg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="head/Camera3D"]
+material_override = SubResource("ShaderMaterial_pk8ii")
+extra_cull_margin = 10.0
+mesh = SubResource("QuadMesh_5mf0n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -597,6 +629,16 @@ animation = &"take_damage"
 frame = 7
 frame_progress = 1.0
 speed_scale = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 655
+material = SubResource("ShaderMaterial_5mf0n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7498689, 0)

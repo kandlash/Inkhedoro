@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bjsagyyf22p2k"]
+[gd_scene load_steps=34 format=3 uid="uid://bjsagyyf22p2k"]
 
 [ext_resource type="Script" uid="uid://b6xklnx53h16m" path="res://scripts/main/cutscenes/first_cutscene.gd" id="1_kubor"]
 [ext_resource type="Script" uid="uid://bj17qco450ud3" path="res://scripts/main/cutscenes/dialogue_fcs.gd" id="2_arjpg"]
@@ -36,6 +36,9 @@ fog_density = 0.0698
 fog_height = 3.0
 fog_height_density = 1.0323
 adjustment_enabled = true
+
+[sub_resource type="Compositor" id="Compositor_n14g3"]
+compositor_effects = Array[CompositorEffect]([null])
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v6vur"]
 animations = [{
@@ -193,6 +196,7 @@ sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n14g3")
+compositor = SubResource("Compositor_n14g3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
