@@ -113,7 +113,7 @@ ExtResource("2_dga24"): 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 29.252443)
 
 [node name="Choice_Reward" parent="." instance=ExtResource("20_gmpev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 24.867197)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 25.36597)
 new_cards = Dictionary[PackedScene, int]({
 ExtResource("7_dnkej"): 7,
 ExtResource("6_dnkej"): 2,
@@ -121,7 +121,7 @@ ExtResource("7_iwr0g"): 1
 })
 
 [node name="Choice_Reward2" parent="." instance=ExtResource("20_gmpev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0074824095, 0.60530853, 10.870531)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0074824095, 0.60530853, 10.465985)
 new_cards = Dictionary[PackedScene, int]({
 ExtResource("8_v6ha0"): 2,
 ExtResource("9_gmpev"): 2,
@@ -623,12 +623,6 @@ light_energy = 11.722
 shadow_enabled = true
 omni_range = 19.248947
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0814404, 4.294791, 11.979278)
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7747602, 4.294791, 10.833363)
-
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8533845, 12.453573, -45.651344)
 pixel_size = 0.1
@@ -637,7 +631,7 @@ alpha_cut = 1
 texture = ExtResource("4_x42e6")
 
 [node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.3441875, 1.5386214, 14.25465)
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.3441875, 1.4893093, 16.52428)
 enemy_name = "Dummy"
 hp = 18
 base_heal = 2

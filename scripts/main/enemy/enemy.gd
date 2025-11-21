@@ -174,3 +174,8 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		G.current_enemy = self
 		visible = true
 		G.emit_signal("battle_started")
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		queue_free()

@@ -30,6 +30,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	canvas_layer.visible = true
 	G.player.arm_base.visible = false
 	G.player.set_physics_process(false)
+	G.player.velocity = Vector3.ZERO
 	_spawn_cards()
 	_setup_selection_logic()
 

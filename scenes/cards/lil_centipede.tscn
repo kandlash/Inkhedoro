@@ -12,7 +12,7 @@ size = Vector2(181.16125, 181.16162)
 script = ExtResource("3_miw7w")
 vulnarable_turns = 2
 card_name = "Lil Centipede"
-description = "Deals {basic_damage} damage and gets to enemy ear making him Vulnarable for {vulnarable_turns} turns"
+description = "Deals {basic_damage} damage and make enemy  Vulnarable for {vulnarable_turns} attacks."
 cells_to_feel = 2
 basic_damage = 1
 

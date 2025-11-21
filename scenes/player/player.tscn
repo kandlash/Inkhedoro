@@ -38,12 +38,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pk8ii"]
 render_priority = 0
 shader = ExtResource("3_tffgl")
-shader_parameter/grayscale_strength = 0.10000000475
+shader_parameter/grayscale_strength = 0.0
 shader_parameter/light_preserve_strength = 0.0
 shader_parameter/vignette_strength = 0.710000033725
 shader_parameter/blur_intensity = 0.1170000055575
 shader_parameter/blue_fade = 0.0
-shader_parameter/noise_strength = 0.1410000066975
+shader_parameter/noise_strength = 0.038000001805
 shader_parameter/distortion_strength = 0.0010000000475
 
 [sub_resource type="QuadMesh" id="QuadMesh_5mf0n"]
@@ -204,12 +204,12 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5mf0n"]
 shader = ExtResource("32_pk8ii")
-shader_parameter/grayscale_strength = 0.01200000057
+shader_parameter/grayscale_strength = 0.0290000013775
 shader_parameter/light_preserve_strength = 0.0
 shader_parameter/vignette_strength = 0.50000002375
 shader_parameter/blur_intensity = 0.01200000057
 shader_parameter/blue_fade = 0.0
-shader_parameter/noise_strength = 0.030000001425
+shader_parameter/noise_strength = 0.0170000008075
 shader_parameter/distortion_strength = 0.0010000000475
 
 [node name="player" type="CharacterBody3D"]

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://btdagu8barh5a" path="res://scripts/main/chill_area.gd" id="1_b004p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3vygg"]
-size = Vector3(3.6074219, 3.6396484, 5.394287)
+size = Vector3(2.6982422, 3.6396484, 3.564209)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dyixl"]
 bg_color = Color(0, 0, 0, 1)

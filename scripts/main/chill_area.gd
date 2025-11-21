@@ -25,6 +25,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		canvas_layer.visible = true
 		flicker_timer.start()
 		G.player.set_physics_process(false)
+		G.player.velocity = Vector3.ZERO
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):

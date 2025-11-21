@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d03q04s1vvp51"]
+[gd_scene load_steps=8 format=3 uid="uid://d03q04s1vvp51"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_dr1r7"]
 [ext_resource type="Texture2D" uid="uid://legavx02brc4" path="res://assets/sprites/cards/hammer.png" id="2_c0nm0"]
 [ext_resource type="Script" uid="uid://b583op5jyqlf0" path="res://scripts/main/cards/hummer.gd" id="2_ee2xw"]
 [ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="4_a8ufc"]
+[ext_resource type="Texture2D" uid="uid://5q5rhl7mlq6d" path="res://assets/sprites/ui/synergy.png" id="5_a8ufc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
 size = Vector2(181.16125, 181.16162)
@@ -22,14 +23,17 @@ cells_to_feel = 2
 basic_damage = 2
 
 [node name="Texture" parent="." index="0"]
+position = Vector2(-22.64516, 27.174194)
+rotation = 0.19943748
+scale = Vector2(1.4695299, 1.4695299)
 texture = ExtResource("2_c0nm0")
 
 [node name="Image" parent="Card_UI" index="1"]
-offset_left = -49.81929
-offset_top = -543.48395
-offset_right = 366.85168
-offset_bottom = 66.68384
-rotation = 0.41734543
+offset_left = -105.5213
+offset_top = -389.4968
+offset_right = 168.88306
+offset_bottom = 12.337494
+rotation = 0.13502324
 scale = Vector2(1.0183636, 1.0183636)
 texture = ExtResource("2_c0nm0")
 
@@ -75,3 +79,9 @@ monitorable = false
 scale = Vector2(1, 0.9999999)
 shape = SubResource("RectangleShape2D_sf5il")
 debug_color = Color(2.9359758e-06, 0.64650387, 0.2428731, 0.41960785)
+
+[node name="SynergyMark" type="Sprite2D" parent="NeighborFinder/Area2D2" index="1"]
+z_index = 999
+rotation = -0.19602053
+scale = Vector2(0.22204745, 0.22204743)
+texture = ExtResource("5_a8ufc")

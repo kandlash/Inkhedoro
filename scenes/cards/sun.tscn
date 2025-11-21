@@ -8,7 +8,7 @@
 script = ExtResource("2_2ir4q")
 heal_value = 1
 card_name = "Sun"
-description = "Heals {heal_value}"
+description = "Heal {heal_value} hp."
 
 [node name="Texture" parent="." index="0"]
 position = Vector2(0, -36.232258)
