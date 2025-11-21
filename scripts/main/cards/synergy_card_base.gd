@@ -6,6 +6,7 @@ class_name SynergyCardBase
 
 var synergy_active := false
 var active_synergy_cards: Array[CardBase] = []
+var prev_synergy_cards: Array[CardBase] = []
 
 var zone_state := {}  # { Area2D : bool }
 
@@ -88,6 +89,7 @@ func update_synergy():
 
 	var had_synergy = synergy_active
 	synergy_active = new_active.size() > 0
+	prev_synergy_cards = active_synergy_cards.duplicate()
 	active_synergy_cards = new_active
 
 	if synergy_active and !had_synergy:
