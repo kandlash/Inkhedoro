@@ -1,6 +1,8 @@
 extends Panel
 class_name Hand
 
+
+@export var main_hand: bool = false
 @export var card_spacing := 120
 @export var max_card_angle := 0
 @export var base_y_offset := 150
@@ -8,16 +10,21 @@ class_name Hand
 @export var tween_time := 0.25
 
 func _ready() -> void:
-	G.hand = self
-	add_cards(G.deck.generate_hand(3))
+	if main_hand:
+		G.hand = self
+	else:
+		G.reward_hand = self
 
 func _process(_delta: float) -> void:
+	if !main_hand:
+		return
 	if Input.is_action_just_pressed("ui_up"):
 		add_cards(G.deck.generate_hand(3))
 	if Input.is_action_just_pressed("ui_down"):
 		drop_cards()
 
 func add_card(card):
+
 	card.visible = true
 	if card.get_parent() == self:
 		_update_card_layout()
@@ -30,10 +37,13 @@ func _on_card_dropped(_card):
 	_update_card_layout()
 
 func add_cards(cards):
+
 	for card in cards:
 		add_card(card)
 
 func drop_cards():
+	if !main_hand:
+		return
 	G.selected_card = null
 	G.used_grids.clear()
 	var cards = get_children()
@@ -47,6 +57,7 @@ func drop_cards():
 		remove_child(card)
 
 func _update_card_layout() -> void:
+
 	var cards_to_update: Array[CardBase]
 	for card in get_children():
 		if card.on_arm:

@@ -57,6 +57,10 @@ var card_ui_get_back_position: Vector2
 
 var extra_replacements := {}
 
+var is_reward: = false
+var reward_index: int
+signal card_click
+
 var _regex := RegEx.new()
 
 func _ready():
@@ -162,7 +166,6 @@ func on_synergy_ui_update(synergy: bool, value):
 	texture.texture = synergy_texture if synergy else standart_texture
 
 	synergy_popup(synergy)
-	print('new synergy value!', value)
 	if synergy:
 		var c = "+" if value > 0 else "-"
 		var t = "[color=red]" + c + str(abs(value)) + "[/color]"
@@ -212,36 +215,52 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		if check_rect.get_rect().has_point(to_local(event.position)) \
 			and !selected and G.selected_card == null:
-			
-			G.selected_card = self
-			emit_signal("card_selected", self)
-			selected = true
-			if self is SynergyCardBase and in_grid_area:
-				neighbor_finder.visible = true
-			start_z = z_index
-			z_index = 100
-			scale = start_scale * 1.1
-			
-			if !in_grid_area:
-				position.y -= 80
+			if !is_reward:
+				G.selected_card = self
+				emit_signal("card_selected", self)
+				selected = true
+				if self is SynergyCardBase and in_grid_area:
+					neighbor_finder.visible = true
+				start_z = z_index
+				z_index = 100
+				scale = start_scale * 1.1
+				
+				if !in_grid_area:
+					position.y -= 80
+				else:
+					G.card_info_ui.show_data(card_name, get_final_description(), standart_texture)
 			else:
-				G.card_info_ui.show_data(card_name, get_final_description(), standart_texture)
+				G.selected_card = self
+				selected = true
+				start_z = z_index
+				z_index = 100
+				scale = start_scale * 1.1
+				
 		elif !check_rect.get_rect().has_point(to_local(event.position)) \
 			and selected and G.selected_card == self:
-	
-			G.selected_card = null
-			emit_signal("card_deselected", self)
-			selected = false
-			neighbor_finder.visible = false
-			z_index = start_z
-			scale = start_scale
-			if !in_grid_area:
-				position.y += 80
+			if !is_reward:
+				G.selected_card = null
+				emit_signal("card_deselected", self)
+				selected = false
+				neighbor_finder.visible = false
+				z_index = start_z
+				scale = start_scale
+				if !in_grid_area:
+					position.y += 80
+				else:
+					G.card_info_ui.hide_data()
 			else:
-				G.card_info_ui.hide_data()
+				G.selected_card = null
+				selected = false
+				z_index = start_z
+				scale = start_scale
+				
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
+			if is_reward and event.pressed:
+				emit_signal('card_click')
+				return
 			if event.pressed:
 				if check_rect.get_rect().has_point(to_local(event.position)) and G.selected_card == self:
 					global_position = event.global_position

@@ -5,19 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://ba7bhpvw034ce" path="res://assets/textures/garbade_texture.png" id="2_6iamk"]
 [ext_resource type="PackedScene" uid="uid://v3oiujvowil2" path="res://scenes/cards/eye.tscn" id="2_dga24"]
 [ext_resource type="Texture2D" uid="uid://b6k2hktp0uedu" path="res://assets/textures/panel_texture.png" id="3_nsrm0"]
-[ext_resource type="PackedScene" uid="uid://bkjxu46hk1w8s" path="res://scenes/cards/sickle.tscn" id="3_qxy0u"]
-[ext_resource type="PackedScene" uid="uid://ceokwkhruu0yj" path="res://scenes/cards/lil_centipede.tscn" id="4_excbq"]
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="4_x42e6"]
-[ext_resource type="PackedScene" uid="uid://5w7jkc8q8wbh" path="res://scenes/cards/maw.tscn" id="5_excbq"]
 [ext_resource type="PackedScene" uid="uid://d03q04s1vvp51" path="res://scenes/cards/hummer.tscn" id="6_dnkej"]
 [ext_resource type="Script" uid="uid://cv68aydhw6075" path="res://scripts/globals/turn_base_manager.gd" id="6_iav0o"]
 [ext_resource type="PackedScene" uid="uid://bxehxgmgjdf0c" path="res://scenes/cards/nail.tscn" id="7_dnkej"]
-[ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="8_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://byt6cnyrj65rc" path="res://scenes/cards/sacrifice_mark.tscn" id="9_wtwp4"]
 [ext_resource type="Texture2D" uid="uid://c6jvilvojjdyg" path="res://assets/textures/rock(41).png" id="12_np2pn"]
+[ext_resource type="Texture2D" uid="uid://clu1lfc4ejfon" path="res://assets/textures/sculls_texture.png" id="12_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://p6koixqyjp7e" path="res://scenes/enemies/one_leg_bahomet.tscn" id="16_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://cffvsu8jf7y05" path="res://scenes/chill_area.tscn" id="17_bahl2"]
+[ext_resource type="PackedScene" uid="uid://cwg2moulwlxo5" path="res://scenes/choice_reward.tscn" id="20_gmpev"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -43,6 +41,18 @@ compositor_effects = Array[CompositorEffect]([null])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmpev"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("12_v6ha0")
+albedo_texture_force_srgb = true
+metallic_specular = 0.0
+texture_filter = 0
+proximity_fade_distance = 0.01
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mkypq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsrm0"]
 transparency = 2
@@ -93,18 +103,20 @@ compositor = SubResource("Compositor_wtwp4")
 [node name="Deck" type="Node" parent="."]
 script = ExtResource("1_sk5k4")
 deck = Dictionary[PackedScene, int]({
-ExtResource("2_dga24"): 0,
-ExtResource("3_qxy0u"): 0,
-ExtResource("4_excbq"): 0,
-ExtResource("5_excbq"): 1,
-ExtResource("6_dnkej"): 3,
-ExtResource("7_dnkej"): 7,
-ExtResource("8_mm8aj"): 1,
-ExtResource("9_wtwp4"): 0
+ExtResource("2_dga24"): 2
 })
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 29.252443)
+
+[node name="Choice_Reward" parent="." instance=ExtResource("20_gmpev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 24.867197)
+new_cards = Dictionary[PackedScene, int]({
+ExtResource("7_dnkej"): 7,
+ExtResource("6_dnkej"): 2,
+ExtResource("9_wtwp4"): 3
+})
+select_one = true
 
 [node name="TurnBaseManager" type="Node" parent="."]
 script = ExtResource("6_iav0o")
@@ -115,6 +127,51 @@ material_override = SubResource("StandardMaterial3D_x42e6")
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26.014984)
 size = Vector3(107.306885, 0.19702148, 290.4082)
+
+[node name="MeshInstance3D68" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -1.3027312, 0.6751212, 15.869192)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D75" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70149827, 0.6674558, -2.1673902e-08, -1.5578981e-15, -4.3711385e-08, -0.74288225, -0.62877786, 0.7446494, -2.4180565e-08, -1.3027312, 0.6751212, 25.596365)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D76" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7197582, -0.64517754, 2.0950475e-08, 6.7596956e-16, -4.371139e-08, -0.74288225, 0.6077907, 0.7640326, -2.4809982e-08, 1.0499983, 0.6751212, 27.260494)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D71" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -1.0539192, 0.6751212, 12.489148)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D72" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -0.80424154, 0.6751212, 11.79761)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D73" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.905974, -0.2740935, 8.900476e-09, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.25821027, 0.961703, -3.122882e-08, 1.5754045, 0.6751212, 11.79761)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D74" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.905974, -0.2740935, 8.900476e-09, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.25821027, 0.961703, -3.122882e-08, 1.5754045, 0.39933825, 12.151951)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D69" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.72672194, -0.6363206, 2.0662867e-08, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.5994469, 0.7714247, -2.5050024e-08, 1.304607, 0.33359802, 15.869192)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+
+[node name="MeshInstance3D70" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.68262666, -0.6891518, 2.2378424e-08, -4.9313894e-15, -4.3711392e-08, -0.7428823, 0.64921653, 0.724617, -2.353007e-08, 1.8869121, 0.6803621, 16.165874)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
 
 [node name="Env" type="Node3D" parent="."]
 
@@ -132,6 +189,42 @@ skeleton = NodePath("../..")
 
 [node name="MeshInstance3D14" type="MeshInstance3D" parent="Env"]
 transform = Transform3D(3.0211256, 1.1988939, -2.1143245e-08, 0, -1.4207578e-07, -1.3113595, -1.1988939, 3.0211256, -5.327945e-08, -3.0069275, 0.51619005, 8.432848)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D68" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(3.0211256, 1.1988939, -2.1143245e-08, 0, -1.4207578e-07, -1.3113595, -1.1988939, 3.0211256, -5.327945e-08, -3.0069275, 0.51619005, 18.504017)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D69" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(1.8347446, 1.0120633, -1.4401737e-08, 0, -1.1993528e-07, -0.89323354, -0.7280943, 2.550326, -3.629134e-08, -3.0069275, 0.51619005, 19.856348)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D70" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(1.8876607, -0.80230093, 1.1416804e-08, -3.259161e-15, -1.1993528e-07, -0.89323354, 0.5771878, 2.6238804, -3.7338026e-08, 2.1600258, 0.51619005, 19.856348)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D71" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(1.3560873, -0.8713837, 6.578416e-09, -2.3413674e-15, -1.302624e-07, -0.51468533, 0.41464922, 2.8498118, -2.1514346e-08, 2.1600258, 0.14160681, 17.558266)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D72" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(1.3560873, -0.8713837, 6.578416e-09, -2.3413674e-15, -1.302624e-07, -0.51468533, 0.41464922, 2.8498118, -2.1514346e-08, 2.1600258, 0.14160681, 18.193306)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D73" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(1.3112923, -1.1344571, 8.56446e-09, -2.072685e-15, -1.3026239e-07, -0.51468533, 0.53983307, 2.7556748, -2.0803668e-08, 2.1600258, 0.14160681, 18.691097)
 material_override = SubResource("StandardMaterial3D_nsrm0")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
@@ -536,7 +629,7 @@ texture = ExtResource("4_x42e6")
 [node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
 transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.3441875, 1.5386214, 14.25465)
 enemy_name = "Dummy"
-hp = 18
+hp = 3
 base_heal = 2
 random_damage_max = 2
 attack_chance = 1.0

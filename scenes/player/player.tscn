@@ -593,6 +593,7 @@ offset_right = -11.0
 offset_bottom = 89.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8ydkj")
 script = ExtResource("5_p47bc")
+main_hand = true
 base_y_offset = 100
 smooth_appearance = false
 tween_time = 0.15

@@ -6,13 +6,17 @@ extends Node3D
 var base_energy := 1.0
 var base_range := 2.524
 
+var healed = false
+
 func _ready() -> void:
 	omni_light_3d.visible = false
 	flicker_timer.wait_time = 0.08
 	flicker_timer.one_shot = false
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and !healed:
+		healed = true
+		G.player.heal(round(G.player.max_hp*0.5))
 		omni_light_3d.visible = true
 		flicker_timer.start()
 

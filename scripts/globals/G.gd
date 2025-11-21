@@ -8,6 +8,7 @@ var card_info_ui: CardInfo
 var selected_card: CardBase
 var deck: Deck
 var hand: Hand
+var reward_hand: Hand
 var camera: Camera
 var grid: Grid
 var right_attack: RightAttack
