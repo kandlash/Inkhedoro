@@ -12,7 +12,7 @@ description = "Heals {heal_value}"
 
 [node name="Texture" parent="." index="0"]
 position = Vector2(0, -36.232258)
-scale = Vector2(0.34387097, 0.34387094)
+scale = Vector2(0.8832127, 0.88321257)
 texture = ExtResource("3_2ir4q")
 
 [node name="Image" parent="Card_UI" index="1"]
@@ -23,5 +23,5 @@ offset_bottom = 126.03873
 texture = ExtResource("3_2ir4q")
 
 [node name="Desc" parent="Card_UI" index="3"]
-anchor_top = -4.708388
-anchor_bottom = 0.7346786
+anchor_top = -3.802581
+anchor_bottom = 1.6404861
