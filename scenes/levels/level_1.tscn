@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=30 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
@@ -15,7 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="8_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://byt6cnyrj65rc" path="res://scenes/cards/sacrifice_mark.tscn" id="9_wtwp4"]
+[ext_resource type="Texture2D" uid="uid://c6jvilvojjdyg" path="res://assets/textures/rock(41).png" id="12_np2pn"]
 [ext_resource type="PackedScene" uid="uid://p6koixqyjp7e" path="res://scenes/enemies/one_leg_bahomet.tscn" id="16_iwr0g"]
+[ext_resource type="PackedScene" uid="uid://cffvsu8jf7y05" path="res://scenes/chill_area.tscn" id="17_bahl2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -60,6 +62,21 @@ albedo_texture_force_srgb = true
 metallic_specular = 0.0
 proximity_fade_distance = 0.01
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6ha0"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("12_np2pn")
+albedo_texture_force_srgb = true
+metallic_specular = 0.0
+texture_filter = 0
+proximity_fade_distance = 0.01
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gmpev"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_np2pn"]
+flip_faces = true
+
 [node name="level_1" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -76,18 +93,18 @@ compositor = SubResource("Compositor_wtwp4")
 [node name="Deck" type="Node" parent="."]
 script = ExtResource("1_sk5k4")
 deck = Dictionary[PackedScene, int]({
-ExtResource("2_dga24"): 3,
-ExtResource("3_qxy0u"): 2,
-ExtResource("4_excbq"): 2,
-ExtResource("5_excbq"): 2,
+ExtResource("2_dga24"): 0,
+ExtResource("3_qxy0u"): 0,
+ExtResource("4_excbq"): 0,
+ExtResource("5_excbq"): 1,
 ExtResource("6_dnkej"): 3,
-ExtResource("7_dnkej"): 6,
-ExtResource("8_mm8aj"): 2,
-ExtResource("9_wtwp4"): 1
+ExtResource("7_dnkej"): 7,
+ExtResource("8_mm8aj"): 1,
+ExtResource("9_wtwp4"): 0
 })
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 19.710766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 29.252443)
 
 [node name="TurnBaseManager" type="Node" parent="."]
 script = ExtResource("6_iav0o")
@@ -517,9 +534,547 @@ alpha_cut = 1
 texture = ExtResource("4_x42e6")
 
 [node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 7.709243)
-attack_chance = 0.7
-heal_chance = 0.3
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.3441875, 1.5386214, 14.25465)
+enemy_name = "Dummy"
+hp = 18
+base_heal = 2
+random_damage_max = 2
+attack_chance = 1.0
+heal_chance = 0.0
 
 [node name="one_leg_bahomet" parent="." instance=ExtResource("16_iwr0g")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.14356256, 1.8832752, 14.8616085)
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.14356256, 1.8832752, -0.50595284)
+
+[node name="chill_area" parent="." instance=ExtResource("17_bahl2")]
+transform = Transform3D(0.7022173, 0, 0.43210155, 0, 0.7786624, 0, -0.33646113, 0, 0.9018251, -1.092377, 0.8466898, 5.011178)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.95933366, 0, 0.28227448, 0, 1, 0, -0.28227448, 0, 0.95933366, -7.208843, 0, 1.3764054)
+
+[node name="Rock" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.5638375, 0.7881465, 25.263933)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.6368966, 1.9159002, 25.091616)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock3" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.136693, 2.9571986, 24.745152)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock4" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.0905104, 4.0845265, 24.127338)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock5" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.622288, 4.2412643, 25.126215)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock6" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 5.1743336, 3.0631368, 25.269108)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock7" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 5.6738825, 2.1563954, 25.57207)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock8" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 5.9065704, 0.79604506, 25.888506)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock57" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.1786442, 0.78814644, 26.17245)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock58" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.2517033, 1.9159002, 26.000132)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock59" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.7514997, 2.9571986, 25.653667)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock60" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 1.7053171, 4.0845265, 25.035854)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock61" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.237095, 4.2412643, 26.03473)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock62" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.78914, 3.0631368, 26.177624)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock63" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 5.288689, 2.1563954, 26.480585)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock64" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 5.521377, 0.796045, 26.797022)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock65" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.890843, 0.78814644, 26.851257)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock66" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.963902, 1.9159002, 26.67894)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock67" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.4636984, 2.9571986, 26.332476)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock68" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 1.4175158, 4.0845265, 25.714663)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock69" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.9492936, 4.2412643, 26.71354)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock70" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.501339, 3.0631368, 26.856432)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock71" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 5.000888, 2.1563954, 27.159393)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock72" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 5.233576, 0.796045, 27.47583)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock73" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.4971633, 0.7881464, 27.779789)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock74" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.5702224, 1.9159002, 27.607471)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock75" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.0700188, 2.9571986, 27.261007)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock76" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 1.0238361, 4.0845265, 26.643194)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock77" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.555614, 4.2412643, 27.64207)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock78" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.1076593, 3.0631368, 27.784964)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock79" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.6072083, 2.1563954, 28.087925)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock80" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.839896, 0.79604495, 28.404362)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock81" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.1575294, 0.7881463, 28.580849)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock82" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 2.2305884, 1.9159002, 28.408531)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock83" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 1.7303847, 2.9571986, 28.062067)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock84" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 0.6842021, 4.0845265, 27.444254)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock85" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.21598, 4.2412643, 28.44313)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock86" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 3.7680254, 3.0631368, 28.586023)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock87" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.2675743, 2.1563954, 28.888985)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock88" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.087603, -0.8851031, 0, -3.8689087e-08, -9.125203e-08, -0.9148312, 0.8851031, 2.087603, -3.9988542e-08, 4.5002623, 0.7960449, 29.205421)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_gmpev")
+skeleton = NodePath("../..")
+
+[node name="Rock9" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -4.2628536, 0.7881466, 22.424885)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock10" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -4.1897945, 1.9159002, 22.252567)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock11" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -4.689999, 2.9571989, 21.906105)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock12" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.7361813, 4.0845265, 21.288292)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock13" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.204403, 4.2412643, 22.287167)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock17" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -0.9944638, 4.6586914, 23.013163)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock20" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.050286, 0.87427014, 0.16804032, -0.45140502, 1.0430813e-07, 0.8965198, 0.85677046, -2.0921636, 0.07022047, 0.56728566, 4.833362, 23.277597)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock18" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.092152, 0.8742701, -0.0027254256, 0.007321244, 9.126961e-08, 0.91482645, 0.87426543, -2.0921636, -0.0011388566, -0.37753892, 3.4014976, 22.712597)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock19" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-1.62221, 0.8742701, 0.53304803, -1.4319215, 5.9604645e-08, -0.70933676, -0.67788655, -2.0921636, 0.22274926, -2.4204695, 3.851319, 22.148094)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock14" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -2.6523576, 3.063137, 22.430061)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock15" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -2.1528087, 2.1563957, 22.73302)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock16" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -1.9201208, 0.7960452, 23.049458)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock21" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -4.6633434, 0.78814656, 23.383274)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock22" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -4.5902843, 1.9159002, 23.210957)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock23" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.090489, 2.9571989, 22.864494)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock24" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -6.136671, 4.0845265, 22.246681)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock25" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.6048927, 4.2412643, 23.245556)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock26" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -1.3949537, 4.6586914, 23.971552)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock27" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.050286, 0.87427014, 0.16804032, -0.45140502, 1.0430813e-07, 0.8965198, 0.85677046, -2.0921636, 0.07022047, 0.16679564, 4.833362, 24.235987)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock28" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.092152, 0.8742701, -0.0027254256, 0.007321244, 9.126961e-08, 0.91482645, 0.87426543, -2.0921636, -0.0011388566, -0.7780289, 3.4014976, 23.670986)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock29" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-1.62221, 0.8742701, 0.53304803, -1.4319215, 5.9604645e-08, -0.70933676, -0.67788655, -2.0921636, 0.22274926, -2.8209596, 3.851319, 23.106483)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock30" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.0528474, 3.063137, 23.38845)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock31" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -2.5532985, 2.1563957, 23.69141)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock32" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -2.3206108, 0.7960451, 24.007847)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock33" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.178352, 0.7881465, 24.615711)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock34" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.105293, 1.9159002, 24.443394)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock35" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.6054974, 2.9571989, 24.096931)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock36" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -6.6516795, 4.0845265, 23.479118)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock37" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -4.119901, 4.2412643, 24.477993)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock38" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -1.9099624, 4.6586914, 25.203987)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock39" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.050286, 0.87427014, 0.16804032, -0.45140502, 1.0430813e-07, 0.8965198, 0.85677046, -2.0921636, 0.07022047, -0.34821305, 4.833362, 25.468424)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock40" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.092152, 0.8742701, -0.0027254256, 0.007321244, 9.126961e-08, 0.91482645, 0.87426543, -2.0921636, -0.0011388566, -1.2930375, 3.4014976, 24.903423)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock41" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-1.62221, 0.8742701, 0.53304803, -1.4319215, 5.9604645e-08, -0.70933676, -0.67788655, -2.0921636, 0.22274926, -3.3359683, 3.851319, 24.33892)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock42" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.567856, 3.063137, 24.620888)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock43" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.0683072, 2.1563957, 24.923847)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock44" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -2.8356194, 0.79604506, 25.240284)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock45" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.542206, 0.78814644, 25.486427)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock46" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.4691467, 1.9159002, 25.31411)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock47" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -5.9693513, 2.9571989, 24.967648)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock48" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -7.0155334, 4.0845265, 24.349834)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock49" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -4.483755, 4.2412643, 25.34871)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock50" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -2.2738163, 4.6586914, 26.074703)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock51" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.050286, 0.87427014, 0.16804032, -0.45140502, 1.0430813e-07, 0.8965198, 0.85677046, -2.0921636, 0.07022047, -0.712067, 4.833362, 26.339142)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock52" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(2.092152, 0.8742701, -0.0027254256, 0.007321244, 9.126961e-08, 0.91482645, 0.87426543, -2.0921636, -0.0011388566, -1.6568915, 3.4014976, 25.774141)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock53" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-1.62221, 0.8742701, 0.53304803, -1.4319215, 5.9604645e-08, -0.70933676, -0.67788655, -2.0921636, 0.22274926, -3.6998222, 3.851319, 25.209639)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock54" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.93171, 3.063137, 25.491604)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock55" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.432161, 2.1563957, 25.794563)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")
+
+[node name="Rock56" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9148312, -0.87427, -2.092163, -3.998854e-08, -3.1994734, 0.796045, 26.111)
+material_override = SubResource("StandardMaterial3D_v6ha0")
+mesh = SubResource("PlaneMesh_np2pn")
+skeleton = NodePath("../..")

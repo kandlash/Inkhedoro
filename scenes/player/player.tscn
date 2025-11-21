@@ -204,12 +204,12 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5mf0n"]
 shader = ExtResource("32_pk8ii")
-shader_parameter/grayscale_strength = 0.0170000008075
+shader_parameter/grayscale_strength = 0.01200000057
 shader_parameter/light_preserve_strength = 0.0
 shader_parameter/vignette_strength = 0.50000002375
 shader_parameter/blur_intensity = 0.01200000057
 shader_parameter/blue_fade = 0.0
-shader_parameter/noise_strength = 0.06000000285
+shader_parameter/noise_strength = 0.030000001425
 shader_parameter/distortion_strength = 0.0010000000475
 
 [node name="player" type="CharacterBody3D"]
@@ -231,6 +231,12 @@ extra_cull_margin = 10.0
 mesh = SubResource("QuadMesh_5mf0n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HP_UI" parent="CanvasLayer" instance=ExtResource("21_3j4b4")]
+offset_left = -254.0
+offset_top = -235.0
+offset_right = -254.0
+offset_bottom = -235.0
 
 [node name="Card_InfoUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -604,13 +610,6 @@ theme_override_font_sizes/font_size = 56
 theme_override_styles/normal = SubResource("StyleBoxFlat_3j4b4")
 text = "GET INK"
 script = ExtResource("21_yj68g")
-
-[node name="HP_UI" parent="CanvasLayer/TattooPose" instance=ExtResource("21_3j4b4")]
-layout_mode = 1
-offset_left = -254.0
-offset_top = -539.0
-offset_right = -254.0
-offset_bottom = -539.0
 
 [node name="DamageControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3

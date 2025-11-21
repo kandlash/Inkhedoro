@@ -13,8 +13,8 @@
 [ext_resource type="Script" uid="uid://c3sa2cy74lpnn" path="res://scripts/main/cutscenes/cut_self_cs.gd" id="9_ru4gl"]
 [ext_resource type="Script" uid="uid://xfns0khwv2vi" path="res://scripts/main/cutscenes/camera_3d.gd" id="12_q4x8k"]
 [ext_resource type="Script" uid="uid://cogysw30v3imk" path="res://scripts/main/cutscenes/eye_cs.gd" id="12_v6vur"]
+[ext_resource type="AudioStream" uid="uid://b46jxspqymins" path="res://assets/music/inkhedoro_intro_sound_designed.mp3" id="15_arjpg"]
 [ext_resource type="Shader" uid="uid://b53hb4df7mt08" path="res://scripts/shaders/post_process.gdshader" id="17_jo8sd"]
-[ext_resource type="AudioStream" uid="uid://dmx5punsnngu2" path="res://assets/music/inkhedoro_intro.mp3" id="17_n14g3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s3lum"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -49,6 +49,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_arjpg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ru4gl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ru4gl")
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_ru4gl")
@@ -311,7 +317,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_arjpg")
-dialogue = Array[String](["You: \"Huh… So… my life was so short.\"", "You: \"This Eye… this town…\"", "You: \"Is this really my fate?..\"", "Voice: \"Hmm. You’re still alive, stranger?\"", "Voice: \"…Oh. I see.\"", "Voice: \"Your arm... Fuck... there is so many eyes!\"", "Voice: \"Take this.\"", "*You feel something sharp being shoved into your hand*", "Voice: \"Cut this fucking mess from your skin!\"", "Voice: \"It’s gonna hurt like hell… \"", "Voice: \"But you don’t have another choice.\""])
+dialogue = Array[String](["You: \"Huh… So… my life was so short.\"", "You: \"This Eye… this town…\"", "You: \"Is this really my fate?..\"", "*Step sounds*", "Voice: \"Hmm. You’re still alive, stranger?\"", "Voice: \"Your arm... Fuck... there is so many eyes!\"", "*You feel something sharp being shoved into your hand*", "Voice: \"Cut this fucking mess from your skin!\"", "Voice: \"It’s gonna hurt like hell… \"", "Voice: \"But you don’t have another choice.\""])
 
 [node name="ContinueTip" type="Label" parent="CanvasLayer"]
 z_index = 625
@@ -902,7 +908,7 @@ extra_cull_margin = 10.0
 mesh = SubResource("QuadMesh_stf7k")
 
 [node name="IntroMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_n14g3")
+stream = ExtResource("15_arjpg")
 volume_db = -10.0
 autoplay = true
 

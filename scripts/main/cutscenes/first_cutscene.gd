@@ -7,7 +7,7 @@ extends Node3D
 @onready var continue_tip: Label = $CanvasLayer/ContinueTip
 @onready var animation_player: AnimationPlayer = $CanvasLayer/AnimationPlayer
 var cut_frame = 0
-@export var cut_frame_to_effect = 4
+@export var cut_frame_to_effect = 5
 @onready var intro_music: AudioStreamPlayer = $IntroMusic
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if cut_frame >= cut_frame_to_effect and cut_frame > 0:
 		cut_frame = -1
-		G.camera.shake(0.1, 0.4)
+		G.camera.shake(0.25, 0.4)
 
 func _on_dialogue_end():
 	continue_tip.visible = false
@@ -46,6 +46,7 @@ func _on_dialogue_end():
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "blinking":
+		await get_tree().create_timer(1.5).timeout
 		continue_tip.visible = true
 		dialogue.start_dialogue()
 	
