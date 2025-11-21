@@ -7,7 +7,6 @@ class_name SynergyCardBase
 var synergy_active := false
 var active_synergy_cards: Array[CardBase] = []
 
-# NEW: состояние по зонам
 var zone_state := {}  # { Area2D : bool }
 
 func use(speed):
@@ -16,8 +15,7 @@ func use(speed):
 
 func _ready() -> void:
 	super._ready()
-
-	# подключаем зоны и подготавливаем словарь состояний
+	
 	for zone: Area2D in neighbor_finder.get_children():
 		zone_state[zone] = false
 		zone.connect("area_entered", _on_zone_entered.bind(zone))
@@ -27,10 +25,6 @@ func _ready() -> void:
 func on_arm_effect():
 	update_synergy()
 
-
-# -----------------------------
-#   ЗОНЫ
-# -----------------------------
 
 func _on_zone_entered(overlap: Area2D, zone: Area2D):
 	if _is_valid_target(overlap):
@@ -72,11 +66,6 @@ func _is_valid_target(overlap: Area2D) -> bool:
 
 	# 4) карта должна подходить под группы синергии
 	return _matches_synergy_target(card)
-
-
-# -----------------------------
-#   СИНЕРГИЯ
-# -----------------------------
 
 func update_synergy():
 	if !in_grid_area:

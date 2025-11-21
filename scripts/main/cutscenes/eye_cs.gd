@@ -1,7 +1,7 @@
 extends Sprite3D
 
-@export var shake_amount: float = 0.15
-@export var shake_speed: float = 25.0
+@export var shake_amount: float = 0.35
+@export var shake_speed: float = 45.0
 @export var move_duration: float = 15.0   # за сколько секунд доехать
 
 var start_position = Vector3(-1.471, 75.943, -38.104)
@@ -24,7 +24,7 @@ func _process(delta):
 
 	var shake := Vector3(
 		sin(tt * shake_speed + time_offset * 1.1),
-		sin(tt * shake_speed * 1.4 + time_offset * 0.3),
+		0,
 		sin(tt * shake_speed * 0.7 + time_offset * 2.2)
 	) * shake_amount
 
