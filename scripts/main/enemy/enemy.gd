@@ -1,4 +1,4 @@
-extends Sprite3D
+extends Node3D
 class_name EnemyBase
 @onready var area_3d: Area3D = $Area3D
 

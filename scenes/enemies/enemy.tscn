@@ -12,11 +12,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_dga24"]
 size = Vector3(4.536133, 5.5047607, 13.552429)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fcftc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_n7575"]
 viewport_path = NodePath("HP_SUB")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_38ino"]
-viewport_path = NodePath("Attack_SUB")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxy0u"]
 bg_color = Color(0, 0, 0, 1)
@@ -129,16 +128,20 @@ _data = {
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lu5c6"]
 load_path = "res://.godot/imported/serp.png-16a25028e0bc05708c658f125e73793a.ctex"
 
-[node name="Enemy" type="Sprite3D"]
+[node name="Enemy" type="Node3D"]
 transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0, 0, 0)
-pixel_size = 0.008
-texture = ExtResource("1_38ino")
 script = ExtResource("2_fcftc")
 hp = 20
 base_damage = 2
 random_damage_max = 3
 attack_chance = 0.5
 heal_chance = 0.5
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+shaded = true
+alpha_cut = 1
+texture = ExtResource("1_38ino")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -152,7 +155,7 @@ layers = 2
 billboard = 1
 alpha_cut = 1
 texture_filter = 0
-texture = SubResource("ViewportTexture_fcftc")
+texture = SubResource("ViewportTexture_n7575")
 
 [node name="UI_TURN" type="Sprite3D" parent="."]
 transform = Transform3D(0.24649559, 0, 0, 0, 0.24649559, 0, 0, 0, 0.4, -1.4557059, 0.56129646, 1.7687445)
@@ -546,5 +549,10 @@ theme_override_font_sizes/font_size = 115
 text = "-value"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.40247)
+light_energy = 10.016
+spot_angle = 26.810913
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

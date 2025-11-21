@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=25 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="8_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://byt6cnyrj65rc" path="res://scenes/cards/sacrifice_mark.tscn" id="9_wtwp4"]
+[ext_resource type="PackedScene" uid="uid://p6koixqyjp7e" path="res://scenes/enemies/one_leg_bahomet.tscn" id="16_iwr0g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -517,13 +518,8 @@ texture = ExtResource("4_x42e6")
 
 [node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
 transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 7.709243)
-alpha_cut = 1
 attack_chance = 0.7
 heal_chance = 0.3
 
-[node name="Enemy3" parent="." instance=ExtResource("9_qxy0u")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.48285007, 1.475198, 14.139887)
-shaded = true
-alpha_cut = 1
-attack_chance = 0.7
-heal_chance = 0.3
+[node name="one_leg_bahomet" parent="." instance=ExtResource("16_iwr0g")]
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.14356256, 1.8832752, 14.8616085)
