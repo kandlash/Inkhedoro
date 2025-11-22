@@ -2,6 +2,8 @@ extends CharacterBody3D
 class_name Player
 @onready var arm_base: Control = $CanvasLayer/ArmBase
 @onready var tattoo_pose: Control = $CanvasLayer/TattooPose
+@onready var hp_ui: Control = $CanvasLayer/HP_UI
+
 @onready var head: Node3D = $head
 @onready var camera_3d: Camera3D = $head/Camera3D
 
@@ -30,6 +32,7 @@ var rotation_y := 0.0
 
 var arm_base_start_pos := Vector2.ZERO
 var tattoo_pose_start_pos := Vector2.ZERO
+var hp_ui_start_pos := Vector2.ZERO
 var sway_amount := 25.0
 
 var last_mouse_pos := Vector2.ZERO
@@ -63,6 +66,7 @@ func center_mouse():
 	Input.warp_mouse(center)
 	arm_base_start_pos = arm_base.position
 	tattoo_pose_start_pos = tattoo_pose.position
+	hp_ui_start_pos = hp_ui.position
 
 func _on_battle_started():
 	velocity = Vector3.ZERO
@@ -140,6 +144,7 @@ func _process(delta):
 	var final_offset := breathing_offset + mouse_sway + walk_offset
 	arm_base.position = arm_base.position.lerp(arm_base_start_pos + final_offset, delta * 6.0)
 	tattoo_pose.position = tattoo_pose.position.lerp(tattoo_pose_start_pos + final_offset/2, delta * 6.0)
+	hp_ui.position = hp_ui.position.lerp(hp_ui_start_pos + final_offset/2, delta * 6.0)
 
 func _physics_process(delta: float) -> void:
 	var direction := Vector3.ZERO
