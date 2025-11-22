@@ -1,0 +1,649 @@
+[gd_scene load_steps=48 format=3 uid="uid://dmwwst3hdut4y"]
+
+[ext_resource type="Texture2D" uid="uid://cywxycueh0kl5" path="res://assets/sprites/arm_test3.png" id="1_8afob"]
+[ext_resource type="Script" uid="uid://d4mvcidbtb15w" path="res://scripts/main/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://buclmdx7yb84s" path="res://scripts/main/player/camera_3d.gd" id="2_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://duk00ovikfhfl" path="res://assets/sprites/arm_tatoo_pose.png" id="3_gmlin"]
+[ext_resource type="Texture2D" uid="uid://b3xs2qhsobcsu" path="res://assets/sprites/arm_test4.png" id="3_kvlxm"]
+[ext_resource type="Shader" uid="uid://b53hb4df7mt08" path="res://scripts/shaders/post_process.gdshader" id="3_tffgl"]
+[ext_resource type="Script" uid="uid://uqtwgenmhvml" path="res://scripts/main/grid/grid.gd" id="4_75vfm"]
+[ext_resource type="Texture2D" uid="uid://desgj0xtmp0fo" path="res://assets/sprites/punches/punch_1.png" id="4_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://0koxmjyxn077" path="res://assets/sprites/tattoo_frame.png" id="4_lvxji"]
+[ext_resource type="Texture2D" uid="uid://ccdqea7ofgm2v" path="res://assets/sprites/cut_self/cut_self_1.png" id="5_myrg7"]
+[ext_resource type="Script" uid="uid://cc2tbxhnjcxwb" path="res://scripts/main/player/cards_hand.gd" id="5_p47bc"]
+[ext_resource type="Texture2D" uid="uid://dtbflwj5vkv3d" path="res://assets/sprites/punches/punch_2.png" id="5_ugbui"]
+[ext_resource type="Texture2D" uid="uid://cv40ycyqh1h4b" path="res://assets/sprites/punches/punch_3.png" id="6_fcs02"]
+[ext_resource type="Texture2D" uid="uid://6yhlywpptqvs" path="res://assets/sprites/cut_self/cut_self_2.png" id="6_kvlxm"]
+[ext_resource type="Texture2D" uid="uid://ceocpfq3hoat2" path="res://assets/sprites/punches/punch_4.png" id="7_myrg7"]
+[ext_resource type="Texture2D" uid="uid://cwmicp8vtgin3" path="res://assets/sprites/cut_self/cut_self_2_1.png" id="8_8ydkj"]
+[ext_resource type="Texture2D" uid="uid://bjyql4qsnujtn" path="res://assets/sprites/punches/punch_5.png" id="8_kvlxm"]
+[ext_resource type="Texture2D" uid="uid://bgvj6tg8pjsss" path="res://assets/sprites/cut_self/cut_self_2_2.png" id="9_3j4b4"]
+[ext_resource type="Texture2D" uid="uid://bjwp4ag60bwmt" path="res://assets/sprites/punches/punch_6.png" id="9_uf5tr"]
+[ext_resource type="Texture2D" uid="uid://clbm6ilwimihu" path="res://assets/sprites/cut_self/cut_self_2_3.png" id="10_yj68g"]
+[ext_resource type="Texture2D" uid="uid://dl7numpgr3dxr" path="res://assets/sprites/cut_self/cut_self_3_1.png" id="11_8ydkj"]
+[ext_resource type="Script" uid="uid://i8p6e4v72gro" path="res://scripts/main/player/right_attack.gd" id="18_j4nxn"]
+[ext_resource type="PackedScene" uid="uid://cigkigjjj0r0k" path="res://scenes/player/hp_ui.tscn" id="21_3j4b4"]
+[ext_resource type="Script" uid="uid://butd31fbl22dq" path="res://scripts/main/grid/get_ink_button.gd" id="21_yj68g"]
+[ext_resource type="Texture2D" uid="uid://c351so5v5lrhb" path="res://assets/sprites/ui/take_damage/attack_1.png" id="23_6cv16"]
+[ext_resource type="Texture2D" uid="uid://ciimumd8j0tls" path="res://assets/sprites/ui/take_damage/attack_3.png" id="24_j4nxn"]
+[ext_resource type="Texture2D" uid="uid://c2gxtvg3gn8np" path="res://assets/sprites/ui/take_damage/attack_4.png" id="25_28m0y"]
+[ext_resource type="Texture2D" uid="uid://dtpx8de7ciu8j" path="res://assets/sprites/ui/take_damage/attack_5.png" id="26_uniwh"]
+[ext_resource type="Script" uid="uid://bpljig4f1askf" path="res://scripts/main/cards/card_info_ui.gd" id="28_iqsei"]
+[ext_resource type="Texture2D" uid="uid://c7dcifn0waxd6" path="res://assets/sprites/ui/card_back.png" id="28_uniwh"]
+[ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="29_iqsei"]
+[ext_resource type="Shader" uid="uid://kotvc8m4ao22" path="res://scripts/shaders/canvas_post.gdshader" id="32_pk8ii"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pk8ii"]
+render_priority = 0
+shader = ExtResource("3_tffgl")
+shader_parameter/grayscale_strength = 0.0
+shader_parameter/light_preserve_strength = 0.0
+shader_parameter/vignette_strength = 0.710000033725
+shader_parameter/blur_intensity = 0.1170000055575
+shader_parameter/blue_fade = 0.0
+shader_parameter/noise_strength = 0.038000001805
+shader_parameter/distortion_strength = 0.0010000000475
+
+[sub_resource type="QuadMesh" id="QuadMesh_5mf0n"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dovo2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kvlxm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8afob"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8afob")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
+atlas = ExtResource("3_gmlin")
+region = Rect2(0, 0, 2560, 1440)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p47bc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvxji")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ydkj"]
+size = Vector2(1517.9591, 958.2875)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lgqa7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_myrg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_myrg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_myrg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kvlxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3j4b4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yj68g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8ydkj")
+}],
+"loop": false,
+"name": &"cut",
+"speed": 12.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ydkj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gx1jg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ugbui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fcs02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_myrg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kvlxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_uf5tr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvxji"]
+size = Vector2(80.08606, 80.10057)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ydkj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j4b4"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqsei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_uniwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_6cv16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_6cv16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_6cv16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_j4nxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_28m0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_uniwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_uniwh")
+}],
+"loop": false,
+"name": &"take_damage",
+"speed": 10.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mf0n"]
+shader = ExtResource("32_pk8ii")
+shader_parameter/grayscale_strength = 0.0290000013775
+shader_parameter/light_preserve_strength = 0.0
+shader_parameter/vignette_strength = 0.50000002375
+shader_parameter/blur_intensity = 0.01200000057
+shader_parameter/blue_fade = 0.0
+shader_parameter/noise_strength = 0.0170000008075
+shader_parameter/distortion_strength = 0.0010000000475
+
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("1_dovo2")
+hp = 20
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_x7p2l")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6710013, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+script = ExtResource("2_gx1jg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="head/Camera3D"]
+material_override = SubResource("ShaderMaterial_pk8ii")
+extra_cull_margin = 10.0
+mesh = SubResource("QuadMesh_5mf0n")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HP_UI" parent="CanvasLayer" instance=ExtResource("21_3j4b4")]
+offset_left = -254.0
+offset_top = -235.0
+offset_right = -254.0
+offset_bottom = -235.0
+
+[node name="Card_InfoUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 134.0
+offset_right = -78.0
+offset_bottom = 174.0
+grow_horizontal = 0
+scale = Vector2(0.21386465, 0.21386465)
+script = ExtResource("28_iqsei")
+
+[node name="Back" type="TextureRect" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -452.9032
+offset_top = -574.61707
+offset_right = 452.9032
+offset_bottom = 574.61707
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_uniwh")
+
+[node name="Image" type="TextureRect" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.283875
+offset_top = -362.3226
+offset_right = 122.283875
+offset_bottom = -4.1806335
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_iqsei")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.7
+anchor_top = -1.7645165
+anchor_right = 2.7
+anchor_bottom = -0.73951644
+offset_left = -205.0
+offset_top = -398.55487
+offset_right = 205.0
+offset_bottom = -302.55487
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 100
+text = "CARD NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Desc" type="RichTextLabel" parent="CanvasLayer/Card_InfoUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.1388702
+anchor_top = -4.821614
+anchor_right = 3.1388702
+anchor_bottom = 0.62145233
+offset_left = -293.0
+offset_top = 217.39357
+offset_right = 293.0
+offset_bottom = 502.39355
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "Deal some damage to enemy w
+asdfdsfsdfsdf"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ArmBase" type="Control" parent="CanvasLayer"]
+visible = false
+modulate = Color(0.8217887, 0.82178867, 0.82178867, 1)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RightArm" type="AnimatedSprite2D" parent="CanvasLayer/ArmBase"]
+position = Vector2(490.00003, -90.99999)
+scale = Vector2(-0.42, 0.42)
+sprite_frames = SubResource("SpriteFrames_dovo2")
+
+[node name="Left" type="AnimatedSprite2D" parent="CanvasLayer/ArmBase"]
+position = Vector2(-419, -16.999992)
+scale = Vector2(-0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_8afob")
+
+[node name="TattooPose" type="Control" parent="CanvasLayer"]
+modulate = Color(0.8217887, 0.82178867, 0.82178867, 1)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RightArm" type="AnimatedSprite2D" parent="CanvasLayer/TattooPose"]
+position = Vector2(423.90042, -228.18102)
+scale = Vector2(-0.24835971, 0.24835971)
+sprite_frames = SubResource("SpriteFrames_p47bc")
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/RightArm" groups=["grid_collide"]]
+collision_layer = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/RightArm/Area2D"]
+position = Vector2(70.06152, -136.16931)
+shape = SubResource("RectangleShape2D_8ydkj")
+debug_color = Color(0.84313726, 0.38039216, 0, 0.10980392)
+
+[node name="CutSelf" type="AnimatedSprite2D" parent="CanvasLayer/TattooPose"]
+visible = false
+position = Vector2(-15.9999695, -218)
+scale = Vector2(-0.46607694, 0.46607688)
+sprite_frames = SubResource("SpriteFrames_lgqa7")
+animation = &"cut"
+frame = 1
+
+[node name="RightAttack" type="AnimatedSprite2D" parent="CanvasLayer/TattooPose"]
+visible = false
+position = Vector2(-57.180817, -224.13603)
+scale = Vector2(-0.5094385, 0.36243752)
+sprite_frames = SubResource("SpriteFrames_8ydkj")
+script = ExtResource("18_j4nxn")
+
+[node name="Grid" type="Node2D" parent="CanvasLayer/TattooPose"]
+modulate = Color(1, 1, 1, 0.3137255)
+position = Vector2(110.900406, -138.18102)
+rotation = 0.21369182
+script = ExtResource("4_75vfm")
+cut_frame_to_effect = 6
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(156, -243.79999)
+scale = Vector2(0.60000014, 0.60000014)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D3" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D3/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(156.00006, -179.79997)
+scale = Vector2(0.60000014, 0.60000014)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D2" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D2/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(156, -115.79999)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(219.00006, -115.79999)
+scale = Vector2(0.60000014, 0.60000014)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D6" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D6/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(219, -179.79999)
+scale = Vector2(0.60000026, 0.60000026)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D5" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D5/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(219.00006, -243.80002)
+scale = Vector2(0.60000026, 0.60000026)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D4" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D4/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(283, -243.79996)
+scale = Vector2(0.60000026, 0.60000026)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D9" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D9/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(283.00006, -179.8)
+scale = Vector2(0.60000014, 0.60000014)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D8" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D8/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(283.00012, -115.79999)
+scale = Vector2(0.60000026, 0.60000026)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D7" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D7/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D11" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(345.81677, -179.41801)
+scale = Vector2(0.60000014, 0.60000014)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D11" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D11/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D10" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(346.13794, -243.95401)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D10" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D10/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D13" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(409.90875, -242.44347)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D13" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D13/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="Sprite2D14" type="Sprite2D" parent="CanvasLayer/TattooPose/Grid"]
+position = Vector2(410.35272, -179.09679)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_lvxji")
+offset = Vector2(-10, 43)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D14" groups=["grid_cells"]]
+position = Vector2(-5.9468617, 35.541687)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TattooPose/Grid/Sprite2D14/Area2D"]
+position = Vector2(-2.9969482, 6.753784)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_lvxji")
+
+[node name="CardsHand" type="Panel" parent="CanvasLayer/TattooPose"]
+layout_mode = 0
+offset_left = -377.0
+offset_top = -15.0
+offset_right = -11.0
+offset_bottom = 89.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8ydkj")
+script = ExtResource("5_p47bc")
+main_hand = true
+base_y_offset = 100
+smooth_appearance = false
+tween_time = 0.15
+
+[node name="Get_Ink_Button" type="Button" parent="CanvasLayer/TattooPose"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 443.00006
+offset_top = -23.000002
+offset_right = 666.00006
+offset_bottom = 62.0
+scale = Vector2(0.49733248, 0.49733248)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_3j4b4")
+text = "GET INK"
+script = ExtResource("21_yj68g")
+
+[node name="DamageControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DamageAnimator" type="AnimatedSprite2D" parent="CanvasLayer/DamageControl"]
+visible = false
+position = Vector2(577, 325)
+sprite_frames = SubResource("SpriteFrames_iqsei")
+animation = &"take_damage"
+frame = 7
+frame_progress = 1.0
+speed_scale = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 1000
+material = SubResource("ShaderMaterial_5mf0n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7498689, 0)
+light_energy = 0.35
+shadow_enabled = true
+omni_range = 2.0
+
+[connection signal="pressed" from="CanvasLayer/TattooPose/Get_Ink_Button" to="CanvasLayer/TattooPose/Get_Ink_Button" method="_on_pressed"]

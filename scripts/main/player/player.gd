@@ -146,8 +146,6 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_pressed("move_forward"):
 		direction -= transform.basis.z
-	if Input.is_action_pressed("move_backward"):
-		direction += transform.basis.z
 
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()

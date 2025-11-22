@@ -1,13 +1,18 @@
-[gd_scene load_steps=34 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=41 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
+[ext_resource type="Script" uid="uid://3fdw4c5sgoob" path="res://scripts/main/walk_hint.gd" id="1_mkypq"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
 [ext_resource type="Texture2D" uid="uid://ba7bhpvw034ce" path="res://assets/textures/garbade_texture.png" id="2_6iamk"]
 [ext_resource type="PackedScene" uid="uid://v3oiujvowil2" path="res://scenes/cards/eye.tscn" id="2_dga24"]
 [ext_resource type="Texture2D" uid="uid://b6k2hktp0uedu" path="res://assets/textures/panel_texture.png" id="3_nsrm0"]
 [ext_resource type="Texture2D" uid="uid://drc332otkylbl" path="res://assets/textures/eye_texture.png" id="4_x42e6"]
+[ext_resource type="Script" uid="uid://ogfpd6v4gsyi" path="res://scripts/main/battle_hint.gd" id="5_7o3do"]
+[ext_resource type="Texture2D" uid="uid://bd0ebnouo37ee" path="res://assets/textures/arrow.png" id="5_ndtll"]
+[ext_resource type="Texture2D" uid="uid://5q5rhl7mlq6d" path="res://assets/sprites/ui/synergy.png" id="6_7h2jl"]
 [ext_resource type="PackedScene" uid="uid://d03q04s1vvp51" path="res://scenes/cards/hummer.tscn" id="6_dnkej"]
 [ext_resource type="Script" uid="uid://cv68aydhw6075" path="res://scripts/globals/turn_base_manager.gd" id="6_iav0o"]
+[ext_resource type="Texture2D" uid="uid://cyuw2dyjqnlpa" path="res://assets/textures/order_hint.png" id="6_mqh5v"]
 [ext_resource type="PackedScene" uid="uid://bxehxgmgjdf0c" path="res://scenes/cards/nail.tscn" id="7_dnkej"]
 [ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="7_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://5w7jkc8q8wbh" path="res://scenes/cards/maw.tscn" id="8_v6ha0"]
@@ -42,6 +47,12 @@ adjustment_enabled = true
 
 [sub_resource type="Compositor" id="Compositor_wtwp4"]
 compositor_effects = Array[CompositorEffect]([null])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mkypq"]
+bg_color = Color(0, 0, 0, 0.7490196)
+
+[sub_resource type="Theme" id="Theme_ndtll"]
+Panel/styles/panel = SubResource("StyleBoxFlat_mkypq")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
 albedo_color = Color(0, 0, 0, 1)
@@ -93,6 +104,37 @@ flip_faces = true
 
 [node name="level_1" type="Node3D"]
 
+[node name="walk_hint" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mkypq")
+
+[node name="Label" type="Label" parent="walk_hint"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -47.0
+offset_right = 92.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "[W TO WALK FORWARD]"
+
+[node name="Timer" type="Timer" parent="walk_hint"]
+wait_time = 3.5
+one_shot = true
+autostart = true
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.51720566, 0.8558612, 0, -0.8558612, 0.51720566, 0, 14.46684, 0)
 light_energy = 0.3
@@ -112,6 +154,346 @@ ExtResource("2_dga24"): 2
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 29.252443)
+
+[node name="battle_hint" type="Control" parent="."]
+z_index = 4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_7o3do")
+
+[node name="cards_hint" type="Control" parent="battle_hint"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="battle_hint/cards_hint"]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ndtll")
+
+[node name="TextureRect" type="TextureRect" parent="battle_hint/cards_hint"]
+layout_mode = 0
+offset_left = 257.0
+offset_top = 360.99997
+offset_right = 650.0
+offset_bottom = 579.63184
+rotation = -0.37184647
+texture = ExtResource("5_ndtll")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="battle_hint/cards_hint"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -542.0
+offset_top = -35.5
+offset_right = -121.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Select and move Scetch to your arm."
+
+[node name="arm_hint" type="Control" parent="battle_hint"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="battle_hint/arm_hint"]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ndtll")
+
+[node name="Label" type="Label" parent="battle_hint/arm_hint"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 166.0
+offset_top = -160.0
+offset_right = 569.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Rotate Scetch by Right Mouse Click
+Find place for it in cells"
+
+[node name="arm_hint_timer" type="Timer" parent="battle_hint/arm_hint"]
+wait_time = 9.0
+one_shot = true
+
+[node name="order_hint" type="Control" parent="battle_hint"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="battle_hint/order_hint"]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ndtll")
+
+[node name="Label" type="Label" parent="battle_hint/order_hint"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 55.0
+offset_top = -184.0
+offset_right = 558.0
+offset_bottom = -113.0
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "The Sketches are played in a zigzag pattern.
+The shape of the grid doesn't matter."
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="battle_hint/order_hint"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = -94.0
+offset_right = 623.0
+offset_bottom = -23.0
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Start ->"
+
+[node name="Label3" type="Label" parent="battle_hint/order_hint"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 437.0
+offset_top = 43.0
+offset_right = 940.0
+offset_bottom = 114.0
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "<- End"
+
+[node name="TextureRect" type="TextureRect" parent="battle_hint/order_hint"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 205.0
+offset_top = -118.0
+offset_right = 431.0
+offset_bottom = 108.0
+grow_vertical = 2
+texture = ExtResource("6_mqh5v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="order_hint_timer" type="Timer" parent="battle_hint/order_hint"]
+wait_time = 9.0
+one_shot = true
+
+[node name="synergy_hint" type="Control" parent="battle_hint"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="battle_hint/synergy_hint"]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ndtll")
+
+[node name="Label" type="Label" parent="battle_hint/synergy_hint"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -426.0
+offset_top = -145.0
+offset_right = -1.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Some sketches may work in synergy.
+Keep an eye on this symbol."
+
+[node name="Label2" type="Label" parent="battle_hint/synergy_hint"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -427.0
+offset_top = -26.0
+offset_right = -2.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "No Synergy ->"
+
+[node name="Label3" type="Label" parent="battle_hint/synergy_hint"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -422.0
+offset_top = 76.0
+offset_right = 3.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Synergy ->"
+
+[node name="TextureRect" type="TextureRect" parent="battle_hint/synergy_hint"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.5916
+offset_top = -53.0
+offset_right = -153.40839
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_7h2jl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="battle_hint/synergy_hint"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.5916
+offset_top = 49.0
+offset_right = -153.40839
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_7h2jl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="synergy_hint_timer" type="Timer" parent="battle_hint/synergy_hint"]
+wait_time = 9.0
+one_shot = true
+
+[node name="ink_hint" type="Control" parent="battle_hint"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="battle_hint/ink_hint"]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ndtll")
+
+[node name="Label" type="Label" parent="battle_hint/ink_hint"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -544.0
+offset_top = -35.5
+offset_right = 58.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "When you're done choosing a place for the sketches
+Press this button to play"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="battle_hint/ink_hint"]
+layout_mode = 0
+offset_left = 766.00006
+offset_top = 512.0
+offset_right = 984.6319
+offset_bottom = 632.8579
+rotation = 0.05727113
+texture = ExtResource("5_ndtll")
+expand_mode = 2
+
+[node name="ink_hint_timer" type="Timer" parent="battle_hint/ink_hint"]
+wait_time = 9.0
+one_shot = true
 
 [node name="Choice_Reward" parent="." instance=ExtResource("20_gmpev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 26.001682)
@@ -642,14 +1024,11 @@ attack_chance = 0.8
 heal_chance = 0.2
 
 [node name="one_leg_bahomet" parent="." instance=ExtResource("16_iwr0g")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.14356256, 1.8832752, -0.50595284)
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.14356256, 1.8832752, -2.2244785)
 
 [node name="chill_area" parent="." instance=ExtResource("17_bahl2")]
 transform = Transform3D(0.7022173, 0, 0.43210155, 0, 0.7786624, 0, -0.33646113, 0, 0.9018251, -1.092377, 0.8466898, 5.011178)
 upgrade_cells = true
-
-[node name="chill_area2" parent="." instance=ExtResource("17_bahl2")]
-transform = Transform3D(0.7721596, 0, -0.12896869, 0, 0.7786624, 0, 0.10042313, 0, 0.9916488, -0.42934492, 0.8466898, 26.04908)
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(0.95933366, 0, 0.28227448, 0, 1, 0, -0.28227448, 0, 0.95933366, -7.208843, 0, 1.3764054)
@@ -1181,3 +1560,9 @@ transform = Transform3D(-2.092163, 0.87427, 0, 3.8215553e-08, 9.145134e-08, -0.9
 material_override = SubResource("StandardMaterial3D_v6ha0")
 mesh = SubResource("PlaneMesh_np2pn")
 skeleton = NodePath("../..")
+
+[connection signal="timeout" from="walk_hint/Timer" to="walk_hint" method="_on_timer_timeout"]
+[connection signal="timeout" from="battle_hint/arm_hint/arm_hint_timer" to="battle_hint" method="_on_arm_hint_timer_timeout"]
+[connection signal="timeout" from="battle_hint/order_hint/order_hint_timer" to="battle_hint" method="_on_order_hint_timer_timeout"]
+[connection signal="timeout" from="battle_hint/synergy_hint/synergy_hint_timer" to="battle_hint" method="_on_synergy_hint_timer_timeout"]
+[connection signal="timeout" from="battle_hint/ink_hint/ink_hint_timer" to="battle_hint" method="_on_ink_hint_timer_timeout"]

@@ -317,7 +317,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_arjpg")
-dialogue = Array[String](["You: \"Huh… So… my life was so short.\"", "You: \"This Eye… this town…\"", "You: \"Is this really my fate?..\"", "*Step sounds*", "Voice: \"Hmm. You’re still alive, stranger?\"", "Voice: \"Your arm... Fuck... there is so many eyes!\"", "*You feel something sharp being shoved into your hand*", "Voice: \"Cut this fucking mess from your skin!\"", "Voice: \"It’s gonna hurt like hell… \"", "Voice: \"But you don’t have another choice.\""])
+dialogue = Array[String](["You: \"This Eye… This Town…\"", "You: \"Is this really my Fate?..\"", "*Step sounds*", "Voice: \"A human? You’re still alive, stranger?\"", "Voice: \"Your arm... Fuck...\"", "You feel something sharp being shoved into your hand.", "Voice: \"Cut this fucking mess from your skin!\"", "Voice: \"It’s gonna hurt like hell… \"", "Voice: \"But you don’t have another choice.\""])
 
 [node name="ContinueTip" type="Label" parent="CanvasLayer"]
 z_index = 625

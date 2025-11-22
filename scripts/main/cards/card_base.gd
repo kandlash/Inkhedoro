@@ -322,6 +322,7 @@ func _process(_delta: float) -> void:
 
 func _on_collide_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("grid_collide") and dragging:
+		G.emit_signal("card_in_grid_arrived")
 		emit_signal("card_grid_entered", self)
 		card_ui.visible = false
 		in_grid_area = true
