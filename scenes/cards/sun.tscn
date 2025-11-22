@@ -6,7 +6,7 @@
 
 [node name="Sun" instance=ExtResource("1_t3bnq")]
 script = ExtResource("2_2ir4q")
-heal_value = 1
+heal_value = 2
 card_name = "Sun"
 description = "Heal {heal_value} hp."
 

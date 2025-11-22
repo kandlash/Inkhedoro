@@ -48,6 +48,7 @@ var walk_time := 0.0
 signal damage_taked
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	arm_base.visible = true
 	tattoo_pose.visible = false
 	G.player = self

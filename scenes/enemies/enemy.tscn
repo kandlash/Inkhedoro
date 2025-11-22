@@ -153,6 +153,7 @@ shape = SubResource("BoxShape3D_dga24")
 [node name="UI_HP" type="Sprite3D" parent="."]
 transform = Transform3D(0.24649559, 0, 0, 0, 0.24649559, 0, 0, 0, 0.4, -2.3012993, 1.5311033, 1.7687445)
 layers = 2
+cast_shadow = 0
 billboard = 1
 alpha_cut = 1
 texture_filter = 0
@@ -161,6 +162,7 @@ texture = SubResource("ViewportTexture_n7575")
 [node name="UI_TURN" type="Sprite3D" parent="."]
 transform = Transform3D(0.24649559, 0, 0, 0, 0.24649559, 0, 0, 0, 0.4, -1.4557059, 0.56129646, 1.7687445)
 layers = 2
+cast_shadow = 0
 billboard = 1
 alpha_cut = 1
 texture_filter = 0
