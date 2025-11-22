@@ -98,7 +98,7 @@ func update_synergy():
 		remove_synergy()
 
 	for card: CardBase in active_synergy_cards:
-		card.on_synergy_ui_update(true, extra_value)
+		card.on_synergy_ui_update(true, card.get_total_extra_damage())
 
 
 func _matches_synergy_target(card: CardBase) -> bool:
@@ -106,7 +106,6 @@ func _matches_synergy_target(card: CardBase) -> bool:
 		if card.is_in_group(g):
 			return true
 	return false
-
 
 func apply_synergy():
 	print(self, " synergy ON with ", active_synergy_cards)

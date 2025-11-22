@@ -152,8 +152,8 @@ func make_damage(speed):
 	await G.right_attack.right_attack_impacted
 	
 	G.camera.shake(0.15, 0.1)
-	G.current_enemy.take_damage(basic_damage + extra_damage)
-	extra_damage = 0
+	G.current_enemy.take_damage(basic_damage + get_total_extra_damage())
+	synergy_damage_mods.clear()
 	
 	await G.right_attack.right_attack_finished
 	G.right_arm.visible = true
@@ -319,6 +319,16 @@ func check_cells_for_other():
 func _process(_delta: float) -> void:
 	if dragging:
 		position = get_global_mouse_position() + drag_offset
+
+
+var synergy_damage_mods := {}  # { SynergyCardBase : int }
+
+func get_total_extra_damage() -> int:
+	var total := 0
+	for v in synergy_damage_mods.values():
+		total += v
+	return total
+
 
 func _on_collide_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("grid_collide") and dragging:
