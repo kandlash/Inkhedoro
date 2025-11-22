@@ -631,7 +631,7 @@ frame_progress = 1.0
 speed_scale = 5.0
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-z_index = 655
+z_index = 1000
 material = SubResource("ShaderMaterial_5mf0n")
 anchors_preset = 15
 anchor_right = 1.0

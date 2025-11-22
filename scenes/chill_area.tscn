@@ -3,9 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://uxty3uhoc7un" path="res://assets/textures/burrel.png" id="1_3vygg"]
 [ext_resource type="Script" uid="uid://btdagu8barh5a" path="res://scripts/main/chill_area.gd" id="1_b004p"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3vygg"]
-size = Vector3(2.6982422, 3.6396484, 3.564209)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dyixl"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
@@ -13,6 +10,9 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3vygg"]
+size = Vector3(2.6982422, 3.6396484, 2.6677246)
 
 [node name="chill_area" type="Node3D"]
 script = ExtResource("1_b004p")
@@ -22,19 +22,6 @@ transform = Transform3D(0.23541093, 0, 0, 0, 0.23541093, 0, 0, 0, 1, 0, 0, 0)
 shaded = true
 alpha_cut = 1
 texture = ExtResource("1_3vygg")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5714978, 0.38780504)
-light_color = Color(1, 0.4392157, 0, 1)
-shadow_enabled = true
-omni_range = 1.524
-
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_3vygg")
-
-[node name="FlickerTimer" type="Timer" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -56,10 +43,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -291.0
-offset_top = -143.99994
-offset_right = 145.02979
-offset_bottom = 45.557922
+offset_left = -286.1482
+offset_top = -127.72656
+offset_right = 130.37036
+offset_bottom = -3.6113281
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.49733248, 0.49733248)
@@ -74,15 +61,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -212.0
-offset_right = 20.0
-offset_bottom = -189.0
+offset_left = -200.0
+offset_top = -43.5
+offset_right = 200.0
+offset_bottom = 43.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/outline_size = 25
-theme_override_font_sizes/font_size = 46
-text = "Fire always warms. Rest and heal your wounds."
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 30
+text = "Fire always warms.
+Rest and heal your wounds."
+horizontal_alignment = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5714978, 0.38780504)
+light_color = Color(1, 0.4392157, 0, 1)
+shadow_enabled = true
+omni_range = 1.524
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_3vygg")
+
+[node name="FlickerTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

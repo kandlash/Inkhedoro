@@ -12,8 +12,6 @@ class_name Hand
 func _ready() -> void:
 	if main_hand:
 		G.hand = self
-	else:
-		G.reward_hand = self
 
 func _process(_delta: float) -> void:
 	if !main_hand:

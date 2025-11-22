@@ -12,6 +12,42 @@ var grid_areas: Array[Area2D]
 var cards_in_grid: Array[CardBase]
 var speed_mul := 1.0
 
+var current_grid_level = 4
+
+@export var three_cells_figures: Array[PackedInt32Array] = [
+	[1,2,3],
+	[1,6,5],
+	[5,8,9],
+	[10, 13, 12],
+	[2, 5, 8],
+	[4, 5, 6],
+	[8, 10, 11],
+	[7, 8, 9],
+	[4, 8, 11],
+	[2, 5, 4],
+	[2, 5, 6]
+]
+
+@export var four_cells_figures: Array[PackedInt32Array] = [
+	[1, 2, 3, 5],
+	[1,2,3,6],
+	[5,6,8,9],
+	[3,4,5,6],
+	[1,2,6,5],
+	[8,9,10,13],
+	[5, 8, 9, 10],
+	[5, 7, 8, 10],
+	[2, 5, 6, 7],
+]
+@export var five_cells_figures: Array[PackedInt32Array] = [
+	[1,2,3,4,5],
+	[1,2,3,4,6],
+	[2,4,5,6,8],
+	[5,6,7,8,10],
+	[3, 4, 5,6, 9],
+]
+
+
 func _ready() -> void:
 	G.grid = self
 	G.deck.connect("deck_updated", _on_deck_updated)
@@ -29,6 +65,26 @@ func _ready() -> void:
 		if i is Sprite2D and i.get_child(0).is_in_group("grid_cells"):
 			var area = i.get_child(0)
 			grid_areas.append(area)
+			area.monitorable = false
+			area.get_parent().visible = false
+
+func enable_random_cells():
+	if current_grid_level == 3:
+		_enable_cell(three_cells_figures)
+	elif current_grid_level == 4:
+		_enable_cell(four_cells_figures)
+	elif current_grid_level == 5:
+		_enable_cell(five_cells_figures)
+
+func _enable_cell(array):
+	for i in array.pick_random():
+		grid_areas[i-1].monitorable = true
+		grid_areas[i-1].get_parent().visible = true
+
+func disable_cells():
+	for area in grid_areas:
+		area.monitorable = false
+		area.get_parent().visible = false
 
 func _on_deck_updated(card: CardBase):
 	card.connect("card_dropped", _on_card_dropped)
@@ -83,6 +139,7 @@ func spell_cards_on_grid():
 				if cards_in_grid.has(card):
 					continue
 				cards_in_grid.append(card)
+
 
 	for card: CardBase in cards_in_grid:
 		var speed := 1.0 / speed_mul

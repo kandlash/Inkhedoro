@@ -52,7 +52,7 @@ func reset_turn_manager():
 	start_player_turn()
 
 func start_player_turn():
-	print('player turn')
+	
 	if G.player.hp <= 0:
 		return
 	if enemy_defeated:
@@ -62,7 +62,9 @@ func start_player_turn():
 		return
 	emit_signal("player_turn_started")
 	hand_area.drop_cards()
-	hand_area.add_cards(deck.generate_hand(3))
+	G.grid.disable_cells()
+	G.grid.enable_random_cells()
+	hand_area.add_cards(deck.generate_hand(4))
 	
 func end_player_turn():
 	hand_area.drop_cards()

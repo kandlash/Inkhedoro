@@ -6,7 +6,8 @@ class_name ChoiceReward
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var collect_button: Button = $CanvasLayer/Control/collect_button
-@onready var hand: Hand = G.reward_hand
+@onready var hand: Hand = $CanvasLayer/Control/hand
+@onready var card_amount_label: Label = $CanvasLayer/Control/card_amount_label
 
 var spawned_cards: Array[CardBase] = []
 var selected_card: CardBase = null
@@ -14,10 +15,10 @@ var active: bool = false
 
 
 func _ready():
+	card_amount_label.visible = false
 	canvas_layer.visible = false
 	collect_button.disabled = false
 	collect_button.pressed.connect(_on_collect_button_pressed)
-
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("player"):
@@ -50,6 +51,19 @@ func _spawn_cards() -> void:
 		card.reward_index = index
 		index += 1
 		hand.add_card(card)  # Hand сам размещает их красиво
+	index = 0
+	var amounts = new_cards.values()
+	for card: CardBase in hand.get_children():
+		var number_label = card_amount_label.duplicate()
+		number_label.text = "x"+str(amounts[index])
+		number_label.visible = true
+		hand.add_child(number_label)
+		number_label.position = Vector2(
+			card.position.x - number_label.size.x/2,
+			-125.0
+		)
+		index += 1
+
 
 
 func _setup_selection_logic() -> void:
@@ -82,10 +96,7 @@ func _on_collect_button_pressed() -> void:
 			return 
 		var values = new_cards.values()
 		var keys = new_cards.keys()
-		print(selected_card.card_name)
 		var dict: Dictionary[PackedScene, int] = {keys[selected_card.reward_index]: values[selected_card.reward_index]}
-		print(dict)
-		print(new_cards)
 		G.deck.add_to_deck(dict)
 
 	else:
@@ -99,8 +110,10 @@ func _cleanup() -> void:
 			card.queue_free()
 
 	spawned_cards.clear()
+	collect_button.disabled = true
 	selected_card = null
 	canvas_layer.visible = false
 	G.player.arm_base.visible = true
 	G.player.set_physics_process(true)
 	active = false
+	queue_free()

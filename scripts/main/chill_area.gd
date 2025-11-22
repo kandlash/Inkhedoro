@@ -1,7 +1,11 @@
 extends Node3D
 
+
+@export var upgrade_cells: bool = false
 @onready var omni_light_3d: OmniLight3D = $OmniLight3D
 @onready var flicker_timer: Timer = $FlickerTimer
+@onready var chill_area: Node3D = $"."
+@onready var label: Label = $CanvasLayer/Label
 
 var base_energy := 1.0
 var base_range := 2.524
@@ -24,6 +28,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		omni_light_3d.visible = true
 		canvas_layer.visible = true
 		flicker_timer.start()
+		G.player.arm_base.visible = false
 		G.player.set_physics_process(false)
 		G.player.velocity = Vector3.ZERO
 
@@ -42,7 +47,14 @@ func _on_flicker_timer_timeout() -> void:
 	omni_light_3d.omni_range = r
 
 func _on_rest_button_pressed():
+	rest_button.disabled = true
 	healed = true
+	G.player.heal(G.player.max_hp)
+	
+	if upgrade_cells:
+		G.grid.current_grid_level += 1
+		label.text = "The scars on your arm are healing.\nAvailable cells: " + str(G.grid.current_grid_level)
+		await get_tree().create_timer(3.5).timeout
 	canvas_layer.visible = false
-	G.player.heal(round(G.player.max_hp*0.5))
+	G.player.arm_base.visible = true
 	G.player.set_physics_process(true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=34 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://ucnthhnsfq17" path="res://scripts/main/deck/deck.gd" id="1_sk5k4"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://5w7jkc8q8wbh" path="res://scenes/cards/maw.tscn" id="8_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://bkjxu46hk1w8s" path="res://scenes/cards/sickle.tscn" id="9_gmpev"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
+[ext_resource type="PackedScene" uid="uid://byt6cnyrj65rc" path="res://scenes/cards/sacrifice_mark.tscn" id="9_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://ceokwkhruu0yj" path="res://scenes/cards/lil_centipede.tscn" id="10_mkypq"]
 [ext_resource type="Texture2D" uid="uid://c6jvilvojjdyg" path="res://assets/textures/rock(41).png" id="12_np2pn"]
 [ext_resource type="Texture2D" uid="uid://clu1lfc4ejfon" path="res://assets/textures/sculls_texture.png" id="12_v6ha0"]
@@ -113,19 +114,20 @@ ExtResource("2_dga24"): 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 29.252443)
 
 [node name="Choice_Reward" parent="." instance=ExtResource("20_gmpev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 25.36597)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 26.001682)
 new_cards = Dictionary[PackedScene, int]({
 ExtResource("7_dnkej"): 7,
 ExtResource("6_dnkej"): 2,
-ExtResource("7_iwr0g"): 1
+ExtResource("7_iwr0g"): 2,
+ExtResource("10_mkypq"): 1
 })
 
 [node name="Choice_Reward2" parent="." instance=ExtResource("20_gmpev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0074824095, 0.60530853, 10.465985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5490968, 0.60530853, 12.207558)
 new_cards = Dictionary[PackedScene, int]({
 ExtResource("8_v6ha0"): 2,
 ExtResource("9_gmpev"): 2,
-ExtResource("10_mkypq"): 2
+ExtResource("9_wtwp4"): 1
 })
 
 [node name="TurnBaseManager" type="Node" parent="."]
@@ -644,6 +646,10 @@ transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0
 
 [node name="chill_area" parent="." instance=ExtResource("17_bahl2")]
 transform = Transform3D(0.7022173, 0, 0.43210155, 0, 0.7786624, 0, -0.33646113, 0, 0.9018251, -1.092377, 0.8466898, 5.011178)
+upgrade_cells = true
+
+[node name="chill_area2" parent="." instance=ExtResource("17_bahl2")]
+transform = Transform3D(0.7721596, 0, -0.12896869, 0, 0.7786624, 0, 0.10042313, 0, 0.9916488, -0.42934492, 0.8466898, 26.04908)
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(0.95933366, 0, 0.28227448, 0, 1, 0, -0.28227448, 0, 0.95933366, -7.208843, 0, 1.3764054)
