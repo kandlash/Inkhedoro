@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=46 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://3fdw4c5sgoob" path="res://scripts/main/walk_hint.gd" id="1_mkypq"]
@@ -13,13 +13,17 @@
 [ext_resource type="PackedScene" uid="uid://d03q04s1vvp51" path="res://scenes/cards/hummer.tscn" id="6_dnkej"]
 [ext_resource type="Script" uid="uid://cv68aydhw6075" path="res://scripts/globals/turn_base_manager.gd" id="6_iav0o"]
 [ext_resource type="Texture2D" uid="uid://cyuw2dyjqnlpa" path="res://assets/textures/order_hint.png" id="6_mqh5v"]
+[ext_resource type="Texture2D" uid="uid://clus8xwtakuyu" path="res://assets/textures/rotate_hint_1.png" id="7_0qwwm"]
 [ext_resource type="PackedScene" uid="uid://bxehxgmgjdf0c" path="res://scenes/cards/nail.tscn" id="7_dnkej"]
 [ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="7_iwr0g"]
+[ext_resource type="Texture2D" uid="uid://dxev6j06j3h64" path="res://assets/textures/rotate_hint_2.png" id="8_t4umt"]
 [ext_resource type="PackedScene" uid="uid://5w7jkc8q8wbh" path="res://scenes/cards/maw.tscn" id="8_v6ha0"]
+[ext_resource type="Texture2D" uid="uid://cnuvqrmjk1dwv" path="res://assets/textures/rotate_hint_3.png" id="9_4yk0h"]
 [ext_resource type="PackedScene" uid="uid://bkjxu46hk1w8s" path="res://scenes/cards/sickle.tscn" id="9_gmpev"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://byt6cnyrj65rc" path="res://scenes/cards/sacrifice_mark.tscn" id="9_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://ceokwkhruu0yj" path="res://scenes/cards/lil_centipede.tscn" id="10_mkypq"]
+[ext_resource type="Texture2D" uid="uid://dbo68okqix4vf" path="res://assets/textures/rotate_hint_4.png" id="10_vmrhw"]
 [ext_resource type="Texture2D" uid="uid://c6jvilvojjdyg" path="res://assets/textures/rock(41).png" id="12_np2pn"]
 [ext_resource type="Texture2D" uid="uid://clu1lfc4ejfon" path="res://assets/textures/sculls_texture.png" id="12_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://p6koixqyjp7e" path="res://scenes/enemies/one_leg_bahomet.tscn" id="16_iwr0g"]
@@ -53,6 +57,26 @@ bg_color = Color(0, 0, 0, 0.7490196)
 
 [sub_resource type="Theme" id="Theme_ndtll"]
 Panel/styles/panel = SubResource("StyleBoxFlat_mkypq")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cfnpk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0qwwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_t4umt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4yk0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vmrhw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
 albedo_color = Color(0, 0, 0, 1)
@@ -237,10 +261,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 166.0
-offset_top = -160.0
-offset_right = 569.0
-offset_bottom = -89.0
+offset_left = -527.0
+offset_top = -35.5
+offset_right = -124.0
+offset_bottom = 35.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 10
@@ -251,6 +275,13 @@ Find place for it in cells"
 [node name="arm_hint_timer" type="Timer" parent="battle_hint/arm_hint"]
 wait_time = 9.0
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="battle_hint/arm_hint"]
+position = Vector2(564, 336.00003)
+scale = Vector2(0.3161604, 0.3161604)
+sprite_frames = SubResource("SpriteFrames_cfnpk")
+autoplay = "default"
+frame_progress = 0.66187876
 
 [node name="order_hint" type="Control" parent="battle_hint"]
 visible = false
@@ -483,10 +514,10 @@ vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="battle_hint/ink_hint"]
 layout_mode = 0
-offset_left = 766.00006
-offset_top = 512.0
-offset_right = 984.6319
-offset_bottom = 632.8579
+offset_left = 735.0
+offset_top = 485.0
+offset_right = 953.63184
+offset_bottom = 605.8579
 rotation = 0.05727113
 texture = ExtResource("5_ndtll")
 expand_mode = 2

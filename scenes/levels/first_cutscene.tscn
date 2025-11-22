@@ -115,6 +115,21 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ru4gl"]
+resource_name = "blink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlinkRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_q4x8k"]
 resource_name = "blinking"
 length = 15.0
@@ -144,21 +159,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_ru4gl"]
-resource_name = "blink"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlinkRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v6vur"]
@@ -326,13 +326,30 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -63.0
+offset_right = 150.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[Space or Left Mouse Click to continue]"
+horizontal_alignment = 1
+
+[node name="SkipTip" type="Label" parent="CanvasLayer"]
+z_index = 625
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
 offset_left = -54.5
 offset_top = -38.0
 offset_right = 54.5
 offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "[Space or Left Mouse Click to continue]"
+text = "[Hold E to skip]"
+horizontal_alignment = 1
 
 [node name="BlinkRect" type="ColorRect" parent="CanvasLayer"]
 z_index = 240

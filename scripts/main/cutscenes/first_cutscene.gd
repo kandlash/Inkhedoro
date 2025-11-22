@@ -11,6 +11,8 @@ var cut_frame = 0
 @onready var intro_music: AudioStreamPlayer = $IntroMusic
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 
+var skip_time = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cut_self.connect("frame_changed", _on_cut_frame_changed)
@@ -24,6 +26,12 @@ func _process(_delta: float) -> void:
 	if cut_frame >= cut_frame_to_effect and cut_frame > 0:
 		cut_frame = -1
 		G.camera.shake(0.25, 0.4)
+	if Input.is_action_pressed("skip"):
+		skip_time += _delta
+	if Input.is_action_just_released("skip"):
+		skip_time = 0
+	if skip_time >= 2.5:
+		get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
 
 func _on_dialogue_end():
 	continue_tip.visible = false

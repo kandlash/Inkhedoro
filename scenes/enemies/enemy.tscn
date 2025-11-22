@@ -15,7 +15,8 @@ size = Vector3(4.536133, 5.5047607, 13.552429)
 [sub_resource type="ViewportTexture" id="ViewportTexture_n7575"]
 viewport_path = NodePath("HP_SUB")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_38ino"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qch6t"]
+viewport_path = NodePath("Attack_SUB")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxy0u"]
 bg_color = Color(0, 0, 0, 1)
@@ -163,7 +164,7 @@ layers = 2
 billboard = 1
 alpha_cut = 1
 texture_filter = 0
-texture = SubResource("ViewportTexture_38ino")
+texture = SubResource("ViewportTexture_qch6t")
 
 [node name="HP_SUB" type="SubViewport" parent="."]
 transparent_bg = true

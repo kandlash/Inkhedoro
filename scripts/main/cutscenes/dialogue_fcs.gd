@@ -16,7 +16,7 @@ func start_dialogue():
 func _process(_delta: float) -> void:
 	if !dialogue_started:
 		return
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("next_dialogue"):
 		show_dialogue()
 
 func show_dialogue():
