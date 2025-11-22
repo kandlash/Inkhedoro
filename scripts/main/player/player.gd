@@ -23,7 +23,7 @@ var vulnarable_turns: int = 0
 signal hp_updated
 
 @export_category("Movement")
-@export var speed: float = 1.5
+@export var speed: float = 3.5
 @export var max_look_angle := 15.0
 @export var mouse_sensitivity := 0.2
 
@@ -42,7 +42,7 @@ var breathing_time := 0.0
 
 var walk_time := 0.0
 @export var walk_strength := 12.0
-@export var walk_speed := 8.0
+@export var walk_speed := .0
 
 @onready var damage_animator: AnimatedSprite2D = $CanvasLayer/DamageControl/DamageAnimator
 signal damage_taked

@@ -10,7 +10,6 @@ viewport_path = NodePath("HP_SUB")
 viewport_path = NodePath("Attack_SUB")
 
 [node name="one_eye" instance=ExtResource("1_ec5id")]
-hp = 22
 random_damage_max = 5
 attack_chance = 0.85
 heal_chance = 0.15

@@ -16,6 +16,7 @@ size = Vector3(2.6982422, 3.6396484, 2.6677246)
 
 [node name="chill_area" type="Node3D"]
 script = ExtResource("1_b004p")
+non_upgrade_text = "Your scars are too deep this time. Maybe you should rest a few more times."
 
 [node name="burrel" type="Sprite3D" parent="."]
 transform = Transform3D(0.23541093, 0, 0, 0, 0.23541093, 0, 0, 0, 1, 0, 0, 0)

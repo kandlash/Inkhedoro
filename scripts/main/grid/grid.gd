@@ -46,7 +46,16 @@ var current_grid_level = 4
 	[5,6,7,8,10],
 	[3, 4, 5,6, 9],
 ]
-
+@export var six_cells_figures: Array[PackedInt32Array] = [
+	[1, 2, 3, 4, 5, 6],
+	[1, 3, 4, 5, 6, 8],
+	[5, 6, 7, 8, 9, 11],
+	[1, 2, 5, 6, 9, 10],
+	[2, 5, 7, 9, 10, 13],
+	[5, 7, 8, 9, 10, 11],
+	[7, 8, 11, 10, 12, 13],
+	[1, 3, 5, 6, 10, 13]
+]
 
 func _ready() -> void:
 	G.grid = self
@@ -75,6 +84,8 @@ func enable_random_cells():
 		_enable_cell(four_cells_figures)
 	elif current_grid_level == 5:
 		_enable_cell(five_cells_figures)
+	elif current_grid_level == 6:
+		_enable_cell(six_cells_figures)
 
 func _enable_cell(array):
 	for i in array.pick_random():

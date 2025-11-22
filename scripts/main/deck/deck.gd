@@ -34,6 +34,8 @@ func _shuffle_unused() -> void:
 	unused_cards.shuffle()
 
 func generate_hand(size: int) -> Array:
+	print('deck available: ', unused_cards)
+	print('discard: ', used_cards)
 	var hand: Array = []
 	var card_index = 0
 	while hand.size() < size:

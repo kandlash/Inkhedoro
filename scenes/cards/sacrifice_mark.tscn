@@ -10,11 +10,12 @@ size = Vector2(181.16125, 181.16162)
 
 [node name="SacrificeMark" instance=ExtResource("1_j4wro")]
 script = ExtResource("2_tewfg")
-damage_buff = 100
+damage_buff = 200
 self_damage = 2
 card_name = "Sicrifice Mark"
-description = "Sicrifice your blood [color=red]-{self_damage}[/color] hp
- to increase your next damage by {damage_buff}%"
+description = "Sicrifice your blood [color=red]
+-{self_damage}[/color] hp
+ to increase damage by {damage_buff}% for this turn."
 
 [node name="Texture" parent="." index="0"]
 rotation = 0.20352161

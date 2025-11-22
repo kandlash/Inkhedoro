@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://3mlbji2hfqcf"]
+
+[node name="path_position" type="Node3D"]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -5)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 3

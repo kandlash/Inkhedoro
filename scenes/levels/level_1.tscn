@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cjt8h4a83g2kx"]
+[gd_scene load_steps=53 format=3 uid="uid://cjt8h4a83g2kx"]
 
 [ext_resource type="PackedScene" uid="uid://dmwwst3hdut4y" path="res://scenes/player/player.tscn" id="1_ksju7"]
 [ext_resource type="Script" uid="uid://3fdw4c5sgoob" path="res://scripts/main/walk_hint.gd" id="1_mkypq"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://vvhbsx24nrxj" path="res://scenes/cards/sun.tscn" id="7_iwr0g"]
 [ext_resource type="Texture2D" uid="uid://dxev6j06j3h64" path="res://assets/textures/rotate_hint_2.png" id="8_t4umt"]
 [ext_resource type="PackedScene" uid="uid://5w7jkc8q8wbh" path="res://scenes/cards/maw.tscn" id="8_v6ha0"]
+[ext_resource type="PackedScene" uid="uid://3mlbji2hfqcf" path="res://scenes/path_position.tscn" id="8_wvtie"]
 [ext_resource type="Texture2D" uid="uid://cnuvqrmjk1dwv" path="res://assets/textures/rotate_hint_3.png" id="9_4yk0h"]
 [ext_resource type="PackedScene" uid="uid://bkjxu46hk1w8s" path="res://scenes/cards/sickle.tscn" id="9_gmpev"]
 [ext_resource type="PackedScene" uid="uid://d2sgwmnk02oua" path="res://scenes/enemies/enemy.tscn" id="9_qxy0u"]
@@ -29,7 +30,11 @@
 [ext_resource type="PackedScene" uid="uid://p6koixqyjp7e" path="res://scenes/enemies/one_leg_bahomet.tscn" id="16_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://cffvsu8jf7y05" path="res://scenes/chill_area.tscn" id="17_bahl2"]
 [ext_resource type="PackedScene" uid="uid://cwg2moulwlxo5" path="res://scenes/choice_reward.tscn" id="20_gmpev"]
+[ext_resource type="PackedScene" uid="uid://bgutejtgr4v5n" path="res://scenes/path_choose.tscn" id="25_4yk0h"]
 [ext_resource type="PackedScene" uid="uid://dyxg08doehtuc" path="res://scenes/enemies/one_eye.tscn" id="30_t4umt"]
+[ext_resource type="Texture2D" uid="uid://b881ve1huahfp" path="res://assets/textures/question_icon.png" id="32_cfnpk"]
+[ext_resource type="Texture2D" uid="uid://locnq6vcph50" path="res://assets/textures/burrel_fire_icon.png" id="33_wvtie"]
+[ext_resource type="PackedScene" uid="uid://bgsvqmkh3a8ko" path="res://scenes/enemies/boss.tscn" id="35_o8s4s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ksju7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -79,20 +84,16 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfnpk"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42e6"]
 albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmpev"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-albedo_texture = ExtResource("12_v6ha0")
-albedo_texture_force_srgb = true
-metallic_specular = 0.0
-texture_filter = 0
-proximity_fade_distance = 0.01
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_mkypq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsrm0"]
 transparency = 2
@@ -112,6 +113,18 @@ albedo_texture = ExtResource("3_nsrm0")
 albedo_texture_force_srgb = true
 metallic_specular = 0.0
 proximity_fade_distance = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmpev"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("12_v6ha0")
+albedo_texture_force_srgb = true
+metallic_specular = 0.0
+texture_filter = 0
+proximity_fade_distance = 0.01
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mkypq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6ha0"]
 transparency = 2
@@ -179,7 +192,7 @@ ExtResource("2_dga24"): 2
 })
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_ksju7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 29.252443)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7834475, 29.711098)
 
 [node name="battle_hint" type="Control" parent="."]
 z_index = 4096
@@ -528,20 +541,59 @@ expand_mode = 2
 wait_time = 9.0
 one_shot = true
 
+[node name="Skip_Tutor" type="Button" parent="battle_hint"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -409.99994
+offset_top = -84.99994
+offset_right = -4.0
+offset_bottom = 40.21466
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.49733248, 0.49733248)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_cfnpk")
+text = "SKIP TUTORIAL"
+
+[node name="Path_Choose" parent="." node_paths=PackedStringArray("point_left", "point_right") instance=ExtResource("25_4yk0h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008185506, 1.1063939, -11.985712)
+right_path_texture = ExtResource("32_cfnpk")
+left_path_texture = ExtResource("33_wvtie")
+point_left = NodePath("../path_position2")
+point_right = NodePath("../path_position")
+
+[node name="path_position" parent="." instance=ExtResource("8_wvtie")]
+transform = Transform3D(-0.073412254, 0, -0.9973016, 0, 1, 0, 0.9973016, 0, -0.073412254, 2.3378048, 0.72364604, -10.621499)
+
+[node name="path_position2" parent="." instance=ExtResource("8_wvtie")]
+transform = Transform3D(-0.07282037, 0, 0.9973452, 0, 1, 0, -0.9973452, 0, -0.07282037, -4.2065396, 0.6305293, -14.691975)
+
 [node name="Choice_Reward" parent="." instance=ExtResource("20_gmpev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03863299, 0.60530853, 26.001682)
 new_cards = Dictionary[PackedScene, int]({
 ExtResource("7_dnkej"): 7,
 ExtResource("6_dnkej"): 2,
 ExtResource("7_iwr0g"): 2,
-ExtResource("10_mkypq"): 1
+ExtResource("9_gmpev"): 1
 })
 
 [node name="Choice_Reward2" parent="." instance=ExtResource("20_gmpev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5490968, 0.60530853, 12.207558)
 new_cards = Dictionary[PackedScene, int]({
-ExtResource("8_v6ha0"): 2,
-ExtResource("9_gmpev"): 2,
+ExtResource("8_v6ha0"): 1,
+ExtResource("10_mkypq"): 2
+})
+
+[node name="Choice_Reward3" parent="." instance=ExtResource("20_gmpev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.532855, 0.60530853, -10.136011)
+new_cards = Dictionary[PackedScene, int]({
 ExtResource("9_wtwp4"): 1
 })
 
@@ -554,106 +606,6 @@ material_override = SubResource("StandardMaterial3D_x42e6")
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26.014984)
 size = Vector3(107.306885, 0.19702148, 290.4082)
-
-[node name="MeshInstance3D68" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -1.3027312, 0.6751212, 15.869192)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D75" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.70149827, 0.6674558, -2.1673902e-08, -1.5578981e-15, -4.3711385e-08, -0.74288225, -0.62877786, 0.7446494, -2.4180565e-08, -1.3027312, 0.6751212, 25.596365)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D76" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.7197582, -0.64517754, 2.0950475e-08, 6.7596956e-16, -4.371139e-08, -0.74288225, 0.6077907, 0.7640326, -2.4809982e-08, 1.0499983, 0.6751212, 27.260494)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D71" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -1.0539192, 0.6751212, 12.489148)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D72" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -0.80424154, 0.6751212, 11.79761)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D73" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.905974, -0.2740935, 8.900476e-09, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.25821027, 0.961703, -3.122882e-08, 1.5754045, 0.6751212, 11.79761)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D77" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8428616, 0.44665074, -1.18558185e-08, 3.6712617e-09, -4.3537316e-08, -0.74288225, -0.42076808, 0.8947084, -3.0230733e-08, -1.5986569, 0.66337144, 0.21042028)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D80" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8428616, 0.44665074, -1.18558185e-08, 3.6712617e-09, -4.3537316e-08, -0.74288225, -0.42076808, 0.8947084, -3.0230733e-08, -1.1157563, 0.1935485, 0.96002275)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D81" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.91234905, -0.24912935, -1.1855816e-08, -2.4110923e-08, -3.5434862e-08, -0.74288225, 0.23469275, 0.9684703, -3.0230733e-08, 0.9018467, 0.35055935, -1.0346202)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D82" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.89793, 0.3024531, -1.1855816e-08, -2.7355063e-09, -4.3614826e-08, -0.74288225, -0.2849264, 0.9531643, -3.0230733e-08, -0.85431814, 0.3505594, -2.3726892)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D85" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5179223, 0.83530873, -1.1855816e-08, 2.3756513e-08, -3.570357e-08, -0.74288225, -0.786904, 0.54978114, -3.023073e-08, -3.123962, 0.5910523, -9.525347)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D86" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.57204884, 0.7945206, -1.1855816e-08, 2.1329056e-08, -3.739073e-08, -0.74288225, -0.7484795, 0.6072372, -3.023073e-08, -2.588763, 0.2755494, -10.3385)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D87" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.57204884, 0.7945206, -1.1855816e-08, 2.1329056e-08, -3.739073e-08, -0.74288225, -0.7484795, 0.6072372, -3.023073e-08, -1.9710487, -0.0045943493, -9.866392)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D83" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8808466, -0.35456848, -1.1855814e-08, -2.7650252e-08, -3.2391327e-08, -0.74288225, 0.33402184, 0.9350301, -3.0230733e-08, 0.37731773, -0.037816882, -3.308266)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D84" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.9295546, 0.16234443, -1.1855814e-08, -8.611375e-09, -4.2744887e-08, -0.74288225, -0.15293682, 0.98673415, -3.0230733e-08, -0.5587071, -0.03781686, -3.4622142)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D78" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -4.283444, 0.6633714, 2.9284947)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D79" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.823586, -0.48548114, 8.900475e-09, -9.3583346e-09, -4.2567603e-08, -0.74288225, 0.45734835, 0.8742471, -3.122882e-08, 1.0200818, 0.5595311, 0.18290563)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D74" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.905974, -0.2740935, 8.900476e-09, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.25821027, 0.961703, -3.122882e-08, 1.5754045, 0.39933825, 12.151951)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D69" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.72672194, -0.6363206, 2.0662867e-08, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.5994469, 0.7714247, -2.5050024e-08, 1.304607, 0.33359802, 15.869192)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
-
-[node name="MeshInstance3D70" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.68262666, -0.6891518, 2.2378424e-08, -4.9313894e-15, -4.3711392e-08, -0.7428823, 0.64921653, 0.724617, -2.353007e-08, 1.8869121, 0.6803621, 16.165874)
-material_override = SubResource("StandardMaterial3D_gmpev")
-mesh = SubResource("PlaneMesh_mkypq")
 
 [node name="Env" type="Node3D" parent="."]
 
@@ -1084,13 +1036,25 @@ mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D88" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(2.8645937, 1.5357879, -2.2167708e-08, 1.3484001e-08, -1.4143446e-07, -1.3113595, -1.5357879, 2.8645937, -5.2861402e-08, -5.5667276, 0.5161905, -17.522245)
+transform = Transform3D(1.7700105, 2.7260969, -2.216771e-08, 7.996905e-08, -1.1743281e-07, -1.3113595, -2.7260969, 1.7700105, -5.2861402e-08, -5.237066, 0.5161905, -18.029978)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D110" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(1.2147973, 1.3451911, -3.2764998e-08, 5.488452e-08, -5.794716e-08, -1.9382559, -1.8709804, 0.8734108, -7.813183e-08, -7.867073, 0.5161906, -18.70127)
+material_override = SubResource("StandardMaterial3D_nsrm0")
+mesh = SubResource("PlaneMesh_ksju7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D111" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(-1.2475384, 1.9054205, -2.3060576e-08, 1.1996947e-07, 6.8531647e-09, -1.3641781, -2.4529824, -0.9690592, -5.4990533e-08, -8.79678, 0.40172613, -11.516286)
 material_override = SubResource("StandardMaterial3D_nsrm0")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D89" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(-2.418943, 2.1710038, -2.2167708e-08, 1.2840464e-07, 6.0809015e-08, -1.3113595, -2.1710038, -2.418943, -5.286141e-08, -6.659622, -0.28883994, -12.223516)
+transform = Transform3D(-1.3015714, 2.9783306, -2.2167711e-08, 1.4205983e-07, 2.1199877e-09, -1.3113595, -2.9783306, -1.3015714, -5.286141e-08, -6.659622, -0.28883994, -12.223516)
 material_override = SubResource("StandardMaterial3D_nsrm0")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
@@ -1114,13 +1078,13 @@ mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D75" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(2.4493918, -2.136591, -2.2167715e-08, -1.2753229e-07, -6.261824e-08, -1.3113595, 2.136591, 2.4493918, -5.2861402e-08, 9.61655, 0.51619, -12.313058)
+transform = Transform3D(2.6021862, -1.9476057, -2.2167715e-08, -1.2249711e-07, -7.197212e-08, -1.3113595, 1.9476057, 2.6021862, -5.2861402e-08, 9.205908, 0.51619, -12.963334)
 material_override = SubResource("StandardMaterial3D_nsrm0")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D76" type="MeshInstance3D" parent="Env"]
-transform = Transform3D(-1.6652751, -2.791308, -2.2167711e-08, -8.4368295e-08, 1.1431315e-07, -1.3113595, 2.791308, -1.6652751, -5.2861402e-08, 9.6682205, 0.51618975, -6.6661186)
+transform = Transform3D(-2.5751212, -1.9832528, -2.216771e-08, -3.641491e-08, 1.3732974e-07, -1.3113595, 1.9832528, -2.5751212, -5.2861402e-08, 8.600301, 0.5161898, -7.2993245)
 material_override = SubResource("StandardMaterial3D_nsrm0")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
@@ -1179,6 +1143,371 @@ material_override = SubResource("StandardMaterial3D_nsrm0")
 mesh = SubResource("PlaneMesh_ksju7")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D90" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -1.3027312, 0.6751212, 15.869192)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D91" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.70149827, 0.6674558, -2.1673902e-08, -1.5578981e-15, -4.3711385e-08, -0.74288225, -0.62877786, 0.7446494, -2.4180565e-08, -1.3027312, 0.6751212, 25.596365)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D92" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.7197582, -0.64517754, 2.0950475e-08, 6.7596956e-16, -4.371139e-08, -0.74288225, 0.6077907, 0.7640326, -2.4809982e-08, 1.0499983, 0.6751212, 27.260494)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D93" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -1.0539192, 0.6751212, 12.489148)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D94" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -0.80424154, 0.6751212, 11.79761)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D95" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.905974, -0.2740935, 8.900476e-09, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.25821027, 0.961703, -3.122882e-08, 1.5754045, 0.6751212, 11.79761)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="Node3D" type="Node3D" parent="Env"]
+
+[node name="MeshInstance3D112" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 5.932131, 0.27535388, -11.341288)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D113" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 6.730218, 0.6751221, -11.433831)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D131" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.57405853, -0.79288554, -1.1855814e-08, -2.1234305e-08, 3.7451468e-08, -0.74288225, 0.74693924, -0.60937047, -3.0230737e-08, 6.1360755, 0.46216917, -8.188997)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D118" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 6.5519485, 0.54269683, -12.633475)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D130" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.5556909, -0.8074959, -1.1855815e-08, -3.982431e-08, -1.1117197e-08, -0.74288225, 0.76070297, 0.589873, -3.0230737e-08, 5.7740264, 0.54269683, -12.223479)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D119" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 7.6193843, 0.67512214, -12.805224)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D120" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 8.500522, 0.6751221, -11.983014)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D121" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.32863486, -0.9371785, -1.1855818e-08, -3.0682646e-08, 2.9152693e-08, -0.74288225, 0.8828707, -0.34885007, -3.0230737e-08, 8.589078, 0.3364703, -8.885785)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D122" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.32863486, -0.9371785, -1.1855818e-08, -3.0682646e-08, 2.9152693e-08, -0.74288225, 0.8828707, -0.34885007, -3.0230737e-08, 9.137391, 0.33647028, -8.801996)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D123" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.34803027, -0.92925507, -1.1855816e-08, -4.117794e-08, -2.036884e-10, -0.74288225, 0.8754064, 0.3694386, -3.0230737e-08, 9.3725, 0.33647037, -11.56029)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D124" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.34803027, -0.92925507, -1.1855816e-08, -4.117794e-08, -2.036884e-10, -0.74288225, 0.8754064, 0.3694386, -3.0230737e-08, 9.8691025, 0.33647034, -11.21267)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D125" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.24877241, -0.9645021, -1.1855818e-08, -3.300466e-08, 2.6138936e-08, -0.74288225, 0.9086109, -0.2640751, -3.0230737e-08, 9.623159, 0.027992805, -9.295084)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D126" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.24877241, -0.9645021, -1.1855818e-08, -3.300466e-08, 2.6138936e-08, -0.74288225, 0.9086109, -0.2640751, -3.0230737e-08, 8.300918, 0.027992828, -9.334711)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D127" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.37928778, -0.9153677, -1.18558185e-08, -4.1144407e-08, -1.7755513e-09, -0.74288225, 0.86232376, 0.40261883, -3.0230737e-08, 8.506573, 0.0279929, -11.209154)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D128" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.37928778, -0.9153677, -1.18558185e-08, -4.1144407e-08, -1.7755513e-09, -0.74288225, 0.86232376, 0.40261883, -3.0230737e-08, 9.115395, 0.02799287, -10.733172)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D129" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.21335718, -0.97401553, -1.1855818e-08, -3.3934562e-08, 2.476093e-08, -0.74288225, 0.91757303, -0.22648138, -3.0230737e-08, 10.34797, 0.027992781, -9.025774)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D117" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 7.654587, 0.29674414, -11.92101)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D114" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.21258827, -0.97420484, -1.1855812e-08, -3.395409e-08, 2.4730735e-08, -0.74288225, 0.91775143, -0.22566517, -3.0230737e-08, 7.369899, 0.675122, -8.949046)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D115" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(-0.21258827, -0.97420484, -1.1855812e-08, -3.395409e-08, 2.4730735e-08, -0.74288225, 0.91775143, -0.22566517, -3.0230737e-08, 6.945494, 0.03945297, -9.047356)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D116" type="MeshInstance3D" parent="Env/Node3D"]
+transform = Transform3D(0.3997519, -0.9055021, -1.1855812e-08, -4.1092786e-08, -2.816986e-09, -0.74288225, 0.85302985, 0.4243417, -3.0230737e-08, 7.749789, 0.039453022, -10.680971)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="Node3D2" type="Node3D" parent="Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.52065, 0, 0)
+
+[node name="MeshInstance3D112" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 5.932131, 0.27535388, -11.341288)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D113" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 6.730218, 0.6751221, -11.433831)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D131" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.57405853, -0.79288554, -1.1855814e-08, -2.1234305e-08, 3.7451468e-08, -0.74288225, 0.74693924, -0.60937047, -3.0230737e-08, 6.1360755, 0.46216917, -8.188997)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D118" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 6.5519485, 0.54269683, -12.633475)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D130" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.5556909, -0.8074959, -1.1855815e-08, -3.982431e-08, -1.1117197e-08, -0.74288225, 0.76070297, 0.589873, -3.0230737e-08, 5.7740264, 0.54269683, -12.223479)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D119" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 7.6193843, 0.67512214, -12.805224)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D120" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 8.500522, 0.6751221, -11.983014)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D121" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.32863486, -0.9371785, -1.1855818e-08, -3.0682646e-08, 2.9152693e-08, -0.74288225, 0.8828707, -0.34885007, -3.0230737e-08, 8.589078, 0.3364703, -8.885785)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D122" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.32863486, -0.9371785, -1.1855818e-08, -3.0682646e-08, 2.9152693e-08, -0.74288225, 0.8828707, -0.34885007, -3.0230737e-08, 9.137391, 0.33647028, -8.801996)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D123" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.34803027, -0.92925507, -1.1855816e-08, -4.117794e-08, -2.036884e-10, -0.74288225, 0.8754064, 0.3694386, -3.0230737e-08, 9.3725, 0.33647037, -11.56029)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D124" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.34803027, -0.92925507, -1.1855816e-08, -4.117794e-08, -2.036884e-10, -0.74288225, 0.8754064, 0.3694386, -3.0230737e-08, 9.8691025, 0.33647034, -11.21267)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D125" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.24877241, -0.9645021, -1.1855818e-08, -3.300466e-08, 2.6138936e-08, -0.74288225, 0.9086109, -0.2640751, -3.0230737e-08, 9.623159, 0.027992805, -9.295084)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D126" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.24877241, -0.9645021, -1.1855818e-08, -3.300466e-08, 2.6138936e-08, -0.74288225, 0.9086109, -0.2640751, -3.0230737e-08, 8.300918, 0.027992828, -9.334711)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D127" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.37928778, -0.9153677, -1.18558185e-08, -4.1144407e-08, -1.7755513e-09, -0.74288225, 0.86232376, 0.40261883, -3.0230737e-08, 8.506573, 0.0279929, -11.209154)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D128" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.37928778, -0.9153677, -1.18558185e-08, -4.1144407e-08, -1.7755513e-09, -0.74288225, 0.86232376, 0.40261883, -3.0230737e-08, 9.115395, 0.02799287, -10.733172)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D129" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.21335718, -0.97401553, -1.1855818e-08, -3.3934562e-08, 2.476093e-08, -0.74288225, 0.91757303, -0.22648138, -3.0230737e-08, 10.34797, 0.027992781, -9.025774)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D117" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.43922943, -0.88465416, -1.1855815e-08, -4.0923595e-08, -4.855021e-09, -0.74288225, 0.83339, 0.46624768, -3.0230737e-08, 7.654587, 0.29674414, -11.92101)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D114" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.21258827, -0.97420484, -1.1855812e-08, -3.395409e-08, 2.4730735e-08, -0.74288225, 0.91775143, -0.22566517, -3.0230737e-08, 7.369899, 0.675122, -8.949046)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D115" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(-0.21258827, -0.97420484, -1.1855812e-08, -3.395409e-08, 2.4730735e-08, -0.74288225, 0.91775143, -0.22566517, -3.0230737e-08, 6.945494, 0.03945297, -9.047356)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D116" type="MeshInstance3D" parent="Env/Node3D2"]
+transform = Transform3D(0.3997519, -0.9055021, -1.1855812e-08, -4.1092786e-08, -2.816986e-09, -0.74288225, 0.85302985, 0.4243417, -3.0230737e-08, 7.749789, 0.039453022, -10.680971)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D96" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.8428616, 0.44665074, -1.18558185e-08, 3.6712617e-09, -4.3537316e-08, -0.74288225, -0.42076808, 0.8947084, -3.0230733e-08, -1.5986569, 0.66337144, 0.21042028)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D97" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.8428616, 0.44665074, -1.18558185e-08, 3.6712617e-09, -4.3537316e-08, -0.74288225, -0.42076808, 0.8947084, -3.0230733e-08, -1.1157563, 0.1935485, 0.96002275)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D98" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.91234905, -0.24912935, -1.1855816e-08, -2.4110923e-08, -3.5434862e-08, -0.74288225, 0.23469275, 0.9684703, -3.0230733e-08, 0.9018467, 0.35055935, -1.0346202)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D99" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.89793, 0.3024531, -1.1855816e-08, -2.7355063e-09, -4.3614826e-08, -0.74288225, -0.2849264, 0.9531643, -3.0230733e-08, -0.85431814, 0.3505594, -2.3726892)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D100" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.5179223, 0.83530873, -1.1855816e-08, 2.3756513e-08, -3.570357e-08, -0.74288225, -0.786904, 0.54978114, -3.023073e-08, -3.123962, 0.5910523, -9.525347)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D101" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.57204884, 0.7945206, -1.1855816e-08, 2.1329056e-08, -3.739073e-08, -0.74288225, -0.7484795, 0.6072372, -3.023073e-08, -2.588763, 0.2755494, -10.3385)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D102" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.57204884, 0.7945206, -1.1855816e-08, 2.1329056e-08, -3.739073e-08, -0.74288225, -0.7484795, 0.6072372, -3.023073e-08, -1.9710487, -0.0045943493, -9.866392)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D103" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.8808466, -0.35456848, -1.1855814e-08, -2.7650252e-08, -3.2391327e-08, -0.74288225, 0.33402184, 0.9350301, -3.0230733e-08, 0.37731773, -0.037816882, -3.308266)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D104" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.9295546, 0.16234443, -1.1855814e-08, -8.611375e-09, -4.2744887e-08, -0.74288225, -0.15293682, 0.98673415, -3.0230733e-08, -0.5587071, -0.03781686, -3.4622142)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D105" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.8770187, 0.3651043, -1.18558185e-08, 0, -4.3711385e-08, -0.74288225, -0.3439471, 0.9309666, -3.0230733e-08, -4.283444, 0.6633714, 2.9284947)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D106" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.823586, -0.48548114, 8.900475e-09, -9.3583346e-09, -4.2567603e-08, -0.74288225, 0.45734835, 0.8742471, -3.122882e-08, 1.0200818, 0.5595311, 0.18290563)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D107" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.905974, -0.2740935, 8.900476e-09, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.25821027, 0.961703, -3.122882e-08, 1.5754045, 0.39933825, 12.151951)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D108" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.72672194, -0.6363206, 2.0662867e-08, -1.5578981e-15, -4.3711385e-08, -0.74288225, 0.5994469, 0.7714247, -2.5050024e-08, 1.304607, 0.33359802, 15.869192)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D109" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(0.68262666, -0.6891518, 2.2378424e-08, -4.9313894e-15, -4.3711392e-08, -0.7428823, 0.64921653, 0.724617, -2.353007e-08, 1.8869121, 0.6803621, 16.165874)
+material_override = SubResource("StandardMaterial3D_gmpev")
+mesh = SubResource("PlaneMesh_mkypq")
+skeleton = NodePath("../..")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7308903, 19.485085, 21.144222)
 light_energy = 11.722
@@ -1186,22 +1515,38 @@ shadow_enabled = true
 omni_range = 19.248947
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(0.9628757, 0, -0.2699451, 0, 1, 0, 0.2699451, 0, 0.9628757, 16.95741, 4.5895915, -9.636732)
-light_energy = 11.722
-shadow_enabled = true
-omni_range = 9.8810425
+transform = Transform3D(0.9628757, 0, -0.2699451, 0, 1, 0, 0.2699451, 0, 0.9628757, 6.3622127, 3.0938847, -10.173673)
+light_energy = 0.913
+omni_range = 4.78
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="."]
+transform = Transform3D(0.9628757, 0, -0.2699451, 0, 1, 0, 0.2699451, 0, 0.9628757, 10.771954, 3.0938847, -8.937388)
+light_energy = 0.913
+omni_range = 4.78
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(0.9628757, 0, -0.2699451, 0, 1, 0, 0.2699451, 0, 0.9628757, -16.095583, 4.5895915, -13.729408)
+transform = Transform3D(0.9628757, 0, -0.2699451, 0, 1, 0, 0.2699451, 0, 0.9628757, -19.039967, 4.5895915, -14.554875)
 light_energy = 11.722
 shadow_enabled = true
 omni_range = 13.164434
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7308903, 11.960683, -4.8557777)
+[node name="OmniLight3D7" type="OmniLight3D" parent="."]
+transform = Transform3D(0.9477907, 0, 0.31889316, 0, 1, 0, -0.31889316, 0, 0.9477907, -37.98694, 4.5895915, -11.067405)
 light_energy = 11.722
 shadow_enabled = true
-omni_range = 19.248947
+omni_range = 18.277409
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(0.9628757, 0, -0.2699451, 0, 1, 0, 0.2699451, 0, 0.9628757, -6.3874273, 1.7367258, -14.750555)
+light_energy = 3.088
+shadow_enabled = true
+omni_range = 5.224
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7308903, 17.424976, -4.8557777)
+light_energy = 11.722
+shadow_enabled = true
+omni_range = 13.316
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform3D(0.9997338, 0, -0.023071205, 0, 1, 0, 0.023071205, 0, 0.9997338, 4.16941, 12.453573, -38.530807)
@@ -1211,7 +1556,7 @@ alpha_cut = 1
 texture = ExtResource("4_x42e6")
 
 [node name="Enemy2" parent="." instance=ExtResource("9_qxy0u")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.3441875, 1.4893093, 16.52428)
+transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, 0.3441875, 1.576503, 16.52428)
 enemy_name = "Dummy"
 hp = 18
 base_heal = 2
@@ -1220,11 +1565,20 @@ attack_chance = 0.8
 heal_chance = 0.2
 
 [node name="one_leg_bahomet" parent="." instance=ExtResource("16_iwr0g")]
-transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.14356256, 1.8832752, -20.032446)
+transform = Transform3D(-0.006685213, 0, -0.1894082, 0, 0.48303354, 0, 0.48298728, 0, -0.002621672, 11.32946, 1.7356691, -10.179538)
 
 [node name="chill_area" parent="." instance=ExtResource("17_bahl2")]
 transform = Transform3D(0.7022173, 0, 0.43210155, 0, 0.7786624, 0, -0.33646113, 0, 0.9018251, -1.092377, 0.8466898, 5.011178)
+non_upgrade_text = "Your scars are too deep this time.
+ Maybe you should rest a few more times."
 upgrade_cells = true
+
+[node name="chill_area2" parent="." instance=ExtResource("17_bahl2")]
+transform = Transform3D(-0.4514964, 0, 0.81473327, 0, 0.7786624, 0, -0.6344022, 0, -0.57983595, -10.256777, 0.8466898, -13.256603)
+upgrade_cells = true
+
+[node name="chill_area3" parent="." instance=ExtResource("17_bahl2")]
+transform = Transform3D(0.31637532, 0, -0.91373694, 0, 0.7786624, 0, 0.7114926, 0, 0.40630624, 15.155496, 0.91425467, -10.793771)
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(0.95933366, 0, 0.28227448, 0, 1, 0, -0.28227448, 0, 0.95933366, -7.208843, 0, 1.3764054)
@@ -1760,8 +2114,20 @@ skeleton = NodePath("../..")
 [node name="one_eye" parent="." instance=ExtResource("30_t4umt")]
 transform = Transform3D(0.48303354, 0, 0, 0, 0.48303354, 0, 0, 0, 0.18942633, -0.404593, 2.0177634, -3.8236372)
 
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.925547, 22.583176)
+light_energy = 3.286
+omni_range = 5.34
+
+[node name="Enemy" parent="." instance=ExtResource("35_o8s4s")]
+transform = Transform3D(-0.037621, 0, -0.18885091, 0, 0.48303354, 0, 0.48156625, 0, -0.014753441, 24.345556, 1.5522997, -8.626313)
+
+[node name="Enemy3" parent="." instance=ExtResource("35_o8s4s")]
+transform = Transform3D(-0.060138635, 0, 0.18795244, 0, 0.48303354, 0, -0.47927526, 0, -0.023583956, -18.137413, 1.6499143, -13.627203)
+
 [connection signal="timeout" from="walk_hint/Timer" to="walk_hint" method="_on_timer_timeout"]
 [connection signal="timeout" from="battle_hint/arm_hint/arm_hint_timer" to="battle_hint" method="_on_arm_hint_timer_timeout"]
 [connection signal="timeout" from="battle_hint/order_hint/order_hint_timer" to="battle_hint" method="_on_order_hint_timer_timeout"]
 [connection signal="timeout" from="battle_hint/synergy_hint/synergy_hint_timer" to="battle_hint" method="_on_synergy_hint_timer_timeout"]
 [connection signal="timeout" from="battle_hint/ink_hint/ink_hint_timer" to="battle_hint" method="_on_ink_hint_timer_timeout"]
+[connection signal="pressed" from="battle_hint/Skip_Tutor" to="battle_hint" method="_on_skip_tutor_pressed"]

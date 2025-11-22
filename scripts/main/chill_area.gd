@@ -1,6 +1,7 @@
 extends Node3D
 
-
+@export_multiline var upgrade_text: String
+@export_multiline var non_upgrade_text: String
 @export var upgrade_cells: bool = false
 @onready var omni_light_3d: OmniLight3D = $OmniLight3D
 @onready var flicker_timer: Timer = $FlickerTimer
@@ -54,6 +55,9 @@ func _on_rest_button_pressed():
 	if upgrade_cells:
 		G.grid.current_grid_level += 1
 		label.text = "The scars on your arm are healing.\nAvailable cells: " + str(G.grid.current_grid_level)
+		await get_tree().create_timer(3.5).timeout
+	else:
+		label.text = non_upgrade_text
 		await get_tree().create_timer(3.5).timeout
 	canvas_layer.visible = false
 	G.player.arm_base.visible = true

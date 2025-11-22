@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgutejtgr4v5n"]
+
+[ext_resource type="Script" uid="uid://coqmgshiqb5kc" path="res://scripts/main/path_choose.gd" id="1_jfasd"]
+[ext_resource type="Texture2D" uid="uid://cq1x82530w4w8" path="res://assets/textures/path_sign.png" id="2_11hft"]
+[ext_resource type="Texture2D" uid="uid://locnq6vcph50" path="res://assets/textures/burrel_fire_icon.png" id="3_3ktol"]
+[ext_resource type="Texture2D" uid="uid://bxm6bpbv11ywo" path="res://assets/textures/path_sign_left.png" id="4_3ktol"]
+[ext_resource type="Texture2D" uid="uid://b881ve1huahfp" path="res://assets/textures/question_icon.png" id="4_e5nos"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_11hft"]
+size = Vector3(2.3203125, 2.6953125, 1.9448242)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5nos"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="Path_Choose" type="Node3D"]
+script = ExtResource("1_jfasd")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.30737305)
+shape = SubResource("BoxShape3D_11hft")
+
+[node name="right_sign" type="Sprite3D" parent="."]
+transform = Transform3D(0.4637021, 0, 0.2208847, 0, 0.47544563, 0, -0.10501866, 0, 0.97529995, 1.0905458, 0, -1.5941411)
+shaded = true
+alpha_cut = 1
+texture = ExtResource("2_11hft")
+
+[node name="path_icon" type="Sprite3D" parent="right_sign"]
+transform = Transform3D(-0.6890762, 0, -0.12318274, 0, 0.7, 0, 0.12318274, 0, -0.6890762, -0.031999625, 2.468153, 0.19668418)
+cast_shadow = 0
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("3_3ktol")
+
+[node name="left_sign" type="Sprite3D" parent="."]
+transform = Transform3D(0.43943527, 0, -0.38176417, 0, 0.47544563, 0, 0.18150812, 0, 0.9242598, -1.0343745, 0, -1.6882577)
+shaded = true
+alpha_cut = 1
+texture = ExtResource("4_3ktol")
+
+[node name="path_icon" type="Sprite3D" parent="left_sign"]
+transform = Transform3D(-0.6890762, 0, -0.12318274, 0, 0.7, 0, 0.12318274, 0, -0.6890762, -0.031999625, 2.468153, 0.19668418)
+cast_shadow = 0
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("4_e5nos")
+
+[node name="Control" type="Control" parent="."]
+z_index = 4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="left" type="Button" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 129.68738
+offset_top = -1.0
+offset_right = 344.81677
+offset_bottom = 81.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_e5nos")
+text = "LEFT
+"
+
+[node name="right" type="Button" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -1.0
+offset_right = -110.870605
+offset_bottom = 81.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_e5nos")
+text = "RIGHT"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = 9.5
+offset_right = 193.5
+offset_bottom = 70.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 44
+text = "Choose your path."
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="pressed" from="Control/left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/right" to="." method="_on_right_pressed"]
