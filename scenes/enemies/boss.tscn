@@ -11,7 +11,7 @@ viewport_path = NodePath("Attack_SUB")
 
 [node name="Enemy" instance=ExtResource("1_3uc6t")]
 hp = 36
-random_damage_max = 7
+random_damage_max = 6
 attack_chance = 0.75
 heal_chance = 0.25
 

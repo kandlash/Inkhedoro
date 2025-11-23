@@ -594,7 +594,9 @@ ExtResource("10_mkypq"): 2
 [node name="Choice_Reward3" parent="." instance=ExtResource("20_gmpev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.532855, 0.60530853, -10.136011)
 new_cards = Dictionary[PackedScene, int]({
-ExtResource("9_wtwp4"): 1
+ExtResource("9_wtwp4"): 1,
+ExtResource("7_iwr0g"): 1,
+ExtResource("2_dga24"): 1
 })
 
 [node name="TurnBaseManager" type="Node" parent="."]
@@ -1569,9 +1571,9 @@ transform = Transform3D(-0.006685213, 0, -0.1894082, 0, 0.48303354, 0, 0.4829872
 
 [node name="chill_area" parent="." instance=ExtResource("17_bahl2")]
 transform = Transform3D(0.7022173, 0, 0.43210155, 0, 0.7786624, 0, -0.33646113, 0, 0.9018251, -1.092377, 0.8466898, 5.011178)
+upgrade_cells = true
 non_upgrade_text = "Your scars are too deep this time.
  Maybe you should rest a few more times."
-upgrade_cells = true
 
 [node name="chill_area2" parent="." instance=ExtResource("17_bahl2")]
 transform = Transform3D(-0.4514964, 0, 0.81473327, 0, 0.7786624, 0, -0.6344022, 0, -0.57983595, -10.256777, 0.8466898, -13.256603)
@@ -1579,6 +1581,8 @@ upgrade_cells = true
 
 [node name="chill_area3" parent="." instance=ExtResource("17_bahl2")]
 transform = Transform3D(0.31637532, 0, -0.91373694, 0, 0.7786624, 0, 0.7114926, 0, 0.40630624, 15.155496, 0.91425467, -10.793771)
+upgrade_max_hp = true
+hp_upgrade = 5
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(0.95933366, 0, 0.28227448, 0, 1, 0, -0.28227448, 0, 0.95933366, -7.208843, 0, 1.3764054)
@@ -2120,7 +2124,7 @@ light_energy = 3.286
 omni_range = 5.34
 
 [node name="Enemy" parent="." instance=ExtResource("35_o8s4s")]
-transform = Transform3D(-0.037621, 0, -0.18885091, 0, 0.48303354, 0, 0.48156625, 0, -0.014753441, 24.345556, 1.5522997, -8.626313)
+transform = Transform3D(-0.009315133, 0, -0.18939109, 0, 0.48303354, 0, 0.4829437, 0, -0.0036530197, 22.700869, 1.5522997, -8.70413)
 
 [node name="Enemy3" parent="." instance=ExtResource("35_o8s4s")]
 transform = Transform3D(-0.060138635, 0, 0.18795244, 0, 0.48303354, 0, -0.47927526, 0, -0.023583956, -18.137413, 1.6499143, -13.627203)

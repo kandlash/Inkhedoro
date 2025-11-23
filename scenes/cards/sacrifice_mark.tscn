@@ -1,24 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://byt6cnyrj65rc"]
+[gd_scene load_steps=4 format=3 uid="uid://byt6cnyrj65rc"]
 
 [ext_resource type="PackedScene" uid="uid://drk3wxeg2kh3r" path="res://scenes/cards/card_base.tscn" id="1_j4wro"]
 [ext_resource type="Script" uid="uid://bi4cbkdx2xbf1" path="res://scripts/main/cards/sacrifice_mark.gd" id="2_tewfg"]
 [ext_resource type="Texture2D" uid="uid://cstxq2jt8t5dd" path="res://assets/sprites/cards/sacrifice_mark.png" id="3_tewfg"]
-[ext_resource type="Texture2D" uid="uid://bhnfdoxktut47" path="res://assets/sprites/tattoo_frame2.png" id="4_csbl6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_75vfm"]
-size = Vector2(181.16125, 181.16162)
 
 [node name="SacrificeMark" instance=ExtResource("1_j4wro")]
 script = ExtResource("2_tewfg")
 damage_buff = 200
-self_damage = 2
-card_name = "Sicrifice Mark"
+self_damage = 3
+card_name = "Sacrifice Mark"
 description = "Sicrifice your blood [color=red]
 -{self_damage}[/color] hp
  to increase damage by {damage_buff}% for this turn."
 
 [node name="Texture" parent="." index="0"]
 rotation = 0.20352161
+scale = Vector2(0.5828855, 0.58288556)
 texture = ExtResource("3_tewfg")
 
 [node name="Image" parent="Card_UI" index="1"]
@@ -38,24 +35,10 @@ texture = ExtResource("3_tewfg")
 anchor_top = -5.161291
 
 [node name="Center" parent="." index="2"]
-position = Vector2(22.645164, -113.22582)
+position = Vector2(1.367446e-06, -4.529032)
 
 [node name="Area2D" parent="." index="3"]
-position = Vector2(18.11613, -76.99357)
-
-[node name="Area2D2" type="Area2D" parent="." index="4" groups=["tattoo_area"]]
-position = Vector2(-22.64516, 144.92905)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
-position = Vector2(0, -40.761295)
-rotation = 0.18502945
-shape = SubResource("RectangleShape2D_75vfm")
+position = Vector2(-4.529032, 31.703222)
 
 [node name="Sprite2D" parent="Cells" index="0"]
-position = Vector2(18.116127, -117.754845)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Cells" index="1"]
-position = Vector2(-22.64516, 104.16776)
-rotation = 0.18768506
-scale = Vector2(1.8137224, 1.782836)
-texture = ExtResource("4_csbl6")
+position = Vector2(-4.5290318, -9.058052)

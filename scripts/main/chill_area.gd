@@ -1,8 +1,14 @@
 extends Node3D
 
+
+@export var upgrade_cells: bool = false
+@export var upgrade_max_hp: bool = false
+@export var hp_upgrade: int = 0
+
 @export_multiline var upgrade_text: String
 @export_multiline var non_upgrade_text: String
-@export var upgrade_cells: bool = false
+
+
 @onready var omni_light_3d: OmniLight3D = $OmniLight3D
 @onready var flicker_timer: Timer = $FlickerTimer
 @onready var chill_area: Node3D = $"."
@@ -58,6 +64,12 @@ func _on_rest_button_pressed():
 		await get_tree().create_timer(3.5).timeout
 	else:
 		label.text = non_upgrade_text
+		await get_tree().create_timer(3.5).timeout
+	if upgrade_max_hp:
+		G.player.max_hp += hp_upgrade
+		G.player.heal(G.player.max_hp)
+		G.player.emit_signal("hp_updated")
+		label.text = "You had a very good rest this time.\nThe curse is going away.\nMaximum health has been increased"
 		await get_tree().create_timer(3.5).timeout
 	canvas_layer.visible = false
 	G.player.arm_base.visible = true

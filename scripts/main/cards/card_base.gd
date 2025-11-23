@@ -158,6 +158,7 @@ func make_damage(speed):
 	await G.right_attack.right_attack_finished
 	G.right_arm.visible = true
 	G.hand.visible = true
+	extra_damage = 0
 
 func on_arm_effect():
 	pass
@@ -327,6 +328,7 @@ func get_total_extra_damage() -> int:
 	var total := 0
 	for v in synergy_damage_mods.values():
 		total += v
+	total += extra_damage
 	return total
 
 
